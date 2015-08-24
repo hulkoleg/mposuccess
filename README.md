@@ -13,7 +13,6 @@ composer update
 or
 
 ```
-
 composer require notprometey/mposuccess:dev-install
 ```
 
