@@ -1,11 +1,11 @@
 {
     "name": "notprometey/mposuccess",
-    "description": "Laravel",
+    "description": "Preparatory Program for the purchase of property",
     "keywords": [
         "laravel",
-        "management",
-        "teachers",
-        "teacher",
+        "Program",
+        "MPO",
+        "property",
         "administrator"
     ],
     "licence": "MIT",
