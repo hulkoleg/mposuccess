@@ -3,7 +3,7 @@
 Install using Composer, edit your ```composer.json``` file to include:
 ```
 "require-dev": {
-	"notprometey/mposuccess": "*"
+	"notprometey/mposuccess": "dev-install"
 }
 ```
 Update composer from the command line:
@@ -14,7 +14,7 @@ or
 
 ```
 
-composer require notprometey/mposuccess
+composer require notprometey/mposuccess:dev-install
 ```
 
 Add a new Service Provider to the ```providers``` array in your ```config/app.php``` file:
