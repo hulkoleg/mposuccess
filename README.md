@@ -37,7 +37,7 @@ Add a new Service Provider to the ```aliases``` array in your ```config/app.php`
 'Debugbar' => Barryvdh\Debugbar\Facade::class,
 ```
 
-Download the files [`public`]() and put them in a folder `vendor\notprometey\mposuccess\public`
+Download the files [`public`](https://drive.google.com/file/d/0B1FIEy8WL45hRDFzRTNaZXJuVkU/view?usp=sharing) and put them in a folder `vendor\notprometey\mposuccess\public`
 
 Then publish Teacher's assets with `php artisan vendor:publish`.
 
