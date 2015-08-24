@@ -53,9 +53,6 @@ class MposuccessServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
-		View::composers([
-			'Notprometey\Mposuccess\Http\Composers\MenuComposer' => 'mposuccess::layouts.slidebar'
-		]);
 
 		$this->mergeConfigFrom(
 			__DIR__.'/../../config/mposuccess.php', 'mposuccess'

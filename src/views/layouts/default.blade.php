@@ -7,21 +7,21 @@
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
     <head>
-        @include('Mposuccess::layouts.head')
+        @include('mposuccess::layouts.head')
     </head>
 
     <body class="page-header-fixed page-quick-sidebar-over-content page-sidebar-closed-hide-logo">
 
-        @include('Mposuccess::layouts.top')
+        @include('mposuccess::layouts.top')
 
         <!-- BEGIN CONTAINER -->
         <div class="page-container">
-            @include('Mposuccess::layouts.slidebar')
-            @include('Mposuccess::layouts.content')
+            @include('mposuccess::layouts.slidebar')
+            @include('mposuccess::layouts.content')
         </div>
         <!-- END CONTAINER -->
-        @include('Mposuccess::layouts.footer')
-        @include('Mposuccess::layouts.script')
+        @include('mposuccess::layouts.footer')
+        @include('mposuccess::layouts.script')
     </body>
 <!-- END BODY -->
 </html>
