@@ -10,3 +10,8 @@ Route::get('/', array(
     'as' => 'home',
     'uses' => 'Notprometey\Mposuccess\Controllers\FrontController@index',
 ));
+
+Route::controllers([
+    'auth' => 'Notprometey\Mposuccess\Http\Auth\AuthController',
+    'password' => 'Notprometey\Mposuccess\Http\Auth\PasswordController',
+]);

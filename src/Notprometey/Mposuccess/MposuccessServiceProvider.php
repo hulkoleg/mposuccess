@@ -57,6 +57,7 @@ class MposuccessServiceProvider extends ServiceProvider {
 		$this->mergeConfigFrom(
 			__DIR__.'/../../config/mposuccess.php', 'mposuccess'
 		);
+
 	}
 
 	/**
