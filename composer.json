@@ -1,6 +1,6 @@
 {
     "name": "notprometey/mposuccess",
-    "description": "Laravel Management Teachers",
+    "description": "Laravel",
     "keywords": [
         "laravel",
         "management",
@@ -16,9 +16,14 @@
         }
     ],
     "require": {
-        "php": ">=5.4.0",
+        "php": ">=5.5.0",
+        "laravel/framework": "5.1.*",
         "illuminate/support": "5.*",
-        "illuminate/database": "5.*"
+        "illuminate/database": "5.*",
+        "barryvdh/laravel-ide-helper":"*",
+        "barryvdh/laravel-debugbar":"*",
+        "frozennode/administrator": "5.*",
+        "bican/roles": "2.1.*"
     },
     "autoload": {
         "psr-0": {

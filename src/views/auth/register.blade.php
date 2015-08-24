@@ -84,7 +84,7 @@
 			<div class="controls">
 				<div class="input-icon">
 					<i class="fa fa-check"></i>
-					<input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Введите свой пароль снова" name="rpassword"/>
+					<input class="form-control placeholder-no-fix" type="password" autocomplete="off" placeholder="Введите свой пароль снова" name="password_confirmation"/>
 				</div>
 			</div>
 		</div>
