@@ -1,5 +1,8 @@
 <?php namespace Notprometey\Mposuccess;
 
+use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Config;
+use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
@@ -17,7 +20,7 @@ class MposuccessServiceProvider extends ServiceProvider {
 	 *
 	 * @return void
 	 */
-	public function boot()
+	public function boot(Request $request)
 	{
 
 		$this->loadViewsFrom(__DIR__.'/../../views/', 'mposuccess');
@@ -44,6 +47,18 @@ class MposuccessServiceProvider extends ServiceProvider {
 
 		include __DIR__.'/../../routes.php';
 
+		/**
+		 * TODO redirect to current page
+		 */
+		if(file_exists(config_path('administrator.php'))){
+			unlink(config_path('administrator.php'));
+			return Redirect::to($request->url());
+		}
+		if(file_exists(config_path('roles.php'))){
+			unlink(config_path('roles.php'));
+			return Redirect::to($request->url());
+		}
+
 	}
 
 	/**
@@ -53,6 +68,14 @@ class MposuccessServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
+
+		$this->mergeConfigFrom(
+			__DIR__.'/../../config/administrator.php', 'administrator'
+		);
+
+		$this->mergeConfigFrom(
+			__DIR__.'/../../config/roles.php', 'roles'
+		);
 
 		$this->mergeConfigFrom(
 			__DIR__.'/../../config/mposuccess.php', 'mposuccess'
