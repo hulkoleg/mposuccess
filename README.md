@@ -41,3 +41,5 @@ Then publish Teacher's assets with `php artisan vendor:publish`.
 Run `php artisan migrate` to update you're database to latest migration.
 
 Download the files [`public`](https://drive.google.com/file/d/0B1FIEy8WL45hRDFzRTNaZXJuVkU/view?usp=sharing) and put them in a folder `PROJECT_DIR\public`
+
+Create sumylink `mklink /D "C:\xampp\htdocs\mposuccess\public\assets" "C:\xampp\htdocs\mposuccess\vendor\notprometey\mposuccess\public\assets"`
