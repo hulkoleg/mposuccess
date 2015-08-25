@@ -1,4 +1,5 @@
 /.idea
+/public/template
 .env.*.php
 .env.php
 .env
