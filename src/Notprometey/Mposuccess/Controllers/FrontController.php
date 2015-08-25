@@ -40,7 +40,7 @@ class FrontController extends Controller {
             $this->layout = view($this->layout);
             $this->layout->page = false;
             $this->layout->dashboard = false;
-            $this->layout->title = 'Главная';
+            //$this->layout->title = 'Главная';
         }
     }
 
