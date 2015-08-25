@@ -41,9 +41,9 @@ class MposuccessServiceProvider extends ServiceProvider {
 			__DIR__ . '/../../seeds/' => base_path('/database/seeds')
 		], 'seeds');
 
-		$this->publishes([
+		/*$this->publishes([
 			__DIR__.'/../../../public/' => public_path(),
-		], 'public');
+		], 'public');*/
 
 		include __DIR__.'/../../routes.php';
 
