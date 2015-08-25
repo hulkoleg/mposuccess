@@ -47,7 +47,6 @@ class MposuccessServiceProvider extends ServiceProvider {
 
 		include __DIR__.'/../../routes.php';
 
-
 		/**
 		 * TODO redirect to current page
 		 */
