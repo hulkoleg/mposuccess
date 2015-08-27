@@ -1,6 +1,9 @@
 language: php
 install:
    - composer install
+script:
+   - php artisan vendor:publish
+   - php artisan migrate
 php:
   - 5.5
   - 5.6
