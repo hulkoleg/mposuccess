@@ -1,4 +1,6 @@
 language: php
+install:
+   - composer require laravel/framework
 php:
   - 5.4
   - 5.5
