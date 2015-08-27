@@ -41,5 +41,5 @@
             "Notprometey\\Tests\\Mposuccess\\": "tests/"
         }
     },
-    "minimum-stability": "stable",
+    "minimum-stability": "dev"
 }
