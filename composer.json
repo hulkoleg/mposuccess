@@ -16,8 +16,8 @@
         }
     ],
     "require": {
-        "php": ">=5.3.0",
-        "laravel/laravel": "5.*",
+        "php": ">=5.5.0",
+        "laravel/laravel": "*",
         "barryvdh/laravel-ide-helper":"*",
         "barryvdh/laravel-debugbar":"*",
         "frozennode/administrator": "5.*",
