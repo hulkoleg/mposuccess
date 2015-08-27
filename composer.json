@@ -16,12 +16,12 @@
         }
     ],
     "require": {
-        "php": ">=5.5.0",
+        "php": ">=5.5.9",
         "laravel/framework": "5.1.*",
-        "barryvdh/laravel-ide-helper":"*",
-        "barryvdh/laravel-debugbar":"*",
-        "frozennode/administrator": "5.*",
-        "bican/roles": "2.1.*"
+        "barryvdh/laravel-ide-helper": "v2.1.0",
+        "barryvdh/laravel-debugbar": "v2.0.5",
+        "frozennode/administrator": "v5.0.3",
+        "bican/roles": "2.1.7"
     },
     "autoload": {
         "psr-4": {
