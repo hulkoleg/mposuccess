@@ -15,15 +15,21 @@
             "email": "admin@notprometey.pro"
         }
     ],
+    "type": "project",
     "require": {
-        "php": ">=5.5.0",
-        "laravel/framework": "5.1.*",
-        "illuminate/support": "5.*",
-        "illuminate/database": "5.*",
-        "barryvdh/laravel-ide-helper":"*",
-        "barryvdh/laravel-debugbar":"*",
-        "frozennode/administrator": "5.*",
-        "bican/roles": "2.1.*"
+        "php": ">=5.5.9",
+        "laravel/laravel": "5.*",
+        "laravel/framework": "5.*",
+        "barryvdh/laravel-ide-helper": "v2.1.0",
+        "barryvdh/laravel-debugbar": "v2.0.5",
+        "frozennode/administrator": "v5.0.3",
+        "bican/roles": "2.1.7"
+    },
+    "require-dev": {
+        "fzaninotto/faker": "~1.4",
+        "mockery/mockery": "0.9.*",
+        "phpunit/phpunit": "~4.0",
+        "phpspec/phpspec": "~2.1"
     },
     "autoload": {
         "psr-4": {
@@ -35,6 +41,5 @@
             "Notprometey\\Tests\\Mposuccess\\": "tests/"
         }
     },
-    "minimum-stability": "dev",
-    "prefer-stable": true
+    "minimum-stability": "dev"
 }
