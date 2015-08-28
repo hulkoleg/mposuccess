@@ -14,7 +14,7 @@ class UserSeeder extends Seeder {
         $user = User::create([
             'name' => 'admin',
             'email' => 'admin@mposuccess.ru',
-            'password' => bcrypt('admin'),
+            'password' => 'admin',
         ]);
 
         $adminRole = Role::create([
@@ -30,7 +30,7 @@ class UserSeeder extends Seeder {
         $user = User::create([
             'name' => 'moderator',
             'email' => 'moderator@mposuccess.ru',
-            'password' => bcrypt('moderator'),
+            'password' => 'moderator',
         ]);
 
         $moderatorRole = Role::create([
@@ -46,7 +46,7 @@ class UserSeeder extends Seeder {
         $user = User::create([
             'name' => 'user',
             'email' => 'user@mposuccess.ru',
-            'password' => bcrypt('user'),
+            'password' => 'user',
         ]);
 
         $userRole = Role::create([
@@ -62,7 +62,7 @@ class UserSeeder extends Seeder {
         $user = User::create([
             'name' => 'test',
             'email' => 'test@mposuccess.ru',
-            'password' => bcrypt('test'),
+            'password' => 'test',
         ]);
 
         $badUserRole = Role::create([
