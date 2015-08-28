@@ -42,7 +42,7 @@ Run `php artisan migrate` to update you're database to latest migration.
 
 Run `php artisan db:seed --class=UserSeeder` to seed database with test data (users and roles). Then you can log in to the admin panel the following data (email/password):
 ```
-	admin@mposuccess.ru / admin 			- role admin
+	admin@mposuccess.ru / admin 		- role admin
 	moderator@mposuccess.ru / moderator	- role moderator
 	user@mposuccess.ru / user			- role user (verified user)
 	test@mposuccess.ru / test			- role bad.user (not verified user)
