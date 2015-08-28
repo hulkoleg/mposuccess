@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
 
+
 class MposuccessServiceProvider extends ServiceProvider {
 
 	/**
@@ -68,6 +69,7 @@ class MposuccessServiceProvider extends ServiceProvider {
 	 */
 	public function register()
 	{
+
 
 		$this->mergeConfigFrom(
 			__DIR__.'/../../config/administrator.php', 'administrator'

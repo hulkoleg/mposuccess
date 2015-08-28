@@ -11,6 +11,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Session\SessionManager as Session;
+use Notprometey\Mposuccess\Repositories\User\UserRepository;
 /**
  * Handles all requests related to managing the data models
  */
@@ -48,8 +49,9 @@ class FrontController extends Controller {
      *
      * @return Response
      */
-    public function index()
+    public function index(UserRepository $user)
     {
+        print_r($user->all());
         $this->layout->content = view("mposuccess::home");
         return $this->layout;
     }
