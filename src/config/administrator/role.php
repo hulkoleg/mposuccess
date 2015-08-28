@@ -66,6 +66,6 @@ return array(
 	'rules' => array(
 		'name' 			=> 'required|min:3|max:255',
 		'slug' 			=> 'required|min:3|max:255|unique:roles',
-		'description' 	=> 'min:3|max:255',
+		'description' 	=> 'min:3|max:255'
 	),
 );

@@ -18,6 +18,6 @@ class RoleCustom extends Role
      */
     public function permissions()
     {
-        return $this->belongsToMany('Bican\Roles\Models\Permission', 'permission_role', 'permission_id', 'role_id');
+        return $this->belongsToMany('Notprometey\Mposuccess\Models\PermissionCustom', 'permission_role', 'permission_id', 'role_id');
     }
 }
