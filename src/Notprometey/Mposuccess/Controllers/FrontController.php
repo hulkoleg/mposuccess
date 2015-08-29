@@ -52,7 +52,7 @@ class FrontController extends Controller {
      */
     public function index(UserRepository $user)
     {
-        print_r($user->all());
+        /*print_r($user->all());*/
         $this->layout->content = view("mposuccess::home");
         return $this->layout;
     }
