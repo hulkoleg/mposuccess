@@ -23,6 +23,8 @@ class MposuccessServiceProvider extends ServiceProvider {
 	public function boot(Request $request)
 	{
 
+		$this->loadTranslationsFrom(__DIR__.'/../../lang', 'mposuccess');
+
 		$this->loadViewsFrom(__DIR__.'/../../views/', 'mposuccess');
 
 		$this->publishes([
