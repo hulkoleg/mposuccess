@@ -27,7 +27,7 @@ class FrontController extends Controller {
     /**
      * @var string
      */
-    protected $layout = "mposuccess::layouts.default";
+    protected $layout = "mposuccess::layouts.front.main";
 
     /**
      * @param \Illuminate\Http\Request              $request
@@ -41,7 +41,6 @@ class FrontController extends Controller {
             $this->layout = view($this->layout);
             $this->layout->page = false;
             $this->layout->dashboard = false;
-            //$this->layout->title = 'Главная';
         }
     }
 
@@ -50,10 +49,66 @@ class FrontController extends Controller {
      *
      * @return Response
      */
-    public function index(UserRepository $user)
+    public function index()
     {
-        /*print_r($user->all());*/
-        $this->layout->content = view("mposuccess::home");
+        $this->layout->content = view("mposuccess::front.index");
+        $this->layout->title = trans('mposuccess::front.home');
+        return $this->layout;
+    }
+
+    public function defense()
+    {
+        $this->layout->content = view("mposuccess::front.success.defense");
+        $this->layout->title = trans('mposuccess::front.success.defense');
+        return $this->layout;
+    }
+
+    public function news()
+    {
+        $this->layout->content = view("mposuccess::front.news");
+        $this->layout->title = trans('mposuccess::front.news');
+        return $this->layout;
+    }
+
+    public function article()
+    {
+        $this->layout->content = view("mposuccess::front.article");
+        $this->layout->title = trans('mposuccess::front.article');
+        return $this->layout;
+    }
+
+    public function about()
+    {
+        $this->layout->content = view("mposuccess::front.about.about");
+        $this->layout->title = trans('mposuccess::front.about.title');
+        return $this->layout;
+    }
+
+    public function contacts()
+    {
+        $this->layout->content = view("mposuccess::front.about.contacts");
+        $this->layout->title = trans('mposuccess::front.about.contacts');
+        return $this->layout;
+    }
+
+    public function rights()
+    {
+        $this->layout->content = view("mposuccess::front.about.rights");
+        $this->layout->title = trans('mposuccess::front.about.rights');
+        return $this->layout;
+    }
+
+    public function charter()
+    {
+        $this->layout->content = view("mposuccess::front.about.docs.charter");
+        $this->layout->title = trans('mposuccess::front.about.docs.charter');
+        return $this->layout;
+    }
+
+    public function regdocs()
+    {
+        $this->layout->content = view("mposuccess::front.about.docs.regdocs");
+        $this->layout->title = trans('mposuccess::front.about.docs.regdocs');
         return $this->layout;
     }
 }

@@ -14,6 +14,7 @@
 
         @include('mposuccess::layouts.top')
 
+
         <!-- BEGIN CONTAINER -->
         <div class="page-container">
             @include('mposuccess::layouts.slidebar')
