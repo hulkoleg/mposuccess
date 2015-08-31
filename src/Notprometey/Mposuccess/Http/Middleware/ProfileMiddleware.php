@@ -10,7 +10,7 @@ namespace Notprometey\Mposuccess\Http\Middleware;
 
 use Closure;
 
-class AdminMiddleware{
+class ProfileMiddleware{
     public function handle($request, Closure $next){
         return $next($request);
     }

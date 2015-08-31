@@ -7,24 +7,31 @@
 <!--<![endif]-->
 <!-- BEGIN HEAD -->
     <head>
-        @include('mposuccess::layouts.head')
+        @include('mposuccess::layouts.panel.head')
     </head>
 
     <body class="page-header-fixed page-quick-sidebar-over-content page-sidebar-closed-hide-logo">
 
-        @include('mposuccess::layouts.top')
+        @include('mposuccess::layouts.panel.top')
 
 
         <!-- BEGIN CONTAINER -->
         <div class="page-container">
 
-            {{ $slidebar }}
+            {!! $slidebar !!}
 
-            @include('mposuccess::layouts.content')
+            <div class="page-content-wrapper">
+                <div class="page-content">
+                    {!! $content !!}
+                </div>
+            </div>
+
+            {!! $r_slidebar !!}
+
         </div>
         <!-- END CONTAINER -->
-        @include('mposuccess::layouts.footer')
-        @include('mposuccess::layouts.script')
+        @include('mposuccess::layouts.panel.footer')
+        @include('mposuccess::layouts.panel.script')
     </body>
 <!-- END BODY -->
 </html>
