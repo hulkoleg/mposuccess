@@ -17,7 +17,9 @@
 
         <!-- BEGIN CONTAINER -->
         <div class="page-container">
-            @include('mposuccess::layouts.slidebar')
+
+            {{ $slidebar }}
+
             @include('mposuccess::layouts.content')
         </div>
         <!-- END CONTAINER -->
