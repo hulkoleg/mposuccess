@@ -11,7 +11,7 @@
 Route::controllers([
     'auth' => 'Notprometey\Mposuccess\Http\Auth\AuthController',
     'password' => 'Notprometey\Mposuccess\Http\Auth\PasswordController',
-    'admin' => 'Notprometey\Mposuccess\Http\Middleware\AdminMiddleware',
+    //'admin' => 'Notprometey\Mposuccess\Http\Middleware\AdminMiddleware',
 ]);
 
 

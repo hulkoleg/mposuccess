@@ -54,13 +54,27 @@
 	<!-- BEGIN REGISTRATION FORM -->
 	<form class="register-form" action="{{ url('/auth/register') }}" method="post">
 		<input type="hidden" name="_token" value="{{ csrf_token() }}">
-		<h3>Зарегистрироваться</h3>
+		<h3 align="center">Зарегистрироваться</h3>
 
 		<div class="form-group">
 			<label class="control-label visible-ie8 visible-ie9">Имя</label>
 			<div class="input-icon">
 				<i class="fa fa-font"></i>
 				<input class="form-control placeholder-no-fix" type="text" placeholder="Имя" name="name" value="{{ old('name') }}"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">Фамилия</label>
+			<div class="input-icon">
+				<i class="fa fa-font"></i>
+				<input class="form-control placeholder-no-fix" type="text" placeholder="Фамилия" name="surname" value="{{ old('surname') }}"/>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">Отчество</label>
+			<div class="input-icon">
+				<i class="fa fa-font"></i>
+				<input class="form-control placeholder-no-fix" type="text" placeholder="Отчество" name="patronymic" value="{{ old('patronymic') }}"/>
 			</div>
 		</div>
 		<div class="form-group">
@@ -71,7 +85,6 @@
 				<input class="form-control placeholder-no-fix" type="text" placeholder="Email" name="email" value="{{ old('email') }}"/>
 			</div>
 		</div>
-
 		<div class="form-group">
 			<label class="control-label visible-ie8 visible-ie9">Пароль</label>
 			<div class="input-icon">
@@ -89,11 +102,52 @@
 			</div>
 		</div>
 		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">Дата рождения</label>
+			<div class="controls">
+				<div class="input-icon">
+					<i class="fa fa-clock-o"></i>
+					<input class="form-control date-picker" size="20" placeholder="дд/мм/гггг" type="text" value>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">Пригласивший</label>
+			<div class="controls">
+				<div class="input-icon">
+					<i class="fa fa-smile-o"></i>
+					<input class="form-control placeholder-no-fix" type="text" placeholder="Пригласивший" name="refferal" value="{{ old('referral') }}"/>
+				</div>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">Имя</label>
+			<div class="input-icon">
+				<i class="fa fa-home"></i>
+				<select class="form-control">
+					<option>Этап 1</option>
+					<option>Этап 2</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
+			<label class="control-label visible-ie8 visible-ie9">Имя</label>
+			<div class="input-icon">
+				<i class="fa fa-home"></i>
+				<select class="form-control">
+					<option>Регион 1</option>
+					<option>Регион 2</option>
+					<option>Регион 3</option>
+					<option>Регион 4</option>
+					<option>Регион 5</option>
+				</select>
+			</div>
+		</div>
+		<div class="form-group">
 			<label>
 				<input type="checkbox" name="tnc"/> Я согласен с <a href="javascript:;">
 					Условиями использования </a>
 				и <a href="javascript:;">
-					Политикай конфиденциальности </a>
+					Политика конфиденциальности </a>
 			</label>
 			<div id="register_tnc_error">
 			</div>
@@ -132,12 +186,14 @@
 <script src="/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
 <script src="/assets/global/plugins/backstretch/jquery.backstretch.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="/assets/global/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
 <script src="/assets/global/scripts/metronic.js" type="text/javascript"></script>
 <script src="/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
 <script src="/assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
 <script src="/assets/admin/pages/scripts/login-soft.js" type="text/javascript"></script>
+<script src="/assets/admin/pages/scripts/components-pickers.js"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 <script>
 	jQuery(document).ready(function() {
