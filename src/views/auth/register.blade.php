@@ -124,7 +124,7 @@
             <div class="controls">
                 <div class="input-icon">
                     <i class="fa fa-clock-o"></i>
-                    <input class="form-control form-control-inline date-picker" size="16" type="text" value="">
+                    <input class="form-control form-control-inline date-picker" placeholder="Дата рождения" size="16" type="text" value="">
                 </div>
             </div>
         </div>
