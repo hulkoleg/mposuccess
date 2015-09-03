@@ -11,16 +11,9 @@
 Route::controllers([
     'auth' => 'Notprometey\Mposuccess\Http\Auth\AuthController',
     'password' => 'Notprometey\Mposuccess\Http\Auth\PasswordController',
-    'admin' => 'Notprometey\Mposuccess\Http\Middleware\AdminMiddleware',
+    //'admin' => 'Notprometey\Mposuccess\Http\Middleware\AdminMiddleware',
 ]);
 
-
-Route::get('admin/', ['middleware' => 'admin', function()
-{
-    /*
-     * Роуты для админа. Проверка на админа в Notprometey\Mposuccess\Http\Middleware\Admin и если нет прав перенапровление а лучше 404
-     */
-}]);
 
 
 Route::get('/', array(
