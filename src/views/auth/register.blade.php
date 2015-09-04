@@ -60,28 +60,26 @@
         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
         <h3 align="center">Зарегистрироваться</h3>
-
-        <div class="form-group">
+        <div class="form-group @if($errors->has('name')) has-error @endif">
             <label class="control-label visible-ie8 visible-ie9">Имя</label>
-
             <div class="input-icon">
                 <i class="fa fa-font"></i>
-                <input class="form-control placeholder-no-fix" type="text" placeholder="Имя" name="name"
-                       value="{{ old('name') }}"/>
+                <input class="form-control placeholder-no-fix" type="text" placeholder="Имя" name="name" value="{{ old('name') }}"/>
             </div>
+            @if($errors->has('name'))
+                <span id="name-error" class="help-block">{{$errors->first('name')}}</span>
+            @endif
         </div>
-        <div class="form-group">
+        <div class="form-group @if($errors->has('surname')) has-error @endif">
             <label class="control-label visible-ie8 visible-ie9">Фамилия</label>
-
             <div class="input-icon">
                 <i class="fa fa-font"></i>
                 <input class="form-control placeholder-no-fix" type="text" placeholder="Фамилия" name="surname"
                        value="{{ old('surname') }}"/>
             </div>
         </div>
-        <div class="form-group">
+        <div class="form-group @if($errors->has('')) has-error @endif">
             <label class="control-label visible-ie8 visible-ie9">Отчество</label>
-
             <div class="input-icon">
                 <i class="fa fa-font"></i>
                 <input class="form-control placeholder-no-fix" type="text" placeholder="Отчество" name="patronymic"
@@ -99,7 +97,6 @@
         </div>
         <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9">Пароль</label>
-
             <div class="input-icon">
                 <i class="fa fa-lock"></i>
                 <input class="form-control placeholder-no-fix" type="password" autocomplete="off" id="register_password"
@@ -118,7 +115,6 @@
         </div>
         <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9">Дата рождения</label>
-
             <div class="controls">
                 <div class="input-icon">
                     <i class="fa fa-clock-o"></i>
@@ -389,9 +385,8 @@
                 <input type="checkbox" name="tnc"/> Я согласен с <a href="javascript:;">
                     Условиями использования </a>
                 и <a href="javascript:;">
-                    Политика конфиденциальности </a>
+                    Политикой конфиденциальности </a>
             </label>
-
             <div id="register_tnc_error">
             </div>
         </div>
@@ -431,7 +426,9 @@
 <script src="/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
+<!--
 <script src="/assets/global/plugins/jquery-validation/js/jquery.validate.js" type="text/javascript"></script>
+-->
 <script src="/assets/global/plugins/backstretch/jquery.backstretch.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="/assets/global/plugins/select2/select2.min.js"></script>
 <script type="text/javascript" src="/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
