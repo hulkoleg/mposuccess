@@ -77,7 +77,6 @@ Route::group([
     }
 );
 
-
 Route::get('/', array(
     'as' => 'home',
     'uses' => 'Notprometey\Mposuccess\Controllers\FrontController@index',
