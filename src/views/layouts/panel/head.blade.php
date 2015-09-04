@@ -19,5 +19,12 @@
 <link href="assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
 <link id="style_color" href="assets/admin/layout/css/themes/light2.css" rel="stylesheet" type="text/css"/>
 <link href="assets/admin/layout/css/custom.css" rel="stylesheet" type="text/css"/>
+<link href="assets/admin/pages/css/profile.css" rel="stylesheet" type="text/css"/>
+<link href="assets/global/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" type="text/css"/>
+
+<link href="assets/global/plugins/bootstrap-select/bootstrap-select.min.css" rel="stylesheet" type="text/css"/>
+<link href="assets/global/plugins/select2/select2.css" rel="stylesheet" type="text/css"/>
+<link href="assets/global/plugins/jquery-multi-select/css/multi-select.css" rel="stylesheet" type="text/css"/>
+
 <!-- END THEME STYLES -->
 <link rel="shortcut icon" href="favicon.ico"/>

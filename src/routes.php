@@ -31,8 +31,23 @@ Route::group([
     ],
     function(){
         Route::get('/', array(
-            'as' => 'profile.home',
-            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@index',
+            'as'    => 'profile.home',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\ProfileController@index',
+        ));
+
+        Route::post('changeData', array(
+            'as'    => 'profile.changeData',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\ProfileController@changeData',
+        ));
+
+        Route::post('changeAvatar', array(
+            'as'    => 'profile.changeAvatar',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\ProfileController@changeAvatar',
+        ));
+
+        Route::post('changePassword', array(
+            'as'    => 'profile.changePassword',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\ProfileController@changePassword',
         ));
     }
 );
