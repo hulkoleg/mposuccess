@@ -24,7 +24,7 @@ Route::group([
 );
 
 Route::group([
-        //'middleware' => 'Notprometey\Mposuccess\Http\Middleware\ProfileMiddleware',
+        'middleware' => 'Notprometey\Mposuccess\Http\Middleware\ProfileMiddleware',
         'prefix' => 'profile'
     ],
     function(){
