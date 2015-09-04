@@ -7,7 +7,6 @@
  */
 
 
-
 Route::controllers([
     'auth' => 'Notprometey\Mposuccess\Http\Auth\AuthController',
     'password' => 'Notprometey\Mposuccess\Http\Auth\PasswordController',
