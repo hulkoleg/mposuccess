@@ -91,7 +91,6 @@
         <div class="form-group">
             <!--ie8, ie9 does not support html5 placeholder, so we just show field title for that-->
             <label class="control-label visible-ie8 visible-ie9">Email</label>
-
             <div class="input-icon">
                 <i class="fa fa-envelope"></i>
                 <input class="form-control placeholder-no-fix" type="text" placeholder="Email" name="email"
@@ -109,7 +108,6 @@
         </div>
         <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9">Введите свой пароль снова</label>
-
             <div class="controls">
                 <div class="input-icon">
                     <i class="fa fa-check"></i>
@@ -149,7 +147,7 @@
             </div>
         </div>
         <div class="form-group">
-            <select name="" id="select2_sample4" class="form-control select2 select2-offscreen" tabindex="-1" title="">
+            <select name="country" id="select2_sample4" class="form-control select2 select2-offscreen" tabindex="-1" title="">
                 <option value="AF">Afghanistan</option>
                 <option value="AL">Albania</option>
                 <option value="DZ">Algeria</option>
@@ -433,7 +431,7 @@
 <script src="/assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
-<script src="/assets/global/plugins/jquery-validation/js/jquery.validate.min.js" type="text/javascript"></script>
+<script src="/assets/global/plugins/jquery-validation/js/jquery.validate.js" type="text/javascript"></script>
 <script src="/assets/global/plugins/backstretch/jquery.backstretch.min.js" type="text/javascript"></script>
 <script type="text/javascript" src="/assets/global/plugins/select2/select2.min.js"></script>
 <script type="text/javascript" src="/assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>

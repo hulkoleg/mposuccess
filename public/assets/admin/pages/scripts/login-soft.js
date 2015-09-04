@@ -154,42 +154,49 @@ var Login = function () {
 	            ignore: "",
 	            rules: {
 	                
-	                fullname: {
-	                    required: true
+	                name: {
+	                    required: true,
+                        minlength: 2
 	                },
+                    surname: {
+                        required: true,
+                        minlength: 3
+                    },
+                    patronymic: {
+                        required: true,
+                        minlength: 6
+                    },
 	                email: {
 	                    required: true,
 	                    email: true
 	                },
-	                address: {
-	                    required: true
-	                },
-	                city: {
-	                    required: true
-	                },
 	                country: {
 	                    required: true
 	                },
-
-	                username: {
-	                    required: true
-	                },
 	                password: {
-	                    required: true
-	                },
-	                rpassword: {
-	                    equalTo: "#register_password"
-	                },
-
-	                tnc: {
 	                    required: true
 	                }
 	            },
 
 	            messages: { // custom messages for radio buttons and checkboxes
-	                tnc: {
-	                    required: "Please accept TNC first."
-	                }
+	                name: {
+	                    required: "Пожалуйста введите своё имя.",
+                        minlength: "Имя должно иметь не менее 2 символов"
+	                },
+                    surname: {
+                        required: "Пожалуйста введите свою фамилию.",
+                        minlength: "Фамилия должна иметь не менее 3 символов"
+                    },
+                    patronymic: {
+                        required: "Пожалуйста введите своё отчество.",
+                        minlength: "Отчество должно иметь не менее 6 символов"
+                    },
+                    email: {
+                        required: "Пожалуйста введите свой e-mail."
+                    },
+                    password: {
+                        required: "Пожалуйста введите свой пароль."
+                    }
 	            },
 
 	            invalidHandler: function (event, validator) { //display error alert on form submit   

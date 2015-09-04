@@ -48,7 +48,7 @@ class AuthController extends Controller
             'email'                 => 'required|email|max:255|unique:users',
             'password'              => 'required|confirmed|min:6',
             'password_confirmation' => 'same:password',
-            'birthday'              => 'required'
+            'birthday'              => 'required|date',
         ]);
     }
 
@@ -67,6 +67,7 @@ class AuthController extends Controller
              * remove hash password (replace in set attribute model User)
              */
             'password' => $data['password'],
+            'birthday' => $data['birthday'],
         ]);
     }
 
