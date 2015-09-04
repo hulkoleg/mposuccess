@@ -12,6 +12,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Session\SessionManager as Session;
 use Notprometey\Mposuccess\Repositories\User\UserRepository;
+
 /**
  * Handles all requests related to managing the data models
  */
