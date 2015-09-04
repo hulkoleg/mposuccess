@@ -45,14 +45,104 @@ class ProfileController extends Controller {
     }
 
     /**
-     * The main view for any of the data models
+     * Данные пользавателя
      *
      * @return Response
      */
-    public function index()
+    public function personal()
     {
-        $this->layout->content = view("mposuccess::profile.index");
-        $this->layout->title = trans('mposuccess::profile.index');
+        $this->layout->content = view("mposuccess::profile.personal");
+        $this->layout->title = trans('mposuccess::profile.personal');
+        return $this->layout;
+    }
+
+    /**
+     * Закрытые новости профиля
+     *
+     * @return Response
+     */
+    public function news()
+    {
+        $this->layout->content = view("mposuccess::profile.news");
+        $this->layout->title = trans('mposuccess::profile.news');
+        return $this->layout;
+    }
+
+    /**
+     * пополнения счета
+     *
+     * @return Response
+     */
+    public function refill()
+    {
+        $this->layout->content = view("mposuccess::profile.score.refill");
+        $this->layout->title = trans('mposuccess::profile.score.refill');
+        return $this->layout;
+    }
+    /**
+     * вывод средств
+     *
+     * @return Response
+     */
+    public function withdrawal()
+    {
+        $this->layout->content = view("mposuccess::profile.score.withdrawal");
+        $this->layout->title = trans('mposuccess::profile.score.withdrawal');
+        return $this->layout;
+    }
+    /**
+     * покупки пользавателя
+     *
+     * @return Response
+     */
+    public function purchases()
+    {
+        $this->layout->content = view("mposuccess::profile.score.purchases");
+        $this->layout->title = trans('mposuccess::profile.score.purchases');
+        return $this->layout;
+    }
+    /**
+     * Личные места пользавателя
+     *
+     * @return Response
+     */
+    public function places()
+    {
+        $this->layout->content = view("mposuccess::profile.score.places");
+        $this->layout->title = trans('mposuccess::profile.score.places');
+        return $this->layout;
+    }
+    /**
+     * Каталог товаров для покупки
+     *
+     * @return Response
+     */
+    public function catalog()
+    {
+        $this->layout->content = view("mposuccess::profile.catalog");
+        $this->layout->title = trans('mposuccess::profile.catalog');
+        return $this->layout;
+    }
+    /**
+     * Структуры пользавателей
+     *
+     * @return Response
+     */
+    public function structures($id)
+    {
+        $this->layout->content = view("mposuccess::profile.structures");
+        $this->layout->title = trans('mposuccess::profile.structures.' . $id) . ' ' . trans('mposuccess::profile.structures.one');
+        return $this->layout;
+    }
+    /**
+     * Дерево приглашенных
+     *
+     * @return Response
+     */
+    public function tree()
+    {
+        $this->layout->content = view("mposuccess::profile.tree");
+        $this->layout->title = trans('mposuccess::profile.tree');
         return $this->layout;
     }
 }

@@ -30,9 +30,49 @@ Route::group([
         'prefix' => 'profile'
     ],
     function(){
-        Route::get('/', array(
-            'as' => 'profile.home',
-            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@index',
+        Route::get('personal', array(
+            'as' => 'profile.personal',
+            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@personal',
+        ));
+
+        Route::get('news', array(
+            'as' => 'profile.news',
+            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@news',
+        ));
+
+        Route::get('score/refill', array(
+            'as' => 'profile.refill',
+            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@refill',
+        ));
+
+        Route::get('score/withdrawal', array(
+            'as' => 'profile.withdrawal',
+            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@withdrawal',
+        ));
+
+        Route::get('score/purchases', array(
+            'as' => 'profile.purchases',
+            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@purchases',
+        ));
+
+        Route::get('score/places', array(
+            'as' => 'profile.places',
+            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@places',
+        ));
+
+        Route::get('catalog', array(
+            'as' => 'profile.catalog',
+            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@catalog',
+        ));
+
+        Route::get('structures/{id}', array(
+            'as' => 'profile.structures',
+            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@structures',
+        ));
+
+        Route::get('tree', array(
+            'as' => 'profile.tree',
+            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@tree',
         ));
     }
 );
