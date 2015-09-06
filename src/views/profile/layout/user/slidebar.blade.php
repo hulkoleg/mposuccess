@@ -24,12 +24,12 @@
                     <span class="arrow @if(Request::is('*/score/*')) open @endif"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li>
-                        <a data-placement="right" data-original-title="Недоступно без оплаты" href="">
+                    <li @if('profile.refill' == Route::currentRouteName()) class="active" @endif>
+                        <a href="/profile/score/refill">
                             <i class="icon-bar-chart"></i>
-                            @lang('mposuccess::profile.score.refill')
-                        </a>
+                            @lang('mposuccess::profile.score.refill')</a>
                     </li>
+                    <!--
                     <li @if('profile.withdrawal' == Route::currentRouteName()) class="active" @endif>
                         <a href="/profile/score/withdrawal">
                             <i class="icon-bulb"></i>
@@ -45,6 +45,7 @@
                             <i class="icon-graph"></i>
                             @lang('mposuccess::profile.score.places')</a>
                     </li>
+                    -->
                 </ul>
             </li>
 
@@ -55,6 +56,7 @@
                 </a>
             </li>
 
+            <!--
             <li @if('profile.structures' == Route::currentRouteName()) class="active open" @endif>
                 <a href="javascript:;">
                     <i class="icon-home"></i>
@@ -101,7 +103,7 @@
                     <span class="title">@lang('mposuccess::profile.tree')</span>
                 </a>
             </li>
-
+            -->
         </ul>
         <!-- END SIDEBAR MENU -->
     </div>
