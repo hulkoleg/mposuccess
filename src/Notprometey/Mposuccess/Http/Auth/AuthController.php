@@ -2,6 +2,7 @@
 
 namespace Notprometey\Mposuccess\Http\Auth;
 
+use Illuminate\Support\Facades\Lang;
 use Notprometey\Mposuccess\Models\User;
 use Validator;
 use App\Http\Controllers\Controller;
@@ -42,10 +43,23 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name' => 'required|max:255',
-            'email' => 'required|email|max:255|unique:users',
-            'password' => 'required|confirmed|min:6',
+            'name'                  => 'required|min:2|max:255',
+            'surname'               => 'required|max:255',
+            'patronymic'            => 'required|max:255',
+            'email'                 => 'required|email|max:255|unique:users',
+            'password'              => 'required|confirmed|min:6',
             'password_confirmation' => 'same:password',
+            'birthday'              => 'required|date',
+        ], [
+            'name.required'         => 'Введите ваше имя',
+            'name.min'              => 'В имени должно быть минимум 2 символа',
+            'surname.required'      => 'Введите вашу фамилию',
+            'patronymic.required'   => 'Введите ваше отчество',
+            'email.required'        => 'Введите ваш e-mail',
+            'password.required'     => 'Введите ваш пароль',
+            'password.confirmed'    => 'Пароль не совпадает',
+            'password.min'          => 'Пароль должен содержать минимум 6 символов',
+            'birthday.required'     => 'Введите вашу дату рождения',
         ]);
     }
 
@@ -58,12 +72,17 @@ class AuthController extends Controller
     protected function create(array $data)
     {
         return User::create([
-            'name' => $data['name'],
-            'email' => $data['email'],
+            'name'       => $data['name'],
+            'surname'    => $data['surname'],
+            'patronymic' => $data['patronymic'],
+            'email'      => $data['email'],
             /*
              * remove hash password (replace in set attribute model User)
              */
-            'password' => $data['password'],
+            'password'   => $data['password'],
+            'birthday'   => $data['birthday'],
+            'programm'   => $data['programm'],
+            'country'    => $data['country']
         ]);
     }
 
