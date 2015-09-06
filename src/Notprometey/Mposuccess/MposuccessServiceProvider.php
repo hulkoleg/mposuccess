@@ -29,8 +29,8 @@ class MposuccessServiceProvider extends ServiceProvider {
 		$this->loadViewsFrom(__DIR__.'/../../views/', 'mposuccess');
 
 		$this->publishes([
-			__DIR__.'/../../views/auth' => base_path('resources/auth'),
-		], 'auth');
+			__DIR__.'/../../views/errors' => base_path('resources/errors'),
+		], 'errors');
 
 		$this->publishes([
 			__DIR__.'/../../config/mposuccess.php' => config_path('mposuccess.php'),

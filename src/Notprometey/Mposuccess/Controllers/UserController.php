@@ -18,7 +18,27 @@ use Notprometey\Mposuccess\Repositories\User\UserRepository;
 /**
  * Handles all requests related to managing the data models
  */
-class ProfileController extends UserController {
+class UserController extends Controller {
+    /**
+     * user id
+     */
+    protected $id;
+    /**
+     * user all unfo
+     */
+    protected $user;
+    /**
+     * @var \Illuminate\Http\Request
+     */
+    protected $request;
+    /**
+     * @var \Illuminate\Session\SessionManager
+     */
+    protected $session;
+    /**
+     * @var string
+     */
+    protected $layout = "mposuccess::layouts.panel.main";
 
     /**
      * @param \Illuminate\Http\Request              $request
@@ -41,59 +61,49 @@ class ProfileController extends UserController {
     }
 
     /**
-     * вывод средств
+     * Данные пользавателя
      *
      * @return Response
      */
-    public function withdrawal()
+    public function personal()
     {
-        $this->layout->content = view("mposuccess::profile.score.withdrawal");
-        $this->layout->title = trans('mposuccess::profile.score.withdrawal');
-        return $this->layout;
-    }
-    /**
-     * покупки пользавателя
-     *
-     * @return Response
-     */
-    public function purchases()
-    {
-        $this->layout->content = view("mposuccess::profile.score.purchases");
-        $this->layout->title = trans('mposuccess::profile.score.purchases');
-        return $this->layout;
-    }
-    /**
-     * Личные места пользавателя
-     *
-     * @return Response
-     */
-    public function places()
-    {
-        $this->layout->content = view("mposuccess::profile.score.places");
-        $this->layout->title = trans('mposuccess::profile.score.places');
+        $this->layout->content = view("mposuccess::profile.personal");
+        $this->layout->title = trans('mposuccess::profile.personal');
         return $this->layout;
     }
 
     /**
-     * Структуры пользавателей
+     * Закрытые новости профиля
      *
      * @return Response
      */
-    public function structures($id)
+    public function news()
     {
-        $this->layout->content = view("mposuccess::profile.structures");
-        $this->layout->title = trans('mposuccess::profile.structures.' . $id) . ' ' . trans('mposuccess::profile.structures.one');
+        $this->layout->content = view("mposuccess::profile.news");
+        $this->layout->title = trans('mposuccess::profile.news');
+        return $this->layout;
+    }
+
+    /**
+     * пополнения счета
+     *
+     * @return Response
+     */
+    public function refill()
+    {
+        $this->layout->content = view("mposuccess::profile.score.refill");
+        $this->layout->title = trans('mposuccess::profile.score.refill');
         return $this->layout;
     }
     /**
-     * Дерево приглашенных
+     * Каталог товаров для покупки
      *
      * @return Response
      */
-    public function tree()
+    public function catalog()
     {
-        $this->layout->content = view("mposuccess::profile.tree");
-        $this->layout->title = trans('mposuccess::profile.tree');
+        $this->layout->content = view("mposuccess::profile.catalog");
+        $this->layout->title = trans('mposuccess::profile.catalog');
         return $this->layout;
     }
 }
