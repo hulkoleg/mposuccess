@@ -55,8 +55,8 @@ class UserController extends Controller {
         if ( ! is_null($this->layout))
         {
             $this->layout = view($this->layout);
-            $this->layout->slidebar = view('mposuccess::profile.layout.slidebar');
-            $this->layout->r_slidebar = view('mposuccess::profile.layout.r_slidebar');
+            $this->layout->slidebar = view('mposuccess::profile.layout.user.slidebar');
+            //$this->layout->r_slidebar = view('mposuccess::profile.layout.r_slidebar');
         }
     }
 

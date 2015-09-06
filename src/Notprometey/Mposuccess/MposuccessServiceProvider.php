@@ -29,7 +29,7 @@ class MposuccessServiceProvider extends ServiceProvider {
 		$this->loadViewsFrom(__DIR__.'/../../views/', 'mposuccess');
 
 		$this->publishes([
-			__DIR__.'/../../views/errors' => base_path('resources/errors'),
+			__DIR__.'/../../views/errors' => base_path('resources/views/errors'),
 		], 'errors');
 
 		$this->publishes([
