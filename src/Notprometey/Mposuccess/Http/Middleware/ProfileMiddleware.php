@@ -16,12 +16,14 @@ use Notprometey\Mposuccess\Models\User;
 
 class ProfileMiddleware{
     public function handle(Request $request, Closure $next){
-        $user = User::find(Auth::user()->id);
+        if (Auth::check()){
+            $user = User::find(Auth::user()->id);
 
-        if (!Auth::check() || $user->is('bad.user') || !$user->is('admin|moderator|user')) {
-            abort('404');
+            if($user->is('bad.user') || !$user->is('admin|moderator|user')) {
+                abort('404');
+            }
+            return $next($request);
         }
-
-        return $next($request);
+        abort('404');
     }
 }
