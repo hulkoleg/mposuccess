@@ -14,11 +14,14 @@ use Notprometey\Mposuccess\Models\User;
 
 class UserMiddleware{
     public function handle($request, Closure $next){
-        $user = User::find(Auth::user()->id);
+        if (Auth::check()){
+            $user = User::find(Auth::user()->id);
 
-        if (!Auth::check() || !$user->is('admin|moderator|user|bad.user')) {
-            abort('404');
+            if(!$user->is('admin|moderator|user|bad.user')) {
+                abort('404');
+            }
+            return $next($request);
         }
-        return $next($request);
+        abort('404');
     }
 }
