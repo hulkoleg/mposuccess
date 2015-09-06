@@ -10,18 +10,15 @@ namespace Notprometey\Mposuccess\Http\Middleware;
 
 use Auth;
 use Closure;
-use Illuminate\Http\Request;
 use Notprometey\Mposuccess\Models\User;
 
-
-class ProfileMiddleware{
-    public function handle(Request $request, Closure $next){
+class UserMiddleware{
+    public function handle($request, Closure $next){
         $user = User::find(Auth::user()->id);
 
-        if (!Auth::check() || $user->is('bad.user') || !$user->is('admin|moderator|user')) {
+        if (!Auth::check() || !$user->is('admin|moderator|user|bad.user')) {
             abort('404');
         }
-
         return $next($request);
     }
 }

@@ -22,12 +22,15 @@ Route::group([
          */
     }
 );
-
 Route::group([
-        'middleware' => 'Notprometey\Mposuccess\Http\Middleware\ProfileMiddleware',
-        'prefix' => 'profile'
-    ],
+    'middleware' => 'Notprometey\Mposuccess\Http\Middleware\UserMiddleware',
+    'prefix' => 'profile'
+],
     function(){
+        Route::get('/', array(
+            'as' => 'profile.personal2',
+            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@personal',
+        ));
         Route::get('personal', array(
             'as' => 'profile.personal',
             'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@personal',
@@ -43,6 +46,20 @@ Route::group([
             'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@refill',
         ));
 
+        Route::get('catalog', array(
+            'as' => 'profile.catalog',
+            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@catalog',
+        ));
+
+    }
+);
+Route::group([
+        'middleware' => 'Notprometey\Mposuccess\Http\Middleware\ProfileMiddleware',
+        'prefix' => 'profile'
+    ],
+    function(){
+
+
         Route::get('score/withdrawal', array(
             'as' => 'profile.withdrawal',
             'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@withdrawal',
@@ -56,11 +73,6 @@ Route::group([
         Route::get('score/places', array(
             'as' => 'profile.places',
             'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@places',
-        ));
-
-        Route::get('catalog', array(
-            'as' => 'profile.catalog',
-            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@catalog',
         ));
 
         Route::get('structures/{id}', array(
