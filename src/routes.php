@@ -29,26 +29,26 @@ Route::group([
     function(){
         Route::get('/', array(
             'as' => 'profile.personal2',
-            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@personal',
+            'uses' => 'Notprometey\Mposuccess\Controllers\UserController@personal',
         ));
         Route::get('personal', array(
             'as' => 'profile.personal',
-            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@personal',
+            'uses' => 'Notprometey\Mposuccess\Controllers\UserController@personal',
         ));
 
         Route::get('news', array(
             'as' => 'profile.news',
-            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@news',
+            'uses' => 'Notprometey\Mposuccess\Controllers\UserController@news',
         ));
 
         Route::get('score/refill', array(
             'as' => 'profile.refill',
-            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@refill',
+            'uses' => 'Notprometey\Mposuccess\Controllers\UserController@refill',
         ));
 
         Route::get('catalog', array(
             'as' => 'profile.catalog',
-            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@catalog',
+            'uses' => 'Notprometey\Mposuccess\Controllers\UserController@catalog',
         ));
 
     }
