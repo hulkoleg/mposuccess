@@ -170,12 +170,12 @@ var Login = function () {
 	                    required: true,
 	                    email: true
 	                },
-	                country: {
-	                    required: true
-	                },
 	                password: {
 	                    required: true
-	                }
+	                },
+					birthday: {
+                        required: true
+                    }
 	            },
 
 	            messages: { // custom messages for radio buttons and checkboxes
@@ -196,6 +196,9 @@ var Login = function () {
                     },
                     password: {
                         required: "Пожалуйста введите свой пароль."
+                    },
+                    birthday: {
+                        required: "Пожалуйста выберите свою дату рождения."
                     }
 	            },
 
