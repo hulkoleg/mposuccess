@@ -40,17 +40,17 @@ Route::group([
 
         Route::post('changeData', array(
             'as'    => 'profile.changeData',
-            'uses'  => 'Notprometey\Mposuccess\Controllers\ProfileController@changeData',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@changeData',
         ));
 
         Route::post('changeAvatar', array(
             'as'    => 'profile.changeAvatar',
-            'uses'  => 'Notprometey\Mposuccess\Controllers\ProfileController@changeAvatar',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@changeAvatar',
         ));
 
         Route::post('changePassword', array(
             'as'    => 'profile.changePassword',
-            'uses'  => 'Notprometey\Mposuccess\Controllers\ProfileController@changePassword',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@changePassword',
         ));
         
         Route::get('personal', array(

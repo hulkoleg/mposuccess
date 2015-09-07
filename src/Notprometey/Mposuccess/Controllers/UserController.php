@@ -72,7 +72,15 @@ class UserController extends Controller {
      */
     public function personal()
     {
-        $this->layout->content = view("mposuccess::profile.personal");
+        $regions = [['name' => 'Беларусь', 'code' => '375'], ['name' => 'Россия', 'code' => '789']];
+        $instructions = [['name' =>'Покупка продукта(1,2,3 - этапы с последуещим переходом по желанию в 4,5,6)'],
+            ['name' =>'Вступление в МПО(4,5,6 - этапы)']];
+
+        $this->layout->content = "111";
+        /*view("mposuccess::profile.personal", [
+            'user' => $this->user,
+            'regions' => $regions,
+            'instructions' => $instructions]);*/
         $this->layout->title = trans('mposuccess::profile.personal');
         return $this->layout;
     }
@@ -110,5 +118,40 @@ class UserController extends Controller {
         $this->layout->content = view("mposuccess::profile.catalog");
         $this->layout->title = trans('mposuccess::profile.catalog');
         return $this->layout;
+    }
+
+
+    public function changeData(Request $request)
+    {
+        return redirect('profile')->withInput()->with('tab', 1);
+    }
+
+    public function changeAvatar(Request $request)
+    {
+        if ($request->hasFile('photo'))
+        {
+            $destinationPath = "/images/users/";
+            $fileName = $this->user->name . '.' . $request->file('photo')->getClientOriginalExtension();
+
+            $request->file('photo')->move(public_path() . $destinationPath, $fileName);
+
+            $this->user->url_avatar = $destinationPath . $fileName;
+
+            $this->user->save();
+
+            return $request->server();
+        }
+        return 0;
+    }
+
+    public function changePassword(Request $request)
+    {
+        $current = $request->input('current');
+        $new = $request->input('new');
+        $re_type = $request->input('re-type');
+
+        //return $current . ' ' . $new . ' ' . $re_type;
+
+        return redirect('profile')->withInput()->with('tab', 3);
     }
 }
