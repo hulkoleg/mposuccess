@@ -12,7 +12,7 @@
                 <!-- SIDEBAR USER TITLE -->
                 <div class="profile-usertitle">
                     <div class="profile-usertitle-name">
-                        {{ $user->name }}
+                        {{ $user->surname }} {{ $user->name }}
                     </div>
                 </div>
                 <!-- END SIDEBAR USER TITLE -->
@@ -67,19 +67,19 @@
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                                         <div class="form-group">
-                                            <label class="control-label">@lang('mposuccess::profile.personalInfo.lastName')</label>
-                                            <input type="text" name="lastName" placeholder="@lang('mposuccess::profile.personalInfo.lastNamePlaceholder')"
-                                                   class="form-control" value="{{ Input::old('lastName', $user->lastName) }}">
+                                            <label class="control-label">@lang('mposuccess::profile.personalInfo.surname')</label>
+                                            <input type="text" name="surname" placeholder="@lang('mposuccess::profile.personalInfo.surnamePlaceholder')"
+                                                   class="form-control" value="{{ Input::old('surname', $user->surname) }}">
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label">@lang('mposuccess::profile.personalInfo.firstName')</label>
-                                            <input type="text" name="firstName" placeholder="@lang('mposuccess::profile.personalInfo.firstNamePlaceholder')"
-                                                   class="form-control" value="{{ Input::old('firstName', $user->firstName) }}">
+                                            <label class="control-label">@lang('mposuccess::profile.personalInfo.name')</label>
+                                            <input type="text" name="name" placeholder="@lang('mposuccess::profile.personalInfo.namePlaceholder')"
+                                                   class="form-control" value="{{ Input::old('name', $user->name) }}">
                                         </div>
                                         <div class="form-group">
-                                            <label class="control-label">@lang('mposuccess::profile.personalInfo.middleName')</label>
-                                            <input type="text" name="middleName" placeholder="@lang('mposuccess::profile.personalInfo.middleNamePlaceholder')"
-                                                   class="form-control" value="{{ Input::old('middleName', $user->middleName) }}">
+                                            <label class="control-label">@lang('mposuccess::profile.personalInfo.patronymic')</label>
+                                            <input type="text" name="patronymic" placeholder="@lang('mposuccess::profile.personalInfo.patronymicPlaceholder')"
+                                                   class="form-control" value="{{ Input::old('patronymic', $user->patronymic) }}">
                                         </div>
 
                                         <div class="form-group">
@@ -244,4 +244,19 @@
         placeholder: "Select",
         allowClear: true
     });
+
+
+    /*function format(state) {
+        if (!state.id) return state.text; // optgroup
+        return "<img class='flag' src='" + Metronic.getGlobalImgPath() + "flags/" + state.id.toLowerCase() + ".png'/>&nbsp;&nbsp;" + state.text;
+    }
+    $("#select2_sample4").select2({
+        placeholder: "Select a Country",
+        allowClear: true,
+        formatResult: format,
+        formatSelection: format,
+        escapeMarkup: function (m) {
+            return m;
+        }
+    });*/
 </script>

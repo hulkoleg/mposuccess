@@ -157,8 +157,8 @@
             </div>
         </div>
         <div class="form-group">
-                <select name="country" id="select2_sample4" class="form-control select2">
-                    <option value="AF">Afghanistan</option>
+                <select name="country" id="select2_sample4111" class="form-control select2">
+                    <option value="111" data-country="AF">Afghanistan</option>
                     <option value="AL">Albania</option>
                     <option value="DZ">Algeria</option>
                     <option value="AS">American Samoa</option>
@@ -460,18 +460,19 @@
         Layout.init(); // init current layout
         Login.init();
         Demo.init();
-        ComponentsPickers.init();
-        // init background slide images
-        $.backstretch([
-                    "/assets/admin/pages/media/bg/1.jpg",
-                    "/assets/admin/pages/media/bg/2.jpg",
-                    "/assets/admin/pages/media/bg/3.jpg",
-                    "/assets/admin/pages/media/bg/4.jpg"
-                ], {
-                    fade: 1000,
-                    duration: 8000
-                }
-        );
+
+        function formatCountry(state) {
+            if (!state.id) return state.text; // optgroup
+            return "<img class='flag' src='" + Metronic.getGlobalImgPath() + "flags/" + $(state.element).data('country')/*state.id.toLowerCase()*/ + ".png'/>&nbsp;&nbsp;" + state.text;
+        }
+        $("#select2_sample4111").select2({
+            allowClear: true,
+            formatResult: formatCountry,
+            formatSelection: formatCountry,
+            escapeMarkup: function (m) {
+                return m;
+            }
+        });
     });
 </script>
 <!-- END JAVASCRIPTS -->
