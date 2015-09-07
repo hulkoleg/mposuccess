@@ -24,10 +24,15 @@ Route::group([
 );
 
 Route::group([
-        'middleware' => 'Notprometey\Mposuccess\Http\Middleware\ProfileMiddleware',
-        'prefix' => 'profile'
-    ],
+    'middleware' => 'Notprometey\Mposuccess\Http\Middleware\UserMiddleware',
+    'prefix' => 'profile'
+],
     function(){
+        Route::get('/', array(
+            'as' => 'profile.personal2',
+            'uses' => 'Notprometey\Mposuccess\Controllers\UserController@personal',
+        ));
+        
         Route::get('/', array(
             'as'    => 'profile.home',
             'uses'  => 'Notprometey\Mposuccess\Controllers\ProfileController@index',
@@ -50,18 +55,33 @@ Route::group([
         
         Route::get('personal', array(
             'as' => 'profile.personal',
-            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@personal',
+            'uses' => 'Notprometey\Mposuccess\Controllers\UserController@personal',
         ));
 
         Route::get('news', array(
             'as' => 'profile.news',
-            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@news',
+            'uses' => 'Notprometey\Mposuccess\Controllers\UserController@news',
         ));
 
         Route::get('score/refill', array(
             'as' => 'profile.refill',
-            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@refill',
+            'uses' => 'Notprometey\Mposuccess\Controllers\UserController@refill',
         ));
+
+        Route::get('catalog', array(
+            'as' => 'profile.catalog',
+            'uses' => 'Notprometey\Mposuccess\Controllers\UserController@catalog',
+        ));
+
+    }
+);
+
+Route::group([
+        'middleware' => 'Notprometey\Mposuccess\Http\Middleware\ProfileMiddleware',
+        'prefix' => 'profile'
+    ],
+    function(){
+
 
         Route::get('score/withdrawal', array(
             'as' => 'profile.withdrawal',
@@ -76,11 +96,6 @@ Route::group([
         Route::get('score/places', array(
             'as' => 'profile.places',
             'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@places',
-        ));
-
-        Route::get('catalog', array(
-            'as' => 'profile.catalog',
-            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@catalog',
         ));
 
         Route::get('structures/{id}', array(
