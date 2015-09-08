@@ -42,6 +42,7 @@ class FrontController extends Controller {
             $this->layout->page = false;
             $this->layout->dashboard = false;
         }
+        $this->layout->slider = null;
     }
 
     /**
@@ -52,6 +53,7 @@ class FrontController extends Controller {
     public function index()
     {
         $this->layout->content = view("mposuccess::front.index");
+        $this->layout->slider = view("mposuccess::layouts.front.slider");
         $this->layout->title = trans('mposuccess::front.home');
         return $this->layout;
     }
