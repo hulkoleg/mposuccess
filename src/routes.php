@@ -29,13 +29,13 @@ Route::group([
 ],
     function(){
         Route::get('/', array(
+            'as'    => 'profile.home',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@index',
+        ));
+
+        Route::get('/', array(
             'as' => 'profile.personal2',
             'uses' => 'Notprometey\Mposuccess\Controllers\UserController@personal',
-        ));
-        
-        Route::get('/', array(
-            'as'    => 'profile.home',
-            'uses'  => 'Notprometey\Mposuccess\Controllers\ProfileController@index',
         ));
 
         Route::post('changeData', array(
@@ -46,6 +46,11 @@ Route::group([
         Route::post('changeAvatar', array(
             'as'    => 'profile.changeAvatar',
             'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@changeAvatar',
+        ));
+
+        Route::get('removeAvatar', array(
+            'as'    => 'profile.removeAvatar',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@removeAvatar',
         ));
 
         Route::post('changePassword', array(

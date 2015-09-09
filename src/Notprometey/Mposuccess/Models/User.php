@@ -27,7 +27,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable = ['name', 'surname', 'patronymic', 'email', 'password', 'birthday', 'programm', 'country'];
+    protected $fillable = ['id','sid', 'name', 'surname', 'patronymic', 'email', 'password', 'birthday', 'program', 'country', 'url_avatar', 'refer'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -45,6 +45,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     }
 
     /**
+     * Accessor for transform password to hash when setting him.
+     */
+    public function setSidAttribute($value)
+    {
+        if (!$value) {
+            $year = date('Y');
+            $codeCountry = str_pad($this->attributes['country'], 4, "0", STR_PAD_LEFT);
+
+            $this->attributes['sid'] = $codeCountry . $year . (100000 + $this->attributes['id']);
+        }
+    }
+
+    /**
      * Each user can have many roles.
      */
     public function roles()
@@ -58,5 +71,12 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function permissions()
     {
         return $this->belongsToMany('Bican\Roles\Models\Permission', 'permission_user');
+    }
+
+    public function getRefer()
+    {
+        $refer = self::where('sid', $this->refer)->first();
+
+        return trim($refer->surname . $refer->name . "(" . $refer->email . ")") ;
     }
 }

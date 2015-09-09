@@ -13,11 +13,14 @@ class ChangeUsersTable extends Migration
     public function up()
     {
         Schema::table('users', function (Blueprint $table) {
-            $table->string('surname')->after('name');
-            $table->string('patronymic')->after('surname');
+            $table->string('sid', 15)->after('id');
+            $table->string('surname', 32)->after('name');
+            $table->string('patronymic', 32)->after('surname');
             $table->date('birthday');
-            $table->integer('programm');
-            $table->string('country');
+            $table->string('url_avatar', 100);
+            $table->integer('program');
+            $table->integer('country');
+            $table->string('refer', 15);
         });
     }
 

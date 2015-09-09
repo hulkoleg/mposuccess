@@ -18,21 +18,10 @@
                 <!-- END SIDEBAR USER TITLE -->
                 <!-- SIDEBAR BUTTONS -->
                 <div class="profile-userbuttons">
-                    <button type="button" class="btn btn-circle green-haze btn-sm">@lang('mposuccess::profile.referral')</button>
+                    <button type="button" class="btn btn-circle green-haze btn-sm">@lang('mposuccess::profile.refer')</button>
                     <button type="button" class="btn btn-circle btn-danger btn-sm">@lang('mposuccess::profile.message')</button>
                 </div>
                 <!-- END SIDEBAR BUTTONS -->
-                <!-- SIDEBAR MENU -->
-                <div class="profile-usermenu">
-                    <ul class="nav">
-                        <li class="active">
-                            <a href="extra_profile_account.html">
-                                <i class="icon-settings"></i>
-                                @lang('mposuccess::profile.accountSettings')</a>
-                        </li>
-                    </ul>
-                </div>
-                <!-- END MENU -->
             </div>
             <!-- END PORTLET MAIN -->
         </div>
@@ -66,53 +55,66 @@
                                     <form id="form-change-data" method="post" action="{{ url('/profile/changeData') }}">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                                        <div class="form-group">
+                                        <div class="form-group @if($errors->has('surname')) has-error @endif">
                                             <label class="control-label">@lang('mposuccess::profile.personalInfo.surname')</label>
                                             <input type="text" name="surname" placeholder="@lang('mposuccess::profile.personalInfo.surnamePlaceholder')"
                                                    class="form-control" value="{{ Input::old('surname', $user->surname) }}">
+                                            @if($errors->has('surname'))
+                                                <span id="name-error" class="help-block">{{ $errors->first('surname') }}</span>
+                                            @endif
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group @if($errors->has('name')) has-error @endif">
                                             <label class="control-label">@lang('mposuccess::profile.personalInfo.name')</label>
                                             <input type="text" name="name" placeholder="@lang('mposuccess::profile.personalInfo.namePlaceholder')"
-                                                   class="form-control" value="{{ Input::old('name', $user->name) }}">
+                                                   class="form-control" value="{{ old('name', $user->name) }}">
+                                            @if($errors->has('name'))
+                                                <span id="name-error" class="help-block">{{ $errors->first('name') }}</span>
+                                            @endif
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group @if($errors->has('patronymic')) has-error @endif">
                                             <label class="control-label">@lang('mposuccess::profile.personalInfo.patronymic')</label>
                                             <input type="text" name="patronymic" placeholder="@lang('mposuccess::profile.personalInfo.patronymicPlaceholder')"
-                                                   class="form-control" value="{{ Input::old('patronymic', $user->patronymic) }}">
+                                                   class="form-control" value="{{ old('patronymic', $user->patronymic) }}">
+                                            @if($errors->has('patronymic'))
+                                                <span id="name-error" class="help-block">{{ $errors->first('patronymic') }}</span>
+                                            @endif
                                         </div>
 
-                                        <div class="form-group">
-                                            <label class="control-label">@lang('mposuccess::profile.region')</label>
-                                            <select class="form-control select2me input-sm" data-placeholder="@lang('mposuccess::profile.regionNoSelect')">
-                                                @foreach ($regions as $region)
-                                                    <option value="{{$region['code']}}">{{$region['name']}} ({{$region['code']}})</option>
-                                                @endforeach
-                                            </select>
-                                        </div>
-
-                                        <div class="form-group">
+                                        <div class="form-group @if($errors->has('birthday')) has-error @endif">
                                             <label class="control-label">@lang('mposuccess::profile.personalInfo.dataBirth')</label>
                                             <span class="input-group date date-picker" data-date-format="dd.mm.yyyy">
-                                                <input type="text" class="form-control form-filter input-sm"  name="order_date_to" placeholder="01.01.1990">
+                                                <input type="text" class="form-control form-filter input-sm" name="birthday"
+                                                       placeholder="01.01.1990" value="{{ old('birthday', date_format(date_create($user->birthday), 'd.m.Y')) }}">
                                                 <span class="input-group-btn">
                                                     <button class="btn btn-sm default" type="button"><i class="fa fa-calendar"></i></button>
                                                 </span>
                                             </span>
+                                            @if($errors->has('birthday'))
+                                                <span id="name-error" class="help-block">{{ $errors->first('birthday') }}</span>
+                                            @endif
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="control-label">@lang('mposuccess::profile.instruction')</label>
-                                            <select class="form-control select2me input-sm" data-placeholder="@lang('mposuccess::profile.instructionNoSelect')">
-                                                @foreach ($instructions as $instruction)
-                                                    <option value="">{{$instruction['name']}}</option>
+                                            <label class="control-label">@lang('mposuccess::profile.region')</label>
+                                            <select name="country" id="select2_country" class="form-control select2 input-sm" data-placeholder="@lang('mposuccess::profile.regionNoSelect')" disabled>
+                                                @foreach ($countries as $country)
+                                                    <option value="{{ $country['code'] }}" data-country="{{ $country['flag'] }}">{{ $country['name'] }}</option>
                                                 @endforeach
                                             </select>
                                         </div>
 
                                         <div class="form-group">
-                                            <label class="control-label">@lang('mposuccess::profile.referral')</label>
-                                            <input type="text" placeholder="@lang('mposuccess::profile.referralNone')" class="form-control" disabled>
+                                            <label class="control-label">@lang('mposuccess::profile.instruction')</label>
+                                            <select id="select2_program" class="form-control input-sm" data-placeholder="@lang('mposuccess::profile.instructionNoSelect')" disabled>
+                                                @foreach ($programs as $program)
+                                                    <option value="{{ $program['id'] }}">{{ $program['name'] }}</option>
+                                                @endforeach
+                                            </select>
+                                        </div>
+
+                                        <div class="form-group">
+                                            <label class="control-label">@lang('mposuccess::profile.refer')</label>
+                                            <input type="text" placeholder="@lang('mposuccess::profile.referNone')" class="form-control" value="{{ $refer }}" disabled>
                                         </div>
 
                                         <div class="form-group">
@@ -120,12 +122,15 @@
                                             <input type="text" placeholder="name@gmail.com" class="form-control" value="{{$user->email}}" disabled>
                                         </div>
 
+                                        <div class="form-group">
+                                            <label class="control-label">@lang('mposuccess::profile.personalInfo.dateRegister')</label>
+                                            <input type="text" class="form-control" value="{{ $user->created_at }}" disabled>
+                                        </div>
+
                                         <div class="margiv-top-10">
                                             <button type="submit" class="btn green-haze">
                                                 @lang('mposuccess::profile.saveChanges')
                                             </button>
-                                            <a href="javascript:;" class="btn default">
-                                                @lang('mposuccess::profile.cancel')</a>
                                         </div>
                                     </form>
                                 </div>
@@ -137,20 +142,14 @@
 
                                         <div class="form-group">
                                             <div class="fileinput fileinput-new" data-provides="fileinput">
-                                                <div class="fileinput-new thumbnail" style="width: 200px; height: 150px;">
-                                                    <img src="http://www.placehold.it/200x150/EFEFEF/AAAAAA&amp;text=no+image" alt="">
-                                                </div>
-                                                <div class="fileinput-preview fileinput-exists thumbnail" style="max-width: 200px; max-height: 150px;">
-                                                </div>
                                                 <div>
                                                     <span class="btn default btn-file">
                                                         <span class="fileinput-new">
                                                             @lang('mposuccess::profile.changeAvatar.selectImage')</span>
-                                                        <span class="fileinput-exists">
-                                                            @lang('mposuccess::profile.changeAvatar.changeImage')</span>
                                                         <input type="file" name="photo">
                                                     </span>
-                                                    <a href="javascript:;" class="btn default fileinput-exists" data-dismiss="fileinput">
+                                                    <a href="{{ url('profile/removeAvatar') }}" class="btn default fileinput-exists"
+                                                        data-dismiss="fileinput" @if(!$user->url_avatar) disabled @endif>
                                                         @lang('mposuccess::profile.changeAvatar.remove')</a>
                                                 </div>
                                             </div>
@@ -163,8 +162,6 @@
                                             <button type="submit" class="btn green-haze">
                                                 @lang('mposuccess::profile.submit')
                                             </button>
-                                            <a href="javascript:;" class="btn default">
-                                                @lang('mposuccess::profile.cancel')</a>
                                         </div>
                                     </form>
                                 </div>
@@ -174,24 +171,28 @@
                                     <form id="form-change-password" method="post" action="{{ url('/profile/changePassword') }}">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
-                                        <div class="form-group">
+                                        <div class="form-group @if($errors->has('current')) has-error @endif">
                                             <label class="control-label">@lang('mposuccess::profile.changePassword.current')</label>
-                                            <input type="password" name="current" class="form-control" value="{{ Input::old('current') }}">
+                                            <input type="password" name="current" class="form-control" value="{{ old('current') }}">
+                                            @if($errors->has('current'))
+                                                <span id="name-error" class="help-block">{{ $errors->first('current') }}</span>
+                                            @endif
                                         </div>
-                                        <div class="form-group">
+                                        <div class="form-group  @if($errors->has('password')) has-error @endif">
                                             <label class="control-label">@lang('mposuccess::profile.changePassword.new')</label>
-                                            <input type="password" name="new" class="form-control" value="{{ Input::old('new') }}">
+                                            <input type="password" name="password" class="form-control" value="{{ old('password') }}">
+                                            @if($errors->has('password'))
+                                                <span id="name-error" class="help-block">{{ $errors->first('password') }}</span>
+                                            @endif
                                         </div>
                                         <div class="form-group">
                                             <label class="control-label">@lang('mposuccess::profile.changePassword.reType')</label>
-                                            <input type="password" name="re-type" class="form-control" value="{{ Input::old('re-type') }}">
+                                            <input type="password" name="password_confirmation" class="form-control" value="{{ old('password_confirmation') }}">
                                         </div>
                                         <div class="margin-top-10">
                                             <button type="submit" class="btn green-haze">
                                                 @lang('mposuccess::profile.changePassword.title')
                                             </button>
-                                            <a href="javascript:;" class="btn default">
-                                                @lang('mposuccess::profile.cancel')</a>
                                         </div>
                                     </form>
                                 </div>
@@ -206,27 +207,30 @@
     </div>
 </div>
 
-<script src="assets/global/plugins/jquery.min.js" type="text/javascript"></script>
-<script src="assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/jquery.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/jquery-migrate.min.js" type="text/javascript"></script>
 <!-- IMPORTANT! Load jquery-ui.min.js before bootstrap.min.js to fix bootstrap tooltip conflict with jquery ui tooltip -->
-<script src="assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
-<script src="assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
-<script src="assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
-<script src="assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
-<script src="assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
-<script src="assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
-<script src="assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
-<script src="assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/jquery-ui/jquery-ui.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap/js/bootstrap.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-hover-dropdown/bootstrap-hover-dropdown.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/jquery-slimscroll/jquery.slimscroll.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/jquery.blockui.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/jquery.cokie.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/uniform/jquery.uniform.min.js" type="text/javascript"></script>
+<script src="../assets/global/plugins/bootstrap-switch/js/bootstrap-switch.min.js" type="text/javascript"></script>
 <!-- END CORE PLUGINS -->
 <!-- BEGIN PAGE LEVEL PLUGINS -->
-<script type="text/javascript" src="assets/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
-<script type="text/javascript" src="assets/global/plugins/select2/select2.min.js"></script>
-<script type="text/javascript" src="assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
+<script type="text/javascript" src="../assets/global/plugins/bootstrap-select/bootstrap-select.min.js"></script>
+<script type="text/javascript" src="../assets/global/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="../assets/global/plugins/jquery-multi-select/js/jquery.multi-select.js"></script>
 <!-- END PAGE LEVEL PLUGINS -->
 <!-- BEGIN PAGE LEVEL SCRIPTS -->
-<script type="text/javascript" src="assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
-<script src="assets\global\plugins\bootstrap-datepicker\js\locales\bootstrap-datepicker.ru.js" charset="UTF-8"></script>
+<script type="text/javascript" src="../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script src="../assets\global\plugins\bootstrap-datepicker\js\locales\bootstrap-datepicker.ru.js" charset="UTF-8"></script>
 
+<!-- END PAGE LEVEL SCRIPTS -->
+<!-- BEGIN PAGE LEVEL SCRIPTS -->
+<script src="/assets/global/scripts/metronic.js" type="text/javascript"></script>
 <!-- END PAGE LEVEL SCRIPTS -->
 
 
@@ -237,26 +241,19 @@
         endDate: '-18y',
         language: 'ru'
     });
-</script>
 
-<script type="text/javascript">
-    $('.select2me').select2({
-        placeholder: "Select",
-        allowClear: true
-    });
+    function formatCountry(state) {
+        if (!state.id) return state.text; // optgroup
+        return "<img class='flag' src='" + Metronic.getGlobalImgPath() + "flags/" + $(state.element).data('country') + ".png'/>&nbsp;&nbsp;" + state.text;
+    }
+    $("#select2_country").select2({
+        allowClear: true,
+        formatResult: formatCountry,
+        formatSelection: formatCountry,
+        escapeMarkup: function (m) {
+            return m;
+        }
+    }).select2("val", "{{ $user->country }}");
 
-
-    /*function format(state) {
-     if (!state.id) return state.text; // optgroup
-     return "<img class='flag' src='" + Metronic.getGlobalImgPath() + "flags/" + state.id.toLowerCase() + ".png'/>&nbsp;&nbsp;" + state.text;
-     }
-     $("#select2_sample4").select2({
-     placeholder: "Select a Country",
-     allowClear: true,
-     formatResult: format,
-     formatSelection: format,
-     escapeMarkup: function (m) {
-     return m;
-     }
-     });*/
+    $('#select2_program').select2().select2("val", "{{ $user->program }}");
 </script>

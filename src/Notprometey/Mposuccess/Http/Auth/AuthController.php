@@ -3,11 +3,16 @@
 namespace Notprometey\Mposuccess\Http\Auth;
 
 use Illuminate\Support\Facades\Lang;
+use Notprometey\Mposuccess\Models\RoleCustom;
 use Notprometey\Mposuccess\Models\User;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Notprometey\Mposuccess\Models\Country;
+use Notprometey\Mposuccess\Models\Program;
+use Illuminate\Http\Request;
+use DB;
 
 class AuthController extends Controller
 {
@@ -71,7 +76,7 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        $user = User::create([
             'name'       => $data['name'],
             'surname'    => $data['surname'],
             'patronymic' => $data['patronymic'],
@@ -80,10 +85,21 @@ class AuthController extends Controller
              * remove hash password (replace in set attribute model User)
              */
             'password'   => $data['password'],
-            'birthday'   => $data['birthday'],
-            'programm'   => $data['programm'],
-            'country'    => $data['country']
+            'birthday'   => date_format(date_create($data['birthday']), 'Y-m-d'),
+            'program'    => $data['program'],
+            'country'    => $data['country'],
+            'refer'      => $data['refer'] ? $data['refer'] : User::find(1)->sid
         ]);
+
+        $id = $user->id;
+        $newUser = User::find($id);
+        $newUser->sid = '';
+        $newUser->save();
+
+        $badUserRole = RoleCustom::where('slug', 'bad.user')->firstOrFail();
+        $user->attachRole($badUserRole);
+
+        return $user;
     }
 
     public function getLogin()
@@ -93,6 +109,21 @@ class AuthController extends Controller
 
     public function getRegister()
     {
-        return view('mposuccess::auth.register');
+        $data = [
+            'countries' => Country::all(),
+            'programs'  => Program::all(),
+        ];
+
+        return view('mposuccess::auth.register', $data);
+    }
+
+    /*
+     * Get list users (refers) by email or sid
+     */
+    public function getRefers(Request $request)
+    {
+        $q = '%' . $request->query('q') . '%';
+        return User::select('sid', DB::raw('CONCAT(surname, " ", name, "(", email, ")") AS name'))
+            ->whereRaw('email like ? or sid like ?', [$q,$q])->take(10)->get();
     }
 }

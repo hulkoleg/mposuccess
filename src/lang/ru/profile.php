@@ -3,8 +3,8 @@ return [
     'title'                     => 'Профиль пользователя',
     'accountSettings'           => 'Настройки профиля',
     'message'                   => 'Сообщение',
-    'referral'                  => 'Реферал',
-    'referralNone'              => 'Отсутствует',
+    'refer'                     => 'Пригласивший (рефер)',
+    'referNone'                 => 'Отсутствует',
     'personalInfo'              => [
         'title'                 => 'Личные данные',
         'surname'               => 'Фамилия',
@@ -15,6 +15,7 @@ return [
         'patronymicPlaceholder' => 'Александрович',
         'dataBirth'             => 'Дата рождения',
         'email'                 => 'Электронная почта',
+        'dateRegister'          => 'Дата регистрации'
     ],
     'changeAvatar'              => [
         'title'                 => 'Изменить аватар',
