@@ -12,9 +12,9 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Session\SessionManager as Session;
-use Notprometey\Mposuccess\Models\Country;
-use Notprometey\Mposuccess\Models\Program;
 use Notprometey\Mposuccess\Repositories\User\UserRepository;
+use Notprometey\Mposuccess\Repositories\Country\CountryRepository;
+use Notprometey\Mposuccess\Repositories\Program\ProgramRepository;
 use Validator;
 use Hash;
 
@@ -74,13 +74,13 @@ class UserController extends Controller {
      *
      * @return Response
      */
-    public function personal()
+    public function personal(CountryRepository $country, ProgramRepository $program, UserRepository $user)
     {
         $data = [
             'user'          => $this->user,
-            'countries'     => Country::all(),
-            'programs'      => Program::all(),
-            'refer'         => $this->user->getRefer()
+            'countries'     => $country->all(),
+            'programs'      => $program->all(),
+            'refer'         => $user->getRefer($this->user->refer)
         ];
 
         $this->layout->content = view("mposuccess::profile.personal", $data);
@@ -93,19 +93,13 @@ class UserController extends Controller {
      *
      * @return Response
      */
-    public function changeData()
+    public function changeData(UserRepository $user)
     {
         $v = Validator::make($this->request->all(), [
-            'name'                  => 'required|min:2|max:255',
-            'surname'               => 'required|max:255',
-            'patronymic'            => 'required|max:255',
-            'birthday'              => 'required|date',
-        ], [
-            'name.required'         => 'Введите ваше имя',
-            'name.min'              => 'В имени должно быть минимум 2 символа',
-            'surname.required'      => 'Введите вашу фамилию',
-            'patronymic.required'   => 'Введите ваше отчество',
-            'birthday.required'     => 'Введите вашу дату рождения',
+            'name'       => 'required|min:2|max:32',
+            'surname'    => 'required|min:2|max:32',
+            'patronymic' => 'required|min:2|max:32',
+            'birthday'   => 'required|date',
         ]);
 
         if ($v->fails())
@@ -113,11 +107,12 @@ class UserController extends Controller {
             return redirect()->back()->withErrors($v->errors())->withInput()->with('tab', 1);
         }
 
-        $this->user->surname = $this->request->input('surname');
-        $this->user->name = $this->request->input('name');
-        $this->user->patronymic = $this->request->input('patronymic');
-        $this->user->birthday = date_format(date_create($this->request->input('birthday')), 'Y-m-d');
-        $this->user->save();
+        $user->update([
+            'name'       => $this->request->input('name'),
+            'surname'    => $this->request->input('surname'),
+            'patronymic' => $this->request->input('patronymic'),
+            'birthday'   => date_format(date_create($this->request->input('birthday')), 'Y-m-d'),
+        ], $this->user->id);
 
         return redirect('profile');
     }
@@ -127,25 +122,10 @@ class UserController extends Controller {
      *
      * @return Response
      */
-    public function changeAvatar()
+    public function changeAvatar(UserRepository $user)
     {
-        if ($this->request->hasFile('photo'))
-        {
-            $destinationPath = "/images/users/";
-            $fileName = $this->user->sid . '.' . $this->request->file('photo')->getClientOriginalExtension();
+        $user->changeAvatar($this->request, $this->user);
 
-            if ($this->user->url_avatar) {
-                unlink(public_path() . $this->user->url_avatar);
-            }
-
-            $this->request->file('photo')->move(public_path() . $destinationPath, $fileName);
-
-            $this->user->url_avatar = $destinationPath . $fileName;
-
-            $this->user->save();
-
-            return redirect()->back();
-        }
         return redirect()->back();
     }
 
@@ -154,17 +134,9 @@ class UserController extends Controller {
      *
      * @return Response
      */
-    public function removeAvatar()
+    public function removeAvatar(UserRepository $user)
     {
-        if ($this->user->url_avatar) {
-            if (file_exists(public_path() . $this->user->url_avatar)) {
-                unlink(public_path() . $this->user->url_avatar);
-            }
-        }
-
-        $this->user->url_avatar = "";
-
-        $this->user->save();
+        $user->removeAvatar($this->user->id, $this->user->url_avatar);
 
         return redirect()->back();
     }
@@ -174,15 +146,11 @@ class UserController extends Controller {
      *
      * @return Response
      */
-    public function changePassword()
+    public function changePassword(UserRepository $user)
     {
         $v = Validator::make($this->request->all(), [
-            'password'              => 'required|confirmed|min:6',
+            'password'              => 'required|confirmed|min:8',
             'password_confirmation' => 'same:password',
-        ], [
-            'password.required'     => 'Введите ваш пароль',
-            'password.confirmed'    => 'Пароль не совпадает',
-            'password.min'          => 'Пароль должен содержать минимум 6 символов',
         ]);
 
         $v->after(function($v) {
@@ -195,8 +163,10 @@ class UserController extends Controller {
             return redirect()->back()->withErrors($v->errors())->withInput()->with('tab', 3);
         }
 
-        $this->user->password = $this->request->input('password');
-        $this->user->save();
+        $user->update([
+            'password' => bcrypt($this->request->input('password'))
+        ], $this->user->id);
+
         return redirect('profile');
     }
 

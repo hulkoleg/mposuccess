@@ -72,11 +72,4 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->belongsToMany('Bican\Roles\Models\Permission', 'permission_user');
     }
-
-    public function getRefer()
-    {
-        $refer = self::where('sid', $this->refer)->first();
-
-        return trim($refer->surname . $refer->name . "(" . $refer->email . ")") ;
-    }
 }

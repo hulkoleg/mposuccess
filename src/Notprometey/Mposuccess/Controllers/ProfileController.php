@@ -15,7 +15,7 @@ use Illuminate\Support\Facades\View;
 use Illuminate\View\ViewServiceProvider;
 use Notprometey\Mposuccess\Repositories\User\UserRepository;
 use Auth;
-use Notprometey\Mposuccess\Models\User;
+
 /**
  * Handles all requests related to managing the data models
  */
@@ -52,15 +52,6 @@ class ProfileController extends UserController {
      */
     public function index()
     {
-        /*$regions = [['name' => 'Беларусь', 'code' => '375'], ['name' => 'Россия', 'code' => '789']];
-        $instructions = [['name' =>'Покупка продукта(1,2,3 - этапы с последуещим переходом по желанию в 4,5,6)'],
-                            ['name' =>'Вступление в МПО(4,5,6 - этапы)']];
-        $this->layout->content = view("mposuccess::profile.index", [
-            'user' => $this->user,
-            'regions' => $regions,
-            'instructions' => $instructions]);
-        $this->layout->title = trans('mposuccess::profile.index');
-        return $this->layout;*/
     }
 
     /**

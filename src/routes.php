@@ -30,11 +30,11 @@ Route::group([
     function(){
         Route::get('/', array(
             'as'    => 'profile.home',
-            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@index',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@personal',
         ));
 
-        Route::get('/', array(
-            'as' => 'profile.personal2',
+        Route::get('personal', array(
+            'as' => 'profile.personal',
             'uses' => 'Notprometey\Mposuccess\Controllers\UserController@personal',
         ));
 
@@ -56,11 +56,6 @@ Route::group([
         Route::post('changePassword', array(
             'as'    => 'profile.changePassword',
             'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@changePassword',
-        ));
-        
-        Route::get('personal', array(
-            'as' => 'profile.personal',
-            'uses' => 'Notprometey\Mposuccess\Controllers\UserController@personal',
         ));
 
         Route::get('news', array(
