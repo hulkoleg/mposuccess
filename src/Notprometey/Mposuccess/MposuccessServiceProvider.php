@@ -38,7 +38,7 @@ class MposuccessServiceProvider extends ServiceProvider {
 
 		$this->publishes([
 			__DIR__ . '/../../lang/ru/validation.php' => base_path('/resources/lang/ru/validation.php')
-		], 'migrations');
+		], 'lang');
 
 		$this->publishes([
 			__DIR__ . '/../../migrations/' => base_path('/database/migrations')

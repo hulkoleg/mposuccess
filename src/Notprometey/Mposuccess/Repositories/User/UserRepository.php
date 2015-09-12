@@ -83,39 +83,4 @@ class UserRepository extends Repository {
 
         return trim($refer->surname . $refer->name . "(" . $refer->email . ")") ;
     }
-
-    /**
-     * Create/register user
-     *
-     * @return string
-     */
-    public function createUser($data)
-    {
-        /**
-         * Todo не получилось заюзать репу
-         */
-        $user = User::create([
-            'name'       => $data['name'],
-            'surname'    => $data['surname'],
-            'patronymic' => $data['patronymic'],
-            'email'      => $data['email'],
-            /*
-             * remove hash password (replace in set attribute model User)
-             */
-            'password'   => $data['password'],
-            'birthday'   => date_format(date_create($data['birthday']), 'Y-m-d'),
-            'program'    => $data['program'],
-            'country'    => $data['country'],
-            'refer'      => $data['refer'] ? $data['refer'] : $this->find(1)->sid
-        ]);
-
-        $user->update([
-            'sid' => str_pad($user->country, 4, "0", STR_PAD_LEFT) . date('Y') . (100000 + $user->id)
-        ]);
-
-        $badUserRole = RoleCustom::where('slug', 'bad.user')->firstOrFail();
-        $user->attachRole($badUserRole);
-
-        return $user;
-    }
 }

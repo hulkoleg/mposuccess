@@ -7,6 +7,7 @@ use Notprometey\Mposuccess\Models\User;
 use Notprometey\Mposuccess\Repositories\User\UserRepository;
 use Notprometey\Mposuccess\Repositories\Country\CountryRepository;
 use Notprometey\Mposuccess\Repositories\Program\ProgramRepository;
+use Notprometey\Mposuccess\Models\RoleCustom;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
@@ -73,7 +74,33 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return $this->userRepository->createUser($data);
+        /**
+         * Todo не получилось заюзать репу
+         */
+        $user = User::create([
+            'name'       => $data['name'],
+            'surname'    => $data['surname'],
+            'patronymic' => $data['patronymic'],
+            'email'      => $data['email'],
+            /*
+             * remove hash password (replace in set attribute model User)
+             */
+            'password'   => $data['password'],
+            'birthday'   => date_format(date_create($data['birthday']), 'Y-m-d'),
+            'program'    => $data['program'],
+            'country'    => $data['country'],
+            'refer'      => $data['refer'] ? $data['refer'] : User::find(1)->sid
+        ]);
+
+        $id = $user->id;
+        $newUser = User::find($id);
+        $newUser->sid = '';
+        $newUser->save();
+
+        $badUserRole = RoleCustom::where('slug', 'bad.user')->firstOrFail();
+        $user->attachRole($badUserRole);
+
+        return $user;
     }
 
     public function getLogin()
