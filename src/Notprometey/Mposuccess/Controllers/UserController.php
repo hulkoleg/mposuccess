@@ -87,7 +87,7 @@ class UserController extends Controller {
         ];
 
         $this->layout->content = view("mposuccess::profile.personal", $data);
-        $this->layout->title = trans('mposuccess::profile.personal');
+        $this->layout->title = trans('mposuccess::profile.myProfile');
         return $this->layout;
     }
 
@@ -171,6 +171,18 @@ class UserController extends Controller {
         ], $this->user->id);
 
         return redirect('profile');
+    }
+
+    /**
+     * Личные данные
+     *
+     * @return Response
+     */
+    public function dashboard()
+    {
+        $this->layout->content = view("mposuccess::profile.dashboard");
+        $this->layout->title = trans('mposuccess::profile.personal');
+        return $this->layout;
     }
 
     /**

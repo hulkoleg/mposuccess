@@ -62,10 +62,14 @@ Route::group([
             'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@personal',
         ));
 
+        /*
+         * Мой профиль
+         */
         Route::get('personal', array(
-            'as' => 'profile.personal',
-            'uses' => 'Notprometey\Mposuccess\Controllers\UserController@personal',
+            'as'    => 'profile.personal',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@personal',
         ));
+
 
         Route::post('changeData', array(
             'as'    => 'profile.changeData',
@@ -85,6 +89,14 @@ Route::group([
         Route::post('changePassword', array(
             'as'    => 'profile.changePassword',
             'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@changePassword',
+        ));
+
+        /*
+         * Личные данные
+         */
+        Route::get('dashboard', array(
+            'as'    => 'profile.dashboard',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@dashboard',
         ));
 
         Route::get('news', array(
