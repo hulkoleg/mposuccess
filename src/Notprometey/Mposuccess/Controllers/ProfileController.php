@@ -7,18 +7,23 @@
  */
 namespace Notprometey\Mposuccess\Controllers;
 
-use Auth;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Session\SessionManager as Session;
+use Illuminate\Support\Facades\View;
+use Illuminate\View\ViewServiceProvider;
 use Notprometey\Mposuccess\Repositories\User\UserRepository;
-
+use Auth;
 
 /**
  * Handles all requests related to managing the data models
  */
 class ProfileController extends UserController {
+
+    protected $id = null;
+
+    protected $user = null;
 
     /**
      * @param \Illuminate\Http\Request              $request
@@ -38,6 +43,15 @@ class ProfileController extends UserController {
             $this->layout->slidebar = view('mposuccess::profile.layout.slidebar');
             $this->layout->r_slidebar = view('mposuccess::profile.layout.r_slidebar');
         }
+    }
+
+    /**
+     * The main view for any of the data models
+     *
+     * @return Response
+     */
+    public function index()
+    {
     }
 
     /**

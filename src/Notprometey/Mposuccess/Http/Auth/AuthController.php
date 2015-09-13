@@ -4,10 +4,16 @@ namespace Notprometey\Mposuccess\Http\Auth;
 
 use Illuminate\Support\Facades\Lang;
 use Notprometey\Mposuccess\Models\User;
+use Notprometey\Mposuccess\Repositories\User\UserRepository;
+use Notprometey\Mposuccess\Repositories\Country\CountryRepository;
+use Notprometey\Mposuccess\Repositories\Program\ProgramRepository;
+use Notprometey\Mposuccess\Models\RoleCustom;
 use Validator;
 use App\Http\Controllers\Controller;
 use Illuminate\Foundation\Auth\ThrottlesLogins;
 use Illuminate\Foundation\Auth\AuthenticatesAndRegistersUsers;
+use Illuminate\Http\Request;
+use DB;
 
 class AuthController extends Controller
 {
@@ -24,14 +30,21 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
+
+    /**
+     * Todo пока в конструктор запихнул userRepository
+     */
+    protected $userRepository;
+
     /**
      * Create a new authentication controller instance.
      *
      * @return void
      */
-    public function __construct()
+    public function __construct(UserRepository $repository)
     {
         $this->middleware('guest', ['except' => 'getLogout']);
+        $this->userRepository = $repository;
     }
 
     /**
@@ -43,23 +56,13 @@ class AuthController extends Controller
     protected function validator(array $data)
     {
         return Validator::make($data, [
-            'name'                  => 'required|min:2|max:255',
-            'surname'               => 'required|max:255',
-            'patronymic'            => 'required|max:255',
+            'name'                  => 'required|min:2|max:32',
+            'surname'               => 'required|min:2|max:32',
+            'patronymic'            => 'required|min:2|max:32',
             'email'                 => 'required|email|max:255|unique:users',
-            'password'              => 'required|confirmed|min:6',
+            'password'              => 'required|confirmed|min:8',
             'password_confirmation' => 'same:password',
             'birthday'              => 'required|date',
-        ], [
-            'name.required'         => 'Введите ваше имя',
-            'name.min'              => 'В имени должно быть минимум 2 символа',
-            'surname.required'      => 'Введите вашу фамилию',
-            'patronymic.required'   => 'Введите ваше отчество',
-            'email.required'        => 'Введите ваш e-mail',
-            'password.required'     => 'Введите ваш пароль',
-            'password.confirmed'    => 'Пароль не совпадает',
-            'password.min'          => 'Пароль должен содержать минимум 6 символов',
-            'birthday.required'     => 'Введите вашу дату рождения',
         ]);
     }
 
@@ -71,7 +74,10 @@ class AuthController extends Controller
      */
     protected function create(array $data)
     {
-        return User::create([
+        /**
+         * Todo не получилось заюзать репу
+         */
+        $user = User::create([
             'name'       => $data['name'],
             'surname'    => $data['surname'],
             'patronymic' => $data['patronymic'],
@@ -80,10 +86,21 @@ class AuthController extends Controller
              * remove hash password (replace in set attribute model User)
              */
             'password'   => $data['password'],
-            'birthday'   => $data['birthday'],
-            'programm'   => $data['programm'],
-            'country'    => $data['country']
+            'birthday'   => date_format(date_create($data['birthday']), 'Y-m-d'),
+            'program'    => $data['program'],
+            'country'    => $data['country'],
+            'refer'      => $data['refer'] ? $data['refer'] : User::find(1)->sid
         ]);
+
+        $id = $user->id;
+        $newUser = User::find($id);
+        $newUser->sid = '';
+        $newUser->save();
+
+        $badUserRole = RoleCustom::where('slug', 'bad.user')->firstOrFail();
+        $user->attachRole($badUserRole);
+
+        return $user;
     }
 
     public function getLogin()
@@ -91,8 +108,23 @@ class AuthController extends Controller
         return view('mposuccess::auth.login');
     }
 
-    public function getRegister()
+    public function getRegister(ProgramRepository $program, CountryRepository $country)
     {
-        return view('mposuccess::auth.register');
+        $data = [
+            'countries' => $country->all(),
+            'programs'  => $program->all(),
+        ];
+
+        return view('mposuccess::auth.register', $data);
+    }
+
+    /*
+     * Get list users (refers) by email or sid
+     */
+    public function getRefers(Request $request)
+    {
+        $q = '%' . $request->query('q') . '%';
+        return User::select('sid', DB::raw('CONCAT(surname, " ", name, "(", email, ")") AS name'))
+            ->whereRaw('email like ? or sid like ?', [$q,$q])->take(10)->get();
     }
 }

@@ -13,6 +13,10 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Session\SessionManager as Session;
 use Notprometey\Mposuccess\Repositories\User\UserRepository;
+use Notprometey\Mposuccess\Repositories\Country\CountryRepository;
+use Notprometey\Mposuccess\Repositories\Program\ProgramRepository;
+use Validator;
+use Hash;
 
 
 /**
@@ -70,11 +74,100 @@ class UserController extends Controller {
      *
      * @return Response
      */
-    public function personal()
+    public function personal(CountryRepository $country, ProgramRepository $program, UserRepository $user)
     {
-        $this->layout->content = view("mposuccess::profile.personal");
+        $data = [
+            'user'          => $this->user,
+            'countries'     => $country->all(),
+            'programs'      => $program->all(),
+            'refer'         => $user->getRefer($this->user->refer)
+        ];
+
+        $this->layout->content = view("mposuccess::profile.personal", $data);
         $this->layout->title = trans('mposuccess::profile.personal');
         return $this->layout;
+    }
+
+    /**
+     * Изменение личных данных
+     *
+     * @return Response
+     */
+    public function changeData(UserRepository $user)
+    {
+        $v = Validator::make($this->request->all(), [
+            'name'       => 'required|min:2|max:32',
+            'surname'    => 'required|min:2|max:32',
+            'patronymic' => 'required|min:2|max:32',
+            'birthday'   => 'required|date',
+        ]);
+
+        if ($v->fails())
+        {
+            return redirect()->back()->withErrors($v->errors())->withInput()->with('tab', 1);
+        }
+
+        $user->update([
+            'name'       => $this->request->input('name'),
+            'surname'    => $this->request->input('surname'),
+            'patronymic' => $this->request->input('patronymic'),
+            'birthday'   => date_format(date_create($this->request->input('birthday')), 'Y-m-d'),
+        ], $this->user->id);
+
+        return redirect('profile');
+    }
+
+    /**
+     * Измение аватара
+     *
+     * @return Response
+     */
+    public function changeAvatar(UserRepository $user)
+    {
+        $user->changeAvatar($this->request, $this->user);
+
+        return redirect()->back();
+    }
+
+    /**
+     * Удаление аватара
+     *
+     * @return Response
+     */
+    public function removeAvatar(UserRepository $user)
+    {
+        $user->removeAvatar($this->user->id, $this->user->url_avatar);
+
+        return redirect()->back();
+    }
+
+    /**
+     * Изменение пароля
+     *
+     * @return Response
+     */
+    public function changePassword(UserRepository $user)
+    {
+        $v = Validator::make($this->request->all(), [
+            'password'              => 'required|confirmed|min:8',
+            'password_confirmation' => 'same:password',
+        ]);
+
+        $v->after(function($v) {
+            if (!Hash::check($this->request->input('current'), $this->user->password)) {
+                $v->errors()->add('current', 'Неправильный пароль!');
+            }
+        });
+
+        if ($v->fails()) {
+            return redirect()->back()->withErrors($v->errors())->withInput()->with('tab', 3);
+        }
+
+        $user->update([
+            'password' => bcrypt($this->request->input('password'))
+        ], $this->user->id);
+
+        return redirect('profile');
     }
 
     /**

@@ -27,7 +27,7 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
      *
      * @var array
      */
-    protected $fillable = ['name', 'surname', 'patronymic', 'email', 'password', 'birthday', 'programm', 'country'];
+    protected $fillable = ['id','sid', 'name', 'surname', 'patronymic', 'email', 'password', 'birthday', 'program', 'country', 'url_avatar', 'refer'];
 
     /**
      * The attributes excluded from the model's JSON form.
@@ -42,6 +42,19 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     public function setPasswordAttribute($value)
     {
         $this->attributes['password'] = bcrypt($value);
+    }
+
+    /**
+     * Accessor for transform password to hash when setting him.
+     */
+    public function setSidAttribute($value)
+    {
+        if (!$value) {
+            $year = date('Y');
+            $codeCountry = str_pad($this->attributes['country'], 4, "0", STR_PAD_LEFT);
+
+            $this->attributes['sid'] = $codeCountry . $year . (100000 + $this->attributes['id']);
+        }
     }
 
     /**

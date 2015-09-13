@@ -22,18 +22,40 @@ Route::group([
          */
     }
 );
+
 Route::group([
     'middleware' => 'Notprometey\Mposuccess\Http\Middleware\UserMiddleware',
     'prefix' => 'profile'
 ],
     function(){
         Route::get('/', array(
-            'as' => 'profile.personal2',
-            'uses' => 'Notprometey\Mposuccess\Controllers\UserController@personal',
+            'as'    => 'profile.home',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@personal',
         ));
+
         Route::get('personal', array(
             'as' => 'profile.personal',
             'uses' => 'Notprometey\Mposuccess\Controllers\UserController@personal',
+        ));
+
+        Route::post('changeData', array(
+            'as'    => 'profile.changeData',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@changeData',
+        ));
+
+        Route::post('changeAvatar', array(
+            'as'    => 'profile.changeAvatar',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@changeAvatar',
+        ));
+
+        Route::get('removeAvatar', array(
+            'as'    => 'profile.removeAvatar',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@removeAvatar',
+        ));
+
+        Route::post('changePassword', array(
+            'as'    => 'profile.changePassword',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@changePassword',
         ));
 
         Route::get('news', array(
@@ -53,6 +75,7 @@ Route::group([
 
     }
 );
+
 Route::group([
         'middleware' => 'Notprometey\Mposuccess\Http\Middleware\ProfileMiddleware',
         'prefix' => 'profile'
