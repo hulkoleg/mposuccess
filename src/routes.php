@@ -14,12 +14,41 @@ Route::controllers([
 
 Route::group([
         'middleware' => 'Notprometey\Mposuccess\Http\Middleware\AdminMiddleware',
-        'prefix' => 'admin'
+        'prefix' => 'profile/admin'
     ],
     function(){
         /*
          * Роуты для админа. Проверка на админа в Notprometey\Mposuccess\Http\Middleware\Admin и если нет прав перенапровление а лучше 404
          */
+        Route::get('article', array(
+            'as'    => 'admin.article',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\AdminController@article'
+        ));
+
+        Route::get('news', array(
+            'as'    => 'admin.news',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\AdminController@news'
+        ));
+
+        Route::get('payments', array(
+            'as'    => 'admin.payments',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\AdminController@payments'
+        ));
+
+        Route::get('reports', array(
+            'as'    => 'admin.reports',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\AdminController@reports'
+        ));
+
+        Route::get('roles', array(
+            'as'    => 'admin.roles',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\AdminController@roles'
+        ));
+
+        Route::get('user', array(
+            'as'    => 'admin.user',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\AdminController@user'
+        ));
     }
 );
 

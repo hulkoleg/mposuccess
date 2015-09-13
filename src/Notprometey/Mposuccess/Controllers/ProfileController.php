@@ -37,11 +37,15 @@ class ProfileController extends UserController {
         $this->user = $user->find($this->id);
 
         $this->request = $request;
-        if ( ! is_null($this->layout))
-        {
+        if (!is_null($this->layout)) {
             $this->layout = view($this->layout);
-            $this->layout->slidebar = view('mposuccess::profile.layout.slidebar');
-            $this->layout->r_slidebar = view('mposuccess::profile.layout.r_slidebar');
+            if ($this->user->is('user')) {
+                $this->layout->slidebar = view('mposuccess::profile.layout.slidebar');
+                $this->layout->r_slidebar = view('mposuccess::profile.layout.r_slidebar');
+            } else {
+                $this->layout->slidebar = view('mposuccess::admin.layout.slidebar');
+                $this->layout->r_slidebar = view('mposuccess::profile.layout.r_slidebar');
+            }
         }
     }
 
