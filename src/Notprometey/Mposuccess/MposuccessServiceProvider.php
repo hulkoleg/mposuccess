@@ -33,6 +33,10 @@ class MposuccessServiceProvider extends ServiceProvider {
 		], 'errors');
 
 		$this->publishes([
+			__DIR__.'/../../../public/images/users' => base_path('public/images/users'),
+		], 'images');
+
+		$this->publishes([
 			__DIR__.'/../../config/mposuccess.php' => config_path('mposuccess.php'),
 		], 'config');
 
