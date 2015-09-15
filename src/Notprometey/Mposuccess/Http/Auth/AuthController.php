@@ -30,6 +30,10 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
+    /**
+     * Redirect path after auth
+     */
+    protected $redirectPath = 'panel';
 
     /**
      * Todo пока в конструктор запихнул userRepository

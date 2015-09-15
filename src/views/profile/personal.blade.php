@@ -52,7 +52,7 @@
                             <div class="tab-content">
                                 <!-- PERSONAL INFO TAB -->
                                 <div class="tab-pane @if (!in_array(Session::get('tab'), [2,3])) active @endif" id="tab_1_1">
-                                    <form id="form-change-data" method="post" action="{{ url('/profile/changeData') }}">
+                                    <form id="form-change-data" method="post" action="{{ route(config('mposuccess.panel_url') . '.changeData') }}">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                                         <div class="form-group @if($errors->has('surname')) has-error @endif">
@@ -137,7 +137,7 @@
                                 <!-- END PERSONAL INFO TAB -->
                                 <!-- CHANGE AVATAR TAB -->
                                 <div class="tab-pane @if (Session::get('tab') === 2) active @endif" id="tab_1_2">
-                                    <form id="form-change-avatar" method="post" action="{{ url('/profile/changeAvatar') }}" enctype="multipart/form-data">
+                                    <form id="form-change-avatar" method="post" action="{{ route(config('mposuccess.panel_url') . '.changeAvatar') }}" enctype="multipart/form-data">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                                         <div class="form-group">
@@ -168,7 +168,7 @@
                                 <!-- END CHANGE AVATAR TAB -->
                                 <!-- CHANGE PASSWORD TAB -->
                                 <div class="tab-pane @if (Session::get('tab') === 3) active @endif" id="tab_1_3">
-                                    <form id="form-change-password" method="post" action="{{ url('/profile/changePassword') }}">
+                                    <form id="form-change-password" method="post" action="{{ route(config('mposuccess.panel_url') . '.changePassword') }}">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                                         <div class="form-group @if($errors->has('current')) has-error @endif">
