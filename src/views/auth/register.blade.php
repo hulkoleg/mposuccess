@@ -132,7 +132,7 @@
         <div class="form-group">
             <label class="control-label visible-ie8 visible-ie9">Пригласивший</label>
             <div class="controls">
-                <input name="refer" id="select2_refer" class="form-control select2" placeholder="Пригласивший" value="{{ old('refer') }}">
+                <input name="refer" id="select2_refer" class="form-control select2" placeholder="Пригласивший">
             </div>
         </div>
 
@@ -142,7 +142,9 @@
                 <i class="fa fa-home"></i>
                 <select name="program" class="form-control">
                     @foreach ($programs as $program)
-                        <option value="{{ $program['id'] }}">{{ $program['name'] }}</option>
+                        <option value="{{ $program['id'] }}" @if($program['id'] == old('program')) selected @endif>
+                            {{ $program['name'] }}
+                        </option>
                     @endforeach
                 </select>
             </div>
@@ -157,7 +159,7 @@
 
         <div class="form-group">
             <label>
-                <input type="checkbox" name="tnc"/> Я согласен с <a href="javascript:;">
+                <input type="checkbox" name="tnc" @if(old('tnc')) checked @endif/> Я согласен с <a href="javascript:;">
                     Условиями использования </a>
                 и <a href="javascript:;">
                     Политикой конфиденциальности </a>
@@ -217,9 +219,12 @@
                 return m;
             }
         });
+        @if(old('country'))
+            $("#select2_country").select2("val", "{{ old('country') }}");
+        @endif
 
-
-        $("#select2_refer").select2({
+        var $referEl = $("#select2_refer");
+        $referEl.select2({
             id: function(data) { return data.sid; },
             minimumInputLength: 3,
             ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
@@ -242,6 +247,16 @@
                 return item.name;
             }
         });
+
+        @if(old('refer'))
+            $referEl.select2("search", "{{ old('refer') }}")
+                .on("select2-loaded", function(e) {
+                    var nameFirst = $('.select2-results li:first').text();
+                    $referEl.select2("close")
+                            .off("select2-loaded")
+                            .select2("data", { sid: "{{ old('refer') }}", name: nameFirst });
+                });
+        @endif
     });
 </script>
 <!-- END JAVASCRIPTS -->
