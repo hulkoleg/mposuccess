@@ -103,6 +103,7 @@ class UserController extends Controller {
             'surname'    => 'required|min:2|max:32',
             'patronymic' => 'required|min:2|max:32',
             'birthday'   => 'required|date',
+            'email'      => 'required|email|max:255|unique:users',
         ]);
 
         if ($v->fails())
@@ -115,6 +116,7 @@ class UserController extends Controller {
             'surname'    => $this->request->input('surname'),
             'patronymic' => $this->request->input('patronymic'),
             'birthday'   => date_format(date_create($this->request->input('birthday')), 'Y-m-d'),
+            'email'      => $this->request->input('email')
         ], $this->user->id);
 
         return redirect('profile');
