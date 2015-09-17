@@ -88,18 +88,23 @@ Route::group([
         ));
 
         Route::get('news', array(
-            'as' => 'profile.news',
-            'uses' => 'Notprometey\Mposuccess\Controllers\UserController@news',
+            'as'    => 'profile.news',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@news',
+        ));
+
+        Route::get('post/{id}', array(
+            'as'    => 'profile.post',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@post',
         ));
 
         Route::get('score/refill', array(
-            'as' => 'profile.refill',
-            'uses' => 'Notprometey\Mposuccess\Controllers\UserController@refill',
+            'as'    => 'profile.refill',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@refill',
         ));
 
         Route::get('catalog', array(
-            'as' => 'profile.catalog',
-            'uses' => 'Notprometey\Mposuccess\Controllers\UserController@catalog',
+            'as'    => 'profile.catalog',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@catalog',
         ));
 
     }
