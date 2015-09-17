@@ -3,8 +3,8 @@
     <div class="page-sidebar navbar-collapse collapse">
         <!-- BEGIN SIDEBAR MENU -->
         <ul class="page-sidebar-menu page-sidebar-menu-light" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-            <li class="start @if(config('mposuccess.panel_url') . '.personal' == Route::currentRouteName()) active @endif">
-                <a href="{{ route(config('mposuccess.panel_url') . '.personal') }}">
+            <li class="start @if(config('mposuccess.panel_url') . '.dashboard' == Route::currentRouteName()) active @endif">
+                <a href="{{ route(config('mposuccess.panel_url') . '.dashboard') }}">
                     <i class="icon-home"></i>
                     <span class="title">@lang('mposuccess::profile.personal')</span>
                 </a>

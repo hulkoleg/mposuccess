@@ -11,6 +11,7 @@ Route::controllers([
     'password' => 'Notprometey\Mposuccess\Http\Auth\PasswordController',
 ]);
 
+
 Route::group([
         'middleware' => 'Notprometey\Mposuccess\Http\Middleware\AdminMiddleware',
         'prefix'     => config('mposuccess.panel_admin_url')
@@ -61,10 +62,14 @@ Route::group([
             'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@personal',
         ));
 
+        /*
+         * Мой профиль
+         */
         Route::get('personal', array(
             'as'    => config('mposuccess.panel_url') . '.personal',
             'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@personal',
         ));
+
 
         Route::post('changeData', array(
             'as'    => config('mposuccess.panel_url') . '.changeData',
@@ -84,6 +89,14 @@ Route::group([
         Route::post('changePassword', array(
             'as'    => config('mposuccess.panel_url') . '.changePassword',
             'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@changePassword',
+        ));
+
+        /*
+         * Личные данные
+         */
+        Route::get('dashboard', array(
+            'as'    => 'profile.dashboard',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@dashboard',
         ));
 
         Route::get('news', array(

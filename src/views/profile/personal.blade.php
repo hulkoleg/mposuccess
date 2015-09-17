@@ -94,6 +94,14 @@
                                             @endif
                                         </div>
 
+                                        <div class="form-group @if($errors->has('email')) has-error @endif">
+                                            <label class="control-label">@lang('mposuccess::profile.personalInfo.email')</label>
+                                            <input type="text" name="email" placeholder="name@gmail.com" class="form-control" value="{{ old('email', $user->email) }}">
+                                            @if($errors->has('email'))
+                                                <span id="name-error" class="help-block">{{ $errors->first('email') }}</span>
+                                            @endif
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="control-label">@lang('mposuccess::profile.region')</label>
                                             <select name="country" id="select2_country" class="form-control select2 input-sm" data-placeholder="@lang('mposuccess::profile.regionNoSelect')" disabled>
@@ -115,11 +123,6 @@
                                         <div class="form-group">
                                             <label class="control-label">@lang('mposuccess::profile.refer')</label>
                                             <input type="text" placeholder="@lang('mposuccess::profile.referNone')" class="form-control" value="{{ $refer }}" disabled>
-                                        </div>
-
-                                        <div class="form-group">
-                                            <label class="control-label">@lang('mposuccess::profile.personalInfo.email')</label>
-                                            <input type="text" placeholder="name@gmail.com" class="form-control" value="{{$user->email}}" disabled>
                                         </div>
 
                                         <div class="form-group">

@@ -87,7 +87,7 @@ class UserController extends Controller {
         ];
 
         $this->layout->content = view("mposuccess::profile.personal", $data);
-        $this->layout->title = trans('mposuccess::profile.personal');
+        $this->layout->title = trans('mposuccess::profile.myProfile');
         return $this->layout;
     }
 
@@ -103,6 +103,7 @@ class UserController extends Controller {
             'surname'    => 'required|min:2|max:32',
             'patronymic' => 'required|min:2|max:32',
             'birthday'   => 'required|date',
+            'email'      => 'required|email|max:255|unique:users',
         ]);
 
         if ($v->fails())
@@ -115,6 +116,7 @@ class UserController extends Controller {
             'surname'    => $this->request->input('surname'),
             'patronymic' => $this->request->input('patronymic'),
             'birthday'   => date_format(date_create($this->request->input('birthday')), 'Y-m-d'),
+            'email'      => $this->request->input('email')
         ], $this->user->id);
 
         return redirect('profile');
@@ -171,6 +173,18 @@ class UserController extends Controller {
         ], $this->user->id);
 
         return redirect('profile');
+    }
+
+    /**
+     * Личные данные
+     *
+     * @return Response
+     */
+    public function dashboard()
+    {
+        $this->layout->content = view("mposuccess::profile.dashboard");
+        $this->layout->title = trans('mposuccess::profile.personal');
+        return $this->layout;
     }
 
     /**
