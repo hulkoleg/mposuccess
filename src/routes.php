@@ -70,6 +70,11 @@ Route::group([
             'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@personal',
         ));
 
+        Route::get('user/{id}', array(
+            'as'    => 'profile.user',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@user',
+        ));
+
 
         Route::post('changeData', array(
             'as'    => 'profile.changeData',
