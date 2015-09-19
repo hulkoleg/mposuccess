@@ -73,14 +73,14 @@ class Sheet implements SheetInterface {
                 $this->two[2] = null;
                 $this->two[3] = null;
             }
-            echo '__________________________________________';
+            echo '__________________________________________<br>';
             echo 'пользователь ' . $uid . '<br>';
             echo 'первое ' . $this->left . '<br>';
             echo 'второе ' . $this->right . '<br>';
             echo 'третье ' . $this->two[0] . '<br>';
-            echo 'четвертое ' . $this->two[2] . '<br>';
-            echo 'пятое ' . $this->two[3] . '<br>';
-            echo 'шестое ' . $this->two[4] . '<br>';
+            echo 'четвертое ' . $this->two[1] . '<br>';
+            echo 'пятое ' . $this->two[2] . '<br>';
+            echo 'шестое ' . $this->two[3] . '<br>';
             echo '__________________________________________<br><br><br>';
 
         }
@@ -91,7 +91,7 @@ class Sheet implements SheetInterface {
         $sid = null;
 
         if ($response = $this->tree->findAllBy('user_id', $this->user->id)) {
-            echo '__________________________________________';
+            echo '__________________________________________<br>';
             echo 'Ишем под сабой<br>';
             echo '__________________________________________<br><br><br>';
             $sid = $this->findVacancy($response);
