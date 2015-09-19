@@ -12,13 +12,10 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Session\SessionManager as Session;
-use Notprometey\Mposuccess\Models\News;
-use Notprometey\Mposuccess\Repositories\User\Criteria\Current;
 use Notprometey\Mposuccess\Repositories\User\UserRepository;
 use Notprometey\Mposuccess\Repositories\Country\CountryRepository;
 use Notprometey\Mposuccess\Repositories\Program\ProgramRepository;
 use Notprometey\Mposuccess\Repositories\News\NewsRepository;
-use Validator;
 use Hash;
 
 use Illuminate\Pagination\Paginator;
@@ -241,18 +238,12 @@ class UserController extends Controller {
      *
      * @return Response
      */
-    public function news(NewsRepository $newsRepository, Request $request)
+    public function news(NewsRepository $newsRepository)
     {
-        //$news = News::where('type', '=', 1)->paginate(2);
-        //$newsRepository->findBy('type', config('mposuccess.news_type_private'))->get();
         $perPage = $this->request->input('perPage') ? $this->request->input('perPage') : 3;
-        $news = \DB::table('news')->paginate($perPage);
-        //$pagi = new Paginator($news, count($news), 2);
-
+        $news = $newsRepository->findBy('type', config('mposuccess.news_type_private'))->paginate($perPage);
 
         $data = [
-            //'news'  => News::all(),
-            //'pagi'  => $pagi,
             'news' => $news
         ];
 

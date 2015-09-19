@@ -45,8 +45,8 @@ Route::group([
             'uses'  => 'Notprometey\Mposuccess\Controllers\AdminController@roles'
         ));
 
-        Route::get('user', array(
-            'as'    => 'admin.user',
+        Route::get('users', array(
+            'as'    => 'admin.users',
             'uses'  => 'Notprometey\Mposuccess\Controllers\AdminController@user'
         ));
     }
@@ -71,7 +71,7 @@ Route::group([
         ));
 
         Route::get('user/{id}', array(
-            'as'    => 'profile.user',
+            'as'    => config('mposuccess.panel_url') . '.user',
             'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@user',
         ));
 
@@ -110,7 +110,7 @@ Route::group([
         ));
 
         Route::get('post/{id}', array(
-            'as'    => 'profile.post',
+            'as'    => config('mposuccess.panel_url') . '.post',
             'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@post',
         ));
 

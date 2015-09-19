@@ -133,8 +133,8 @@
                             <i class="icon-bar-chart"></i>
                             @lang('mposuccess::admin.roles')</a>
                     </li>
-                    <li @if('admin.user' == Route::currentRouteName()) class="active" @endif>
-                        <a href="{{ route('admin.user') }}">
+                    <li @if('admin.users' == Route::currentRouteName()) class="active" @endif>
+                        <a href="{{ route('admin.users') }}">
                             <i class="icon-bar-chart"></i>
                             @lang('mposuccess::admin.user')</a>
                     </li>

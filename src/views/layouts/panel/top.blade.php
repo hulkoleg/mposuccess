@@ -339,7 +339,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default">
                         <li>
-                            <a href="personal">
+                            <a href="/{{ config('mposuccess.panel_url') }}/personal">
                                 <i class="icon-user"></i> My Profile </a>
                         </li>
                         <li>

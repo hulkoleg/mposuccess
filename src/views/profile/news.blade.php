@@ -60,7 +60,7 @@
 
                     <div class="row">
                         <div class="col-md-4 blog-img blog-tag-data">
-                            <img src="{{ $news[$i]->img or config('mposuccess.news_private_default_img') }}" alt="" class="img-responsive">
+                            <img src="{{ $news[$i]->img ? $news[$i]->img : config('mposuccess.news_private_default_img') }}" alt="" class="img-responsive">
                         </div>
                         <div class="col-md-8 blog-article">
                             <h3>

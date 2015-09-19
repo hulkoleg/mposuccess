@@ -14,6 +14,7 @@ use Illuminate\Session\SessionManager as Session;
 use Illuminate\Support\Facades\View;
 use Illuminate\View\ViewServiceProvider;
 use Notprometey\Mposuccess\Repositories\User\UserRepository;
+use Notprometey\Mposuccess\Repositories\News\NewsRepository;
 use Auth;
 
 /**
@@ -70,7 +71,7 @@ class AdminController extends ProfileController {
      *
      * @return Response
      */
-    public function news()
+    public function news(NewsRepository $newsRepository)
     {
         $this->layout->content = view("mposuccess::admin.news");
         $this->layout->title = trans('mposuccess::admin.news');
@@ -116,9 +117,9 @@ class AdminController extends ProfileController {
      *
      * @return Response
      */
-    public function user()
+    public function users()
     {
-        $this->layout->content = view("mposuccess::admin.user");
+        $this->layout->content = view("mposuccess::admin.users");
         $this->layout->title = trans('mposuccess::admin.user');
         return $this->layout;
     }
