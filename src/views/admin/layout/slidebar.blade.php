@@ -3,15 +3,15 @@
     <div class="page-sidebar navbar-collapse collapse">
         <!-- BEGIN SIDEBAR MENU -->
         <ul class="page-sidebar-menu page-sidebar-menu-light" data-keep-expanded="false" data-auto-scroll="true" data-slide-speed="200">
-            <li class="start @if('profile.personal' == Route::currentRouteName()) active @endif">
-                <a href="/profile/personal">
+            <li class="start @if(config('mposuccess.panel_url') . '.personal' == Route::currentRouteName()) active @endif">
+                <a href="{{ route(config('mposuccess.panel_url') . '.personal') }}">
                     <i class="icon-home"></i>
                     <span class="title">@lang('mposuccess::profile.personal')</span>
                 </a>
             </li>
 
-            <li @if('profile.news' == Route::currentRouteName()) class="active" @endif >
-                <a href="/profile/news">
+            <li @if(config('mposuccess.panel_url') . '.news' == Route::currentRouteName()) class="active" @endif >
+                <a href="{{ route(config('mposuccess.panel_url') . '.news') }}">
                     <i class="icon-home"></i>
                     <span class="title">@lang('mposuccess::profile.news')</span>
                 </a>
@@ -24,31 +24,31 @@
                     <span class="arrow @if(Request::is('*/score/*')) open @endif"></span>
                 </a>
                 <ul class="sub-menu">
-                    <li @if('profile.refill' == Route::currentRouteName()) class="active" @endif>
-                        <a href="/profile/score/refill">
+                    <li @if(config('mposuccess.panel_url') . '.refill' == Route::currentRouteName()) class="active" @endif>
+                        <a href="{{ route(config('mposuccess.panel_url') . '.refill') }}">
                             <i class="icon-bar-chart"></i>
                             @lang('mposuccess::profile.score.refill')</a>
                     </li>
-                    <li @if('profile.withdrawal' == Route::currentRouteName()) class="active" @endif>
-                        <a href="/profile/score/withdrawal">
+                    <li @if(config('mposuccess.panel_url') . '.withdrawal' == Route::currentRouteName()) class="active" @endif>
+                        <a href="{{ route(config('mposuccess.panel_url') . '.withdrawal') }}">
                             <i class="icon-bulb"></i>
                             @lang('mposuccess::profile.score.withdrawal')</a>
                     </li>
-                    <li @if('profile.purchases' == Route::currentRouteName()) class="active" @endif>
-                        <a href="/profile/score/purchases">
+                    <li @if(config('mposuccess.panel_url') . '.purchases' == Route::currentRouteName()) class="active" @endif>
+                        <a href="{{ route(config('mposuccess.panel_url') . '.purchases') }}">
                             <i class="icon-graph"></i>
                             @lang('mposuccess::profile.score.purchases')</a>
                     </li>
-                    <li @if('profile.places' == Route::currentRouteName()) class="active" @endif>
-                        <a href="/profile/score/places">
+                    <li @if(config('mposuccess.panel_url') . '.places' == Route::currentRouteName()) class="active" @endif>
+                        <a href="{{ route(config('mposuccess.panel_url') . '.places') }}">
                             <i class="icon-graph"></i>
                             @lang('mposuccess::profile.score.places')</a>
                     </li>
                 </ul>
             </li>
 
-            <li @if('profile.catalog' == Route::currentRouteName()) class="active" @endif>
-                <a href="/profile/catalog">
+            <li @if(config('mposuccess.panel_url') . '.catalog' == Route::currentRouteName()) class="active" @endif>
+                <a href="{{ route(config('mposuccess.panel_url') . '.catalog') }}">
                     <i class="icon-home"></i>
                     <span class="title">@lang('mposuccess::profile.catalog')</span>
                 </a>
@@ -62,40 +62,40 @@
                 </a>
                 <ul class="sub-menu">
                     <li @if(Request::is('*/structures/1')) class="active" @endif>
-                        <a href="/profile/structures/1">
+                        <a href="/{{config('mposuccess.panel_url')}}/structures/1">
                             <i class="icon-bar-chart"></i>
                             @lang('mposuccess::profile.structures.1')</a>
                     </li>
                     <li @if(Request::is('*/structures/2')) class="active" @endif>
-                        <a href="/profile/structures/2">
+                        <a href="/{{config('mposuccess.panel_url')}}/structures/2">
                             <i class="icon-bulb"></i>
                             @lang('mposuccess::profile.structures.2')</a>
                     </li>
                     <li @if(Request::is('*/structures/3')) class="active" @endif>
-                        <a href="/profile/structures/3">
+                        <a href="/{{config('mposuccess.panel_url')}}/structures/3">
                             <i class="icon-graph"></i>
                             @lang('mposuccess::profile.structures.3')</a>
                     </li>
                     <li @if(Request::is('*/structures/4')) class="active" @endif>
-                        <a href="/profile/structures/4">
+                        <a href="/{{config('mposuccess.panel_url')}}/structures/4">
                             <i class="icon-graph"></i>
                             @lang('mposuccess::profile.structures.4')</a>
                     </li>
                     <li @if(Request::is('*/structures/5')) class="active" @endif>
-                        <a href="/profile/structures/5">
+                        <a href="/{{config('mposuccess.panel_url')}}/structures/5">
                             <i class="icon-graph"></i>
                             @lang('mposuccess::profile.structures.5')</a>
                     </li>
                     <li @if(Request::is('*/structures/6')) class="active" @endif>
-                        <a href="/profile/structures/6">
+                        <a href="/{{config('mposuccess.panel_url')}}/structures/6">
                             <i class="icon-graph"></i>
                             @lang('mposuccess::profile.structures.6')</a>
                     </li>
                 </ul>
             </li>
 
-            <li @if('profile.tree' == Route::currentRouteName()) class="active" @endif>
-                <a href="/profile/tree">
+            <li @if(config('mposuccess.panel_url') . '.tree' == Route::currentRouteName()) class="active" @endif>
+                <a href="{{ route(config('mposuccess.panel_url') . '.tree') }}">
                     <i class="icon-home"></i>
                     <span class="title">@lang('mposuccess::profile.tree')</span>
                 </a>
@@ -109,32 +109,32 @@
                 </a>
                 <ul class="sub-menu">
                     <li @if('admin.article' == Route::currentRouteName()) class="active" @endif>
-                        <a href="/profile/admin/article">
+                        <a href="{{ route('admin.article') }}">
                             <i class="icon-bar-chart"></i>
                             @lang('mposuccess::admin.article')</a>
                     </li>
                     <li @if('admin.news' == Route::currentRouteName()) class="active" @endif>
-                        <a href="/profile/admin/news">
+                        <a href="{{ route('admin.news') }}">
                             <i class="icon-bar-chart"></i>
                             @lang('mposuccess::admin.news')</a>
                     </li>
                     <li @if('admin.payments' == Route::currentRouteName()) class="active" @endif>
-                        <a href="/profile/admin/payments">
+                        <a href="{{ route('admin.payments') }}">
                             <i class="icon-bar-chart"></i>
                             @lang('mposuccess::admin.payments')</a>
                     </li>
                     <li @if('admin.reports' == Route::currentRouteName()) class="active" @endif>
-                        <a href="/profile/admin/reports">
+                        <a href="{{ route('admin.reports') }}">
                             <i class="icon-bar-chart"></i>
                             @lang('mposuccess::admin.reports')</a>
                     </li>
                     <li @if('admin.roles' == Route::currentRouteName()) class="active" @endif>
-                        <a href="/profile/admin/roles">
+                        <a href="{{ route('admin.roles') }}">
                             <i class="icon-bar-chart"></i>
                             @lang('mposuccess::admin.roles')</a>
                     </li>
                     <li @if('admin.user' == Route::currentRouteName()) class="active" @endif>
-                        <a href="/profile/admin/user">
+                        <a href="{{ route('admin.user') }}">
                             <i class="icon-bar-chart"></i>
                             @lang('mposuccess::admin.user')</a>
                     </li>

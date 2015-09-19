@@ -30,6 +30,10 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
+    /**
+     * Redirect path after auth
+     */
+    protected $redirectPath = 'panel';
 
     /**
      * Todo пока в конструктор запихнул userRepository
@@ -124,7 +128,7 @@ class AuthController extends Controller
     public function getRefers(Request $request)
     {
         $q = '%' . $request->query('q') . '%';
-        return User::select('sid', DB::raw('CONCAT(surname, " ", name, "(", email, ")") AS name'))
+        return User::select('id', DB::raw('CONCAT(surname, " ", name, "(", email, ")") AS name'))
             ->whereRaw('email like ? or sid like ?', [$q,$q])->take(10)->get();
     }
 }

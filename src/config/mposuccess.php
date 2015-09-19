@@ -2,6 +2,8 @@
 
 return [
     'site_url' => '/',
+    'panel_url' => 'panel',
+    'panel_admin_url' => 'panel/admin',
     'profile_url' => 'profile',
     'teacher_url' => 'admin',
 

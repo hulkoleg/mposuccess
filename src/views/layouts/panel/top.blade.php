@@ -339,7 +339,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default">
                         <li>
-                            <a href="extra_profile.html">
+                            <a href="personal">
                                 <i class="icon-user"></i> My Profile </a>
                         </li>
                         <li>
