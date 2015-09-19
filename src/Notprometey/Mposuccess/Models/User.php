@@ -54,6 +54,8 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
             $codeCountry = str_pad($this->attributes['country'], 4, "0", STR_PAD_LEFT);
 
             $this->attributes['sid'] = $codeCountry . $year . (100000 + $this->attributes['id']);
+        } else {
+            $this->attributes['sid'] = $value;
         }
     }
 

@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Session\SessionManager as Session;
+use Notprometey\Mposuccess\Repositories\User\Criteria\Current;
 use Notprometey\Mposuccess\Repositories\User\UserRepository;
 use Notprometey\Mposuccess\Repositories\Country\CountryRepository;
 use Notprometey\Mposuccess\Repositories\Program\ProgramRepository;
@@ -55,6 +56,10 @@ class UserController extends Controller {
 
         $this->user = $user->find($this->id);
 
+        if ($this->user->refer == 0) {
+            $this->user->refer = 1;
+        }
+
         $this->request = $request;
         if ( ! is_null($this->layout))
         {
@@ -62,8 +67,11 @@ class UserController extends Controller {
             if($this->user->is('bad.user')){
                 $this->layout->slidebar = view('mposuccess::profile.layout.user.slidebar');
                 $this->layout->r_slidebar = null;
-            }else{
+            }elseif($this->user->is('user')){
                 $this->layout->slidebar = view('mposuccess::profile.layout.slidebar');
+                $this->layout->r_slidebar = view('mposuccess::profile.layout.r_slidebar');
+            }else{
+                $this->layout->slidebar = view('mposuccess::admin.layout.slidebar');
                 $this->layout->r_slidebar = view('mposuccess::profile.layout.r_slidebar');
             }
         }
@@ -74,17 +82,57 @@ class UserController extends Controller {
      *
      * @return Response
      */
-    public function personal(CountryRepository $country, ProgramRepository $program, UserRepository $user)
+    public function personal(CountryRepository $country, ProgramRepository $program, UserRepository $userRepository)
     {
         $data = [
             'user'          => $this->user,
             'countries'     => $country->all(),
             'programs'      => $program->all(),
-            'refer'         => $user->getRefer($this->user->refer)
         ];
 
+        if ($this->id != 1) {
+            $data['refer'] = $userRepository->getRefer($this->user->refer);
+        }
+
         $this->layout->content = view("mposuccess::profile.personal", $data);
-        $this->layout->title = trans('mposuccess::profile.personal');
+        $this->layout->title = trans('mposuccess::profile.myProfile');
+        return $this->layout;
+    }
+
+    /**
+     * Данные другого пользавателя
+     *
+     * @return Response
+     */
+    public function user($id, CountryRepository $countryRepository, ProgramRepository $programRepository, UserRepository $userRepository)
+    {
+        $user = $userRepository->find($id);
+        if (!$user) {
+            abort(404);
+        }
+
+        if ($user->refer == 0) {
+            $user->refer = 1;
+        }
+
+        if ($user->birthday == "0000-00-00") {
+            $user->birthday = null;
+        } else {
+            $user->birthday = date_format(date_create($user->birthday), 'd M Y');
+        }
+
+        $data = [
+            'user'          => $user,
+            'country'       => $countryRepository->findby('code', $user->country),
+            'program'       => $programRepository->find($user->program)
+        ];
+
+        if ($this->id != 1) {
+            $data['refer'] =  app('Notprometey\Mposuccess\Repositories\User\UserRepository')->getRefer();
+        }
+
+        $this->layout->content = view("mposuccess::profile.user", $data);
+        $this->layout->title = trans('mposuccess::profile.user') . ' ' . $user->name;
         return $this->layout;
     }
 
@@ -100,6 +148,7 @@ class UserController extends Controller {
             'surname'    => 'required|min:2|max:32',
             'patronymic' => 'required|min:2|max:32',
             'birthday'   => 'required|date',
+            'email'      => 'required|email|max:255|unique:users',
         ]);
 
         if ($v->fails())
@@ -112,6 +161,7 @@ class UserController extends Controller {
             'surname'    => $this->request->input('surname'),
             'patronymic' => $this->request->input('patronymic'),
             'birthday'   => date_format(date_create($this->request->input('birthday')), 'Y-m-d'),
+            'email'      => $this->request->input('email')
         ], $this->user->id);
 
         return redirect('profile');
@@ -168,6 +218,18 @@ class UserController extends Controller {
         ], $this->user->id);
 
         return redirect('profile');
+    }
+
+    /**
+     * Личные данные
+     *
+     * @return Response
+     */
+    public function dashboard()
+    {
+        $this->layout->content = view("mposuccess::profile.dashboard");
+        $this->layout->title = trans('mposuccess::profile.personal');
+        return $this->layout;
     }
 
     /**
