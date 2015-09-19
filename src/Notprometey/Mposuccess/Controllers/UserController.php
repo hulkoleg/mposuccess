@@ -12,6 +12,7 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Session\SessionManager as Session;
+use Notprometey\Mposuccess\Repositories\User\Criteria\Current;
 use Notprometey\Mposuccess\Repositories\User\UserRepository;
 use Notprometey\Mposuccess\Repositories\Country\CountryRepository;
 use Notprometey\Mposuccess\Repositories\Program\ProgramRepository;
@@ -55,6 +56,10 @@ class UserController extends Controller {
 
         $this->user = $user->find($this->id);
 
+        if ($this->user->refer == 0) {
+            $this->user->refer = 1;
+        }
+
         $this->request = $request;
         if ( ! is_null($this->layout))
         {
@@ -77,17 +82,57 @@ class UserController extends Controller {
      *
      * @return Response
      */
-    public function personal(CountryRepository $country, ProgramRepository $program, UserRepository $user)
+    public function personal(CountryRepository $country, ProgramRepository $program, UserRepository $userRepository)
     {
         $data = [
             'user'          => $this->user,
             'countries'     => $country->all(),
             'programs'      => $program->all(),
-            'refer'         => $user->getRefer($this->user->refer)
         ];
+
+        if ($this->id != 1) {
+            $data['refer'] = $userRepository->getRefer($this->user->refer);
+        }
 
         $this->layout->content = view("mposuccess::profile.personal", $data);
         $this->layout->title = trans('mposuccess::profile.myProfile');
+        return $this->layout;
+    }
+
+    /**
+     * Данные другого пользавателя
+     *
+     * @return Response
+     */
+    public function user($id, CountryRepository $countryRepository, ProgramRepository $programRepository, UserRepository $userRepository)
+    {
+        $user = $userRepository->find($id);
+        if (!$user) {
+            abort(404);
+        }
+
+        if ($user->refer == 0) {
+            $user->refer = 1;
+        }
+
+        if ($user->birthday == "0000-00-00") {
+            $user->birthday = null;
+        } else {
+            $user->birthday = date_format(date_create($user->birthday), 'd M Y');
+        }
+
+        $data = [
+            'user'          => $user,
+            'country'       => $countryRepository->findby('code', $user->country),
+            'program'       => $programRepository->find($user->program)
+        ];
+
+        if ($this->id != 1) {
+            $data['refer'] =  app('Notprometey\Mposuccess\Repositories\User\UserRepository')->getRefer();
+        }
+
+        $this->layout->content = view("mposuccess::profile.user", $data);
+        $this->layout->title = trans('mposuccess::profile.user') . ' ' . $user->name;
         return $this->layout;
     }
 

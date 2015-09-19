@@ -225,7 +225,7 @@
 
         var $referEl = $("#select2_refer");
         $referEl.select2({
-            id: function(data) { return data.sid; },
+            id: function(data) { return data.id; },
             minimumInputLength: 3,
             ajax: { // instead of writing the function to execute the request we use Select2's convenient helper
                 url: "/auth/refers",
@@ -241,7 +241,7 @@
                 }
             },
             formatResult: function (item) {
-                return "<option value='" + item.sid + "'>" + item.name + "</option>";
+                return "<option value='" + item.id + "'>" + item.name + "</option>";
             },
             formatSelection: function (item) {
                 return item.name;
@@ -254,7 +254,7 @@
                     var nameFirst = $('.select2-results li:first').text();
                     $referEl.select2("close")
                             .off("select2-loaded")
-                            .select2("data", { sid: "{{ old('refer') }}", name: nameFirst });
+                            .select2("data", { id: "{{ old('refer') }}", name: nameFirst });
                 });
         @endif
     });

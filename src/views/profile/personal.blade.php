@@ -18,8 +18,9 @@
                 <!-- END SIDEBAR USER TITLE -->
                 <!-- SIDEBAR BUTTONS -->
                 <div class="profile-userbuttons">
-                    <button type="button" class="btn btn-circle green-haze btn-sm">@lang('mposuccess::profile.refer')</button>
-                    <button type="button" class="btn btn-circle btn-danger btn-sm">@lang('mposuccess::profile.message')</button>
+                    @if($refer)
+                        <a href="/profile/user/{{ $user->refer }}" class="btn btn-circle green-haze btn-sm">@lang('mposuccess::profile.refer')</a>
+                    @endif
                 </div>
                 <!-- END SIDEBAR BUTTONS -->
             </div>
@@ -120,10 +121,12 @@
                                             </select>
                                         </div>
 
+                                        @if($user['id'] != 1)
                                         <div class="form-group">
                                             <label class="control-label">@lang('mposuccess::profile.refer')</label>
-                                            <input type="text" placeholder="@lang('mposuccess::profile.referNone')" class="form-control" value="{{ $refer }}" disabled>
+                                            <input type="text" placeholder="@lang('mposuccess::profile.referNone')" class="form-control" value="{{ $refer or "" }}" disabled>
                                         </div>
+                                        @endif
 
                                         <div class="form-group">
                                             <label class="control-label">@lang('mposuccess::profile.personalInfo.dateRegister')</label>
@@ -231,7 +234,7 @@
 
     function formatCountry(state) {
         if (!state.id) return state.text; // optgroup
-        return "<img class='flag' src='../../assets/global/img/flags/" + $(state.element).data('country') + ".png'/>&nbsp;&nbsp;" + state.text;
+        return "<img class='flag' src='/assets/global/img/flags/" + $(state.element).data('country') + ".png'/>&nbsp;&nbsp;" + state.text;
     }
     $("#select2_country").select2({
         allowClear: true,
