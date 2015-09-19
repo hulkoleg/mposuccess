@@ -156,9 +156,9 @@ class Sheet implements SheetInterface {
 
     private function findVacancy($places){
         echo '__________________________________________';
-        echo 'Мои места<br>';
+        echo 'Мои места <br>';
         print_r($places);
-        echo '__________________________________________<br><br><br>';
+        echo '<br>__________________________________________<br><br><br>';
         $sid = null;
         foreach ($places as $place) {
             $sheet = new Sheet($this->level, $place->user_id, $place->id);
