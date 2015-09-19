@@ -78,6 +78,7 @@ class Sheet implements SheetInterface {
 
     public function insert()
     {
+        $sid = null;
 
         if ($response = $this->tree->findAllBy('user_id', $this->user->id)) {
             $sid = $this->findVacancy($response);
@@ -144,20 +145,19 @@ class Sheet implements SheetInterface {
         $sid = null;
         foreach ($places as $place) {
             $sheet = new Sheet($this->level, $place->user_id, $place->id);
-            if (empty($sheet->left) || empty($sheet->right) || in_array(null, $sheet->two)) {
-                if (empty($sheet->left)) {
-                    $sid = $sheet->sid * 2;
-                } elseif (empty($sheet->right)) {
-                    $sid = ($sheet->sid * 2) + 1;
-                } else {
-                    foreach ($sheet->two as $key => $place) {
-                        if (empty($place)) {
-                            $sid = ($sheet->sid * 4) + $key;
-                            break;
-                        }
+            if (empty($sheet->left)) {
+                $sid = $sheet->sid * 2;
+                break;
+            } elseif (empty($sheet->right)) {
+                $sid = ($sheet->sid * 2) + 1;
+                break;
+            } else {
+                foreach ($sheet->two as $key => $place) {
+                    if (empty($place)) {
+                        $sid = ($sheet->sid * 4) + $key;
+                        break;
                     }
                 }
-                break;
             }
         }
         return $sid;
