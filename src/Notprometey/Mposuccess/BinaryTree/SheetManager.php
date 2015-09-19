@@ -30,7 +30,7 @@ class SheetManager
     public function create(){
 
         for($i=0; $i<300; $i++) {
-            $users = User::all()->lists('id');
+            $users = User::all()->lists('id')->toArray();
             $refer = array_rand($users);
             $user = User::create([
                 'sid' => 100001,
