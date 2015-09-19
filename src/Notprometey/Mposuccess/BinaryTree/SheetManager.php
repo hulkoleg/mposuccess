@@ -29,23 +29,8 @@ class SheetManager
 
     public function create(){
 
-        for($i=0; $i<300; $i++) {
-            $users = User::all()->lists('id')->toArray();
-            $refer = array_rand($users);
-            $user = User::create([
-                'sid' => 100001,
-                'name' => 'company',
-                'email' => 'company@mposuccess.ru'.$i,
-                'password' => 'company',
-                'refer' => $users[$refer]
-            ]);
-            $this->tree = new Sheet($this->level, $user->id);
-            $this->tree->insert();
-        }
-
-        //$this->tree = new Sheet($this->level, $this->uid);
-        //$this->tree->insert();
-
+        $this->tree = new Sheet($this->level, $this->uid);
+        $this->tree->insert();
 
     }
 }
