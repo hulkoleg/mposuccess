@@ -161,3 +161,9 @@ Route::group(['prefix' => 'about'], function()
     ));
 
 });
+
+
+Route::any('test/tree', array(
+    'as' => 'regdocs',
+    'uses' => 'Notprometey\Mposuccess\Controllers\FrontController@test',
+));
