@@ -79,10 +79,6 @@ class Sheet implements SheetInterface {
     public function insert()
     {
 
-        if ($response = $this->tree->findBy('user_id', $this->user->id)) {
-            return $this->insertUnder();
-        }
-
         $sid = $this->find($this->parent);
 
         if(is_null($sid)){
