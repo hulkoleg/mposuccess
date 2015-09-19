@@ -91,6 +91,9 @@ class Sheet implements SheetInterface {
         $sid = null;
 
         if ($response = $this->tree->findAllBy('user_id', $this->user->id)) {
+            echo '__________________________________________';
+            echo 'Ишем под сабой<br>';
+            echo '__________________________________________<br><br><br>';
             $sid = $this->findVacancy($response);
         }
 
@@ -152,6 +155,10 @@ class Sheet implements SheetInterface {
     }
 
     private function findVacancy($places){
+        echo '__________________________________________';
+        echo 'Мои места<br>';
+        print_r($places);
+        echo '__________________________________________<br><br><br>';
         $sid = null;
         foreach ($places as $place) {
             $sheet = new Sheet($this->level, $place->user_id, $place->id);
