@@ -100,10 +100,19 @@ class Sheet implements SheetInterface {
             }
         }
 
-        $this->tree->create([
-            'user_id' => $this->user->id,
-            'id'      => $sid
-        ]);
+        $current = $this->tree->find($sid);
+
+        if(is_null($current)) {
+            $this->tree->create([
+                'user_id' => $this->user->id,
+                'id' => $sid
+            ]);
+        } else {
+            $this->tree->update([
+                'user_id' => $this->user->id,
+
+            ],$sid);
+        }
     }
 
     public function insertUnder(){
