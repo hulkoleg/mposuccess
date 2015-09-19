@@ -8,6 +8,8 @@
 
 namespace Notprometey\Mposuccess\BinaryTree;
 
+use Notprometey\Mposuccess\Models\User;
+
 
 /**
  * @property Sheet tree
@@ -26,7 +28,24 @@ class SheetManager
     }
 
     public function create(){
-        $this->tree = new Sheet($this->level, $this->uid);
-        $this->tree->insert();
+
+        for($i=0; $i<300; $i++) {
+            $users = User::all()->lists('id');
+            $refer = array_rand($users);
+            $user = User::create([
+                'sid' => 100001,
+                'name' => 'company',
+                'email' => 'company@mposuccess.ru',
+                'password' => 'company',
+                'refer' => $refer
+            ]);
+            $this->tree = new Sheet($this->level, $user->id);
+            $this->tree->insert();
+        }
+
+        //$this->tree = new Sheet($this->level, $this->uid);
+        //$this->tree->insert();
+
+
     }
 }
