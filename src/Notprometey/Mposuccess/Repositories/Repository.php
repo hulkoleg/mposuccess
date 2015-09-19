@@ -30,6 +30,8 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
      */
     protected $model;
 
+    protected static $table;
+
     /**
      * @var Collection
      */
@@ -68,7 +70,19 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
         return $this->model->get($columns);
     }
 
-
+    /**
+     * @param  string $value
+     * @param  string $key
+     * @return array
+     */
+    public function lists($value, $key = null) {
+        $this->applyCriteria();
+        $lists = $this->model->lists($value, $key);
+        if(is_array($lists)) {
+            return $lists;
+        }
+        return $lists->all();
+    }
 
     /**
      * @param int $perPage
@@ -89,6 +103,20 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
     }
 
     /**
+     * save a model without massive assignment
+     *
+     * @param array $data
+     * @return bool
+     */
+    public function saveModel(array $data)
+    {
+        foreach ($data as $k => $v) {
+            $this->model->$k = $v;
+        }
+        return $this->model->save();
+    }
+
+    /**
      * @param array $data
      * @param $id
      * @param string $attribute
@@ -96,6 +124,19 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
      */
     public function update(array $data, $id, $attribute="id") {
         return $this->model->where($attribute, '=', $id)->update($data);
+    }
+
+    /**
+     * @param  array  $data
+     * @param  $id
+     * @return mixed
+     */
+    public function updateRich(array $data, $id) {
+        if (!($model = $this->model->find($id))) {
+            return false;
+        }
+
+        return $model->fill($data)->save();
     }
 
     /**
@@ -128,6 +169,58 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
     }
 
     /**
+     * @param $attribute
+     * @param $value
+     * @param array $columns
+     * @return mixed
+     */
+    public function findAllBy($attribute, $value, $columns = array('*')) {
+        $this->applyCriteria();
+        return $this->model->where($attribute, '=', $value)->get($columns);
+    }
+
+    /**
+     * Find a collection of models by the given query conditions.
+     *
+     * @param array $where
+     * @param array $columns
+     * @param bool  $or
+     *
+     * @return \Illuminate\Database\Eloquent\Collection|null
+     */
+    public function findWhere($where, $columns = ['*'], $or = false)
+    {
+        $this->applyCriteria();
+
+        $model = $this->model;
+
+        foreach ($where as $field => $value) {
+            if ($value instanceof \Closure) {
+                $model = (! $or)
+                    ? $model->where($value)
+                    : $model->orWhere($value);
+            } elseif (is_array($value)) {
+                if (count($value) === 3) {
+                    list($field, $operator, $search) = $value;
+                    $model = (! $or)
+                        ? $model->where($field, $operator, $search)
+                        : $model->orWhere($field, $operator, $search);
+                } elseif (count($value) === 2) {
+                    list($field, $search) = $value;
+                    $model = (! $or)
+                        ? $model->where($field, '=', $search)
+                        : $model->orWhere($field, '=', $search);
+                }
+            } else {
+                $model = (! $or)
+                    ? $model->where($field, '=', $value)
+                    : $model->orWhere($field, '=', $value);
+            }
+        }
+        return $model->get($columns);
+    }
+
+    /**
      * @return \Illuminate\Database\Eloquent\Builder
      * @throws RepositoryException
      */
@@ -137,7 +230,7 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
         if (!$model instanceof Model)
             throw new RepositoryException("Class {$this->model()} must be an instance of Illuminate\\Database\\Eloquent\\Model");
 
-        return $this->model = $model->newQuery();
+        return $this->model = $model;
     }
 
     /**
@@ -185,7 +278,7 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
     /**
      * @return $this
      */
-    public function  applyCriteria() {
+    public function applyCriteria() {
         if($this->skipCriteria === true)
             return $this;
 
@@ -195,5 +288,9 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
         }
 
         return $this;
+    }
+
+    public static function setTable($table){
+        self::$table = $table;
     }
 }
