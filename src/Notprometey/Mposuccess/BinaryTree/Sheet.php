@@ -53,6 +53,10 @@ class Sheet implements SheetInterface {
         if(!empty($this->sid)){
             $this->left = $this->tree->find($this->sid * 2);
             $this->right = $this->tree->find(($this->sid * 2) + 1);
+
+            $this->left = is_null($this->left->user_id)?null:$this->left;
+            $this->right = is_null($this->right->user_id)?null:$this->right;
+
             $this->line = log($this->sid, 2);
             $this->side = ($this->sid%2)?0:1;
 
@@ -60,6 +64,9 @@ class Sheet implements SheetInterface {
             if(!empty($this->left)){
                 $this->two[0] = $this->tree->find($this->sid * 4);
                 $this->two[1] = $this->tree->find(($this->sid * 4) + 1);
+
+                $this->two[0] = is_null($this->two[0]->user_id)?null:$this->two[0];
+                $this->two[1] = is_null($this->two[1]->user_id)?null:$this->two[1];
             }else{
                 $this->two[0] = null;
                 $this->two[1] = null;
@@ -68,6 +75,10 @@ class Sheet implements SheetInterface {
             if(!empty($this->right)){
                 $this->two[2] = $this->tree->find((($this->sid * 2) + 1) * 2);
                 $this->two[3] = $this->tree->find(((($this->sid * 2) + 1) * 2) + 1);
+
+                $this->two[2] = is_null($this->two[2]->user_id)?null:$this->two[2];
+                $this->two[3] = is_null($this->two[3]->user_id)?null:$this->two[3];
+
             }else{
                 $this->two[2] = null;
                 $this->two[3] = null;
