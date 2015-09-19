@@ -22,9 +22,9 @@ class TreeRepository extends Repository{
         return $sid;
     }
 
-    public function findUser($id, $columns = array('*')){
+    public function findUser($id){
         $this->applyCriteria();
-        return $this->model->find($id, $columns)->pluck('user_id');
+        return $this->model->where('id', $id)->pluck('user_id');
     }
 
     public function findIMaxId(){
