@@ -79,13 +79,7 @@ class Sheet implements SheetInterface {
     public function insert()
     {
 
-        if ($response = $this->tree->findAllBy('user_id', $this->user->id)) {
-            $sid = $this->findVacancy($response);
-        }
-
-        if(is_null($sid)) {
-            $sid = $this->find($this->parent);
-        }
+        $sid = $this->find($this->parent);
 
         if(is_null($sid)){
             $sid = $this->tree->findIMindByUser();
@@ -117,6 +111,10 @@ class Sheet implements SheetInterface {
         }
     }
 
+    public function insertUnder(){
+
+    }
+
     public function remove($key){
 
     }
@@ -128,21 +126,7 @@ class Sheet implements SheetInterface {
         $places = $this->tree->findIdByUser($id);
         $sid = null;
 
-        $sid = $this->findVacancy($places);
-
-        if(is_null($sid)){
-            $user = $this->user->find($id);
-            if(!empty($user)) {
-                $sid = $this->find($user->refer);
-            }
-        }
-
-        return $sid;
-    }
-
-    private function findVacancy($places){
-
-        foreach (array_reverse($places) as $place) {
+        foreach ($places as $place) {
             $sheet = new Sheet($this->level, $place->user_id, $place->id);
             if (empty($sheet->left) || empty($sheet->right) || in_array(null, $sheet->two)) {
                 if (empty($sheet->left)) {
@@ -160,6 +144,14 @@ class Sheet implements SheetInterface {
                 break;
             }
         }
+
+        if(is_null($sid)){
+            $user = $this->user->find($id);
+            if(!empty($user)) {
+                $sid = $this->find($user->refer);
+            }
+        }
+
         return $sid;
     }
 }

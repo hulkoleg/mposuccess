@@ -9,5 +9,6 @@
 
 interface SheetInterface {
     public function insert();
+    public function insertUnder();
     public function remove($key);
 }
