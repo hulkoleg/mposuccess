@@ -35,7 +35,7 @@ class SheetManager
             $user = User::create([
                 'sid' => 100001,
                 'name' => 'company',
-                'email' => 'company@mposuccess.ru',
+                'email' => 'company@mposuccess.ru'.$i,
                 'password' => 'company',
                 'refer' => $refer
             ]);
