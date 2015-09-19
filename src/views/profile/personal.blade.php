@@ -6,7 +6,7 @@
             <div class="portlet light profile-sidebar-portlet">
                 <!-- SIDEBAR USERPIC -->
                 <div class="profile-userpic">
-                    <img src="{{ $user->url_avatar }}" class="img-responsive" alt="">
+                    <img src="{{ $user->url_avatar ? $user->url_avatar : '/images/users/default.jpg' }}" class="img-responsive" alt="">
                 </div>
                 <!-- END SIDEBAR USERPIC -->
                 <!-- SIDEBAR USER TITLE -->
