@@ -14,7 +14,7 @@ Route::controllers([
 
 Route::group([
         'middleware' => 'Notprometey\Mposuccess\Http\Middleware\AdminMiddleware',
-        'prefix' => 'profile/admin'
+        'prefix'     => config('mposuccess.panel_admin_url')
     ],
     function(){
         /*
@@ -54,11 +54,11 @@ Route::group([
 
 Route::group([
     'middleware' => 'Notprometey\Mposuccess\Http\Middleware\UserMiddleware',
-    'prefix' => 'profile'
+    'prefix'     => config('mposuccess.panel_url')
 ],
     function(){
         Route::get('/', array(
-            'as'    => 'profile.home',
+            'as'    => config('mposuccess.panel_url') . '.home',
             'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@personal',
         ));
 
@@ -66,28 +66,28 @@ Route::group([
          * Мой профиль
          */
         Route::get('personal', array(
-            'as'    => 'profile.personal',
+            'as'    => config('mposuccess.panel_url') . '.personal',
             'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@personal',
         ));
 
 
         Route::post('changeData', array(
-            'as'    => 'profile.changeData',
+            'as'    => config('mposuccess.panel_url') . '.changeData',
             'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@changeData',
         ));
 
         Route::post('changeAvatar', array(
-            'as'    => 'profile.changeAvatar',
+            'as'    => config('mposuccess.panel_url') . '.changeAvatar',
             'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@changeAvatar',
         ));
 
         Route::get('removeAvatar', array(
-            'as'    => 'profile.removeAvatar',
+            'as'    => config('mposuccess.panel_url') . '.removeAvatar',
             'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@removeAvatar',
         ));
 
         Route::post('changePassword', array(
-            'as'    => 'profile.changePassword',
+            'as'    => config('mposuccess.panel_url') . '.changePassword',
             'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@changePassword',
         ));
 
@@ -100,18 +100,18 @@ Route::group([
         ));
 
         Route::get('news', array(
-            'as' => 'profile.news',
-            'uses' => 'Notprometey\Mposuccess\Controllers\UserController@news',
+            'as'    => config('mposuccess.panel_url') . '.news',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@news',
         ));
 
         Route::get('score/refill', array(
-            'as' => 'profile.refill',
-            'uses' => 'Notprometey\Mposuccess\Controllers\UserController@refill',
+            'as'    => config('mposuccess.panel_url') . '.refill',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@refill',
         ));
 
         Route::get('catalog', array(
-            'as' => 'profile.catalog',
-            'uses' => 'Notprometey\Mposuccess\Controllers\UserController@catalog',
+            'as'    => config('mposuccess.panel_url') . '.catalog',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@catalog',
         ));
 
     }
@@ -119,34 +119,34 @@ Route::group([
 
 Route::group([
         'middleware' => 'Notprometey\Mposuccess\Http\Middleware\ProfileMiddleware',
-        'prefix' => 'profile'
+        'prefix'     => config('mposuccess.panel_url')
     ],
     function(){
 
 
         Route::get('score/withdrawal', array(
-            'as' => 'profile.withdrawal',
-            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@withdrawal',
+            'as'    => config('mposuccess.panel_url') . '.withdrawal',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\ProfileController@withdrawal',
         ));
 
         Route::get('score/purchases', array(
-            'as' => 'profile.purchases',
-            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@purchases',
+            'as'    => config('mposuccess.panel_url') . '.purchases',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\ProfileController@purchases',
         ));
 
         Route::get('score/places', array(
-            'as' => 'profile.places',
-            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@places',
+            'as'    => config('mposuccess.panel_url') . '.places',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\ProfileController@places',
         ));
 
         Route::get('structures/{id}', array(
-            'as' => 'profile.structures',
-            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@structures',
+            'as'    => config('mposuccess.panel_url') . '.structures',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\ProfileController@structures',
         ));
 
         Route::get('tree', array(
-            'as' => 'profile.tree',
-            'uses' => 'Notprometey\Mposuccess\Controllers\ProfileController@tree',
+            'as'    => config('mposuccess.panel_url') . '.tree',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\ProfileController@tree',
         ));
     }
 );
