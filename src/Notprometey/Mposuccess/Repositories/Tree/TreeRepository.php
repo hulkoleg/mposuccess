@@ -12,7 +12,7 @@ use Notprometey\Mposuccess\Models\Tree;
 class TreeRepository extends Repository{
 
     public function findIdByUser($key){
-        return $this->model->where('user_id',$key)->get();
+        return $this->model->where('user_id',$key)->orderBy('id', 'ASC')->get();
     }
     public function findIMindByUser(){
         if(is_null($sid = $this->model->where('user_id',null)->min('id'))){
