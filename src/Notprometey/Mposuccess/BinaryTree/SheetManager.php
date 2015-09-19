@@ -37,7 +37,7 @@ class SheetManager
                 'name' => 'company',
                 'email' => 'company@mposuccess.ru'.$i,
                 'password' => 'company',
-                'refer' => $refer
+                'refer' => $users[$refer]
             ]);
             $this->tree = new Sheet($this->level, $user->id);
             $this->tree->insert();
