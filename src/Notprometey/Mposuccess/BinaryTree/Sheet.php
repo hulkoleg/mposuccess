@@ -141,7 +141,7 @@ class Sheet implements SheetInterface {
     }
 
     private function findVacancy($places){
-
+        $sid = null;
         foreach ($places as $place) {
             $sheet = new Sheet($this->level, $place->user_id, $place->id);
             if (empty($sheet->left) || empty($sheet->right) || in_array(null, $sheet->two)) {
