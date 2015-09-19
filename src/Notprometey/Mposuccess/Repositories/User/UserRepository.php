@@ -33,7 +33,7 @@ class UserRepository extends Repository {
         if ($request->hasFile('photo'))
         {
             $destinationPath = "/images/users/";
-            $fileName = $user->sid . '.' . $request->file('photo')->getClientOriginalExtension();
+            $fileName = $user->id . '.' . $request->file('photo')->getClientOriginalExtension();
 
             if ($user->url_avatar) {
                 if (file_exists(public_path() . $user->url_avatar)) {
@@ -77,10 +77,16 @@ class UserRepository extends Repository {
      *
      * @return string
      */
-    public function getRefer($refer_sid)
+    public function getRefer($referId = 1)
     {
-        $refer = $this->findBy('sid', $refer_sid);
+        $refer = $this->model->find($referId, array('surname', 'name', 'email'));
+        if (!$refer) {
+            $refer = $this->model->find(1, array('surname', 'name', 'email'));
+        }
 
-        return trim($refer->surname . $refer->name . "(" . $refer->email . ")") ;
+        if ($refer)
+            return trim($refer->surname . $refer->name . "(" . $refer->email . ")") ;
+        else
+            return null;
     }
 }
