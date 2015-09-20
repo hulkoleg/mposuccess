@@ -17,6 +17,7 @@ use Notprometey\Mposuccess\Repositories\Country\CountryRepository;
 use Notprometey\Mposuccess\Repositories\Program\ProgramRepository;
 use Notprometey\Mposuccess\Repositories\News\NewsRepository;
 use Hash;
+use Validator;
 
 use Illuminate\Pagination\Paginator;
 
