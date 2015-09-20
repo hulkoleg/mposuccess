@@ -59,7 +59,7 @@ Route::group([
     function(){
         Route::get('/', array(
             'as'    => config('mposuccess.panel_url') . '.home',
-            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@personal',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@dashboard',
         ));
 
         /*
