@@ -37,6 +37,11 @@ class AuthController extends Controller
     protected $userRepository;
 
     /**
+     *
+     */
+    protected $redirectPath = '/';
+
+    /**
      * Create a new authentication controller instance.
      *
      * @return void
