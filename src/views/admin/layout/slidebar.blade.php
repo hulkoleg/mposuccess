@@ -54,7 +54,7 @@
                 </a>
             </li>
 
-            <li @if('profile.structures' == Route::currentRouteName()) class="active open" @endif>
+            <li @if(config('mposuccess.panel_url') . '.structures' == Route::currentRouteName()) class="active open" @endif>
                 <a href="javascript:;">
                     <i class="icon-vector"></i>
                     <span class="title">@lang('mposuccess::profile.structures.title')</span>
@@ -101,7 +101,7 @@
                 </a>
             </li>
 
-            <li @if(Request::is('*profile/admin/*')) class="active open" @endif>
+            <li @if(Request::is('*' . config('mposuccess.panel_url') . '/admin/*')) class="active open" @endif>
                 <a href="javascript:;">
                     <i class="icon-support"></i>
                     <span class="title">@lang('mposuccess::admin.title')</span>
@@ -133,9 +133,9 @@
                             <i class="icon-graduation"></i>
                             @lang('mposuccess::admin.roles')</a>
                     </li>
-                    <li @if('admin.user' == Route::currentRouteName()) class="active" @endif>
-                        <a href="{{ route('admin.user') }}">
-                            <i class="icon-users"></i>
+                    <li @if('admin.users' == Route::currentRouteName()) class="active" @endif>
+                        <a href="{{ route('admin.users') }}">
+                            <i class="icon-bar-chart"></i>
                             @lang('mposuccess::admin.user')</a>
                     </li>
                 </ul>

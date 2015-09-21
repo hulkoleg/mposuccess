@@ -20,12 +20,43 @@
 <script src="/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
 <script src="/assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
 <script src="/assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
+
+
+<!-- only for page "panel/admin/news" -->
+<script type="text/javascript" src="../../assets/global/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="../../assets/global/plugins/bootstrap-wysihtml5/wysihtml5-0.3.0.js"></script>
+<script type="text/javascript" src="../../assets/global/plugins/bootstrap-wysihtml5/bootstrap-wysihtml5.js"></script>
+<script type="text/javascript" src="../../assets/global/plugins/bootstrap-datepicker/js/bootstrap-datepicker.js"></script>
+<script type="text/javascript" src="../../assets/global/plugins/bootstrap-datepicker/js/locales/bootstrap-datepicker.zh-CN.js"></script>
+<script type="text/javascript" src="../../assets/global/plugins/bootstrap-datetimepicker/js/bootstrap-datetimepicker.min.js"></script>
+<script type="text/javascript" src="../../assets/global/plugins/moment.min.js"></script>
+<script type="text/javascript" src="../../assets/global/plugins/jquery.mockjax.js"></script>
+<script type="text/javascript" src="../../assets/global/plugins/bootstrap-editable/bootstrap-editable/js/bootstrap-editable.js"></script>
+<script type="text/javascript" src="../../assets/global/plugins/bootstrap-editable/inputs-ext/address/address.js"></script>
+<script type="text/javascript" src="../../assets/global/plugins/bootstrap-editable/inputs-ext/wysihtml5/wysihtml5.js"></script>
+<script src="/js/form-editable.js"></script>
+
+<script>
+    jQuery(document).ready(function() {
+        FormEditable.init();
+    });
+</script>
+
+<script type="text/javascript" src="../../assets/global/plugins/select2/select2.min.js"></script>
+<script type="text/javascript" src="../../assets/global/plugins/datatables/media/js/jquery.dataTables.min.js"></script>
+<script type="text/javascript" src="../../assets/global/plugins/datatables/plugins/bootstrap/dataTables.bootstrap.js"></script>
+<script src="/js/table-managed.js"></script>
+
+
 <script>
     jQuery(document).ready(function() {
         Metronic.init(); // init metronic core components
         Layout.init(); // init current layout
         QuickSidebar.init(); // init quick sidebar
         Demo.init(); // init demo features
+
+        <!-- only for page "panel/admin/news" -->
+        TableManaged.init();
     });
 </script>
 <script type="text/javascript">
