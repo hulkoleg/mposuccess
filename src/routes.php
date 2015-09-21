@@ -21,33 +21,38 @@ Route::group([
          * Роуты для админа. Проверка на админа в Notprometey\Mposuccess\Http\Middleware\Admin и если нет прав перенапровление а лучше 404
          */
         Route::get('article', array(
-            'as'    => 'admin.article',
+            'as'    => config('mposuccess.admin_prefix') . '.article',
             'uses'  => 'Notprometey\Mposuccess\Controllers\AdminController@article'
         ));
 
         Route::get('news', array(
-            'as'    => 'admin.news',
+            'as'    => config('mposuccess.admin_prefix') . '.news',
             'uses'  => 'Notprometey\Mposuccess\Controllers\AdminController@news'
         ));
 
+        Route::get('news/add', array(
+            'as'    => config('mposuccess.admin_prefix') . '.news.add',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\AdminController@addNews'
+        ));
+
         Route::get('payments', array(
-            'as'    => 'admin.payments',
+            'as'    => config('mposuccess.admin_prefix') . '.payments',
             'uses'  => 'Notprometey\Mposuccess\Controllers\AdminController@payments'
         ));
 
         Route::get('reports', array(
-            'as'    => 'admin.reports',
+            'as'    => config('mposuccess.admin_prefix') . '.reports',
             'uses'  => 'Notprometey\Mposuccess\Controllers\AdminController@reports'
         ));
 
         Route::get('roles', array(
-            'as'    => 'admin.roles',
+            'as'    => config('mposuccess.admin_prefix') . '.roles',
             'uses'  => 'Notprometey\Mposuccess\Controllers\AdminController@roles'
         ));
 
         Route::get('users', array(
-            'as'    => 'admin.users',
-            'uses'  => 'Notprometey\Mposuccess\Controllers\AdminController@user'
+            'as'    => config('mposuccess.admin_prefix') . '.users',
+            'uses'  => 'Notprometey\Mposuccess\Controllers\AdminController@users'
         ));
     }
 );
@@ -100,7 +105,7 @@ Route::group([
          * Личные данные
          */
         Route::get('dashboard', array(
-            'as'    => 'profile.dashboard',
+            'as'    => config('mposuccess.panel_url') . '.dashboard',
             'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@dashboard',
         ));
 

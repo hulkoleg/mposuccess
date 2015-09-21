@@ -37,6 +37,10 @@ class MposuccessServiceProvider extends ServiceProvider {
 		], 'images');
 
 		$this->publishes([
+			__DIR__.'/../../../public/js' => base_path('public/js'),
+		], 'scripts');
+
+		$this->publishes([
 			__DIR__.'/../../config/mposuccess.php' => config_path('mposuccess.php'),
 		], 'config');
 

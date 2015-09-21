@@ -3,6 +3,7 @@
 return [
     'site_url' => '/',
     'panel_url' => 'panel',
+    'admin_prefix' => 'admin',
     'panel_admin_url' => 'panel/admin',
     'profile_url' => 'profile',
     'teacher_url' => 'admin',

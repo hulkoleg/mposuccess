@@ -54,7 +54,7 @@
                 </a>
             </li>
 
-            <li @if('profile.structures' == Route::currentRouteName()) class="active open" @endif>
+            <li @if(config('mposuccess.panel_url') . '.structures' == Route::currentRouteName()) class="active open" @endif>
                 <a href="javascript:;">
                     <i class="icon-home"></i>
                     <span class="title">@lang('mposuccess::profile.structures.title')</span>
@@ -101,7 +101,7 @@
                 </a>
             </li>
 
-            <li @if(Request::is('*profile/admin/*')) class="active open" @endif>
+            <li @if(Request::is('*' . config('mposuccess.panel_url') . '/admin/*')) class="active open" @endif>
                 <a href="javascript:;">
                     <i class="icon-home"></i>
                     <span class="title">@lang('mposuccess::admin.title')</span>
