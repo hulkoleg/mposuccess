@@ -51,39 +51,42 @@ class Sheet implements SheetInterface {
         }
 
         if(!empty($this->sid)){
-            $this->left = $this->tree->find($this->sid * 2);
-            $this->right = $this->tree->find(($this->sid * 2) + 1);
+            $this->left = $this->tree->findUser($this->sid * 2);
+            $this->right = $this->tree->findUser(($this->sid * 2) + 1);
+
             $this->line = log($this->sid, 2);
             $this->side = ($this->sid%2)?0:1;
 
 
             if(!empty($this->left)){
-                $this->two[0] = $this->tree->find($this->sid * 4);
-                $this->two[1] = $this->tree->find(($this->sid * 4) + 1);
+                $this->two[0] = $this->tree->findUser($this->sid * 4);
+                $this->two[1] = $this->tree->findUser(($this->sid * 4) + 1);
             }else{
                 $this->two[0] = null;
                 $this->two[1] = null;
             }
 
             if(!empty($this->right)){
-                $this->two[2] = $this->tree->find((($this->sid * 2) + 1) * 2);
-                $this->two[3] = $this->tree->find(((($this->sid * 2) + 1) * 2) + 1);
+                $this->two[2] = $this->tree->findUser((($this->sid * 2) + 1) * 2);
+                $this->two[3] = $this->tree->findUser(((($this->sid * 2) + 1) * 2) + 1);
             }else{
                 $this->two[2] = null;
                 $this->two[3] = null;
             }
-
         }
     }
 
     public function insert()
     {
+        $sid = null;
 
-        if ($response = $this->tree->findBy('user_id', $this->user->id)) {
-            return $this->insertUnder();
+        if ($response = $this->tree->findAllBy('user_id', $this->user->id)) {
+            $sid = $this->findVacancy($response);
         }
 
-        $sid = $this->find($this->parent);
+        if(is_null($sid)) {
+            $sid = $this->find($this->parent);
+        }
 
         if(is_null($sid)){
             $sid = $this->tree->findIMindByUser();
@@ -100,14 +103,19 @@ class Sheet implements SheetInterface {
             }
         }
 
-        $this->tree->create([
-            'user_id' => $this->user->id,
-            'id'      => $sid
-        ]);
-    }
+        $current = $this->tree->find($sid);
 
-    public function insertUnder(){
+        if(is_null($current)) {
+            $this->tree->create([
+                'user_id' => $this->user->id,
+                'id' => $sid
+            ]);
+        } else {
+            $this->tree->update([
+                'user_id' => $this->user->id,
 
+            ],$sid);
+        }
     }
 
     public function remove($key){
@@ -121,24 +129,7 @@ class Sheet implements SheetInterface {
         $places = $this->tree->findIdByUser($id);
         $sid = null;
 
-        foreach ($places as $place) {
-            $sheet = new Sheet($this->level, $place->user_id, $place->id);
-            if (empty($sheet->left) || empty($sheet->right) || in_array(null, $sheet->two)) {
-                if (empty($sheet->left)) {
-                    $sid = $sheet->sid * 2;
-                } elseif (empty($sheet->right)) {
-                    $sid = ($sheet->sid * 2) + 1;
-                } else {
-                    foreach ($sheet->two as $key => $place) {
-                        if (empty($place)) {
-                            $sid = ($sheet->sid * 4) + $key;
-                            break;
-                        }
-                    }
-                }
-                break;
-            }
-        }
+        $sid = $this->findVacancy($places);
 
         if(is_null($sid)){
             $user = $this->user->find($id);
@@ -147,6 +138,28 @@ class Sheet implements SheetInterface {
             }
         }
 
+        return $sid;
+    }
+
+    private function findVacancy($places){
+        $sid = null;
+        foreach ($places as $place) {
+            $sheet = new Sheet($this->level, $place->user_id, $place->id);
+            if (empty($sheet->left)) {
+                $sid = $sheet->sid * 2;
+                break;
+            } elseif (empty($sheet->right)) {
+                $sid = ($sheet->sid * 2) + 1;
+                break;
+            } else {
+                foreach ($sheet->two as $key => $place) {
+                    if (empty($place)) {
+                        $sid = ($sheet->sid * 4) + $key;
+                        break;
+                    }
+                }
+            }
+        }
         return $sid;
     }
 }

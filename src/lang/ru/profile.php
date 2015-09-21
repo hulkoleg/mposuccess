@@ -1,6 +1,22 @@
 <?php
 return [
     'title'                     => 'Профиль пользователя',
+    'topmenu'                   => [
+        'myprofile'             => 'Мой профиль',
+        'mycalendar'            => 'Мой календарь',
+        'myinbox'               => 'Мои сообщения',
+        'lockscreen'            => 'Блокировка',
+        'logout'                => 'Выход',
+        'notifications'         => [
+            'title'             => 'Уведомления',
+            'pending'           => 'Отложенных уведомлений: ',
+        ],
+        'messages'              => [
+            'title'             => 'Сообщения',
+            'new'               => 'Новых сообщений: ',
+        ],
+    ],
+    'accountSettings'           => 'Настройки профиля',
     'myProfile'                 => 'Мой профиль',
     'user'                      => 'Пользователь',
     'message'                   => 'Сообщение',

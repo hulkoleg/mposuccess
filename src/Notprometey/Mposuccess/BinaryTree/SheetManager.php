@@ -8,6 +8,8 @@
 
 namespace Notprometey\Mposuccess\BinaryTree;
 
+use Notprometey\Mposuccess\Models\User;
+
 
 /**
  * @property Sheet tree
@@ -26,7 +28,9 @@ class SheetManager
     }
 
     public function create(){
+
         $this->tree = new Sheet($this->level, $this->uid);
         $this->tree->insert();
+
     }
 }
