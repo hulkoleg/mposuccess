@@ -20,6 +20,9 @@
 <script src="/assets/admin/layout/scripts/layout.js" type="text/javascript"></script>
 <script src="/assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
 <script src="/assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
+
+{!! \Assets::js() !!}
+
 <script>
     jQuery(document).ready(function() {
         Metronic.init(); // init metronic core components

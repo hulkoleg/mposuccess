@@ -19,7 +19,7 @@ class Sheet implements SheetInterface {
 
     protected $right;
 
-    protected $user;
+    public $user;
 
     protected $line;
 
@@ -162,4 +162,56 @@ class Sheet implements SheetInterface {
         }
         return $sid;
     }
+
+    /**
+     * @return mixed
+     */
+    public function getLeft()
+    {
+        return $this->left;
+    }
+
+    /**
+     * @return mixed
+     */
+    public function getRight()
+    {
+        return $this->right;
+    }
+
+    /**
+     * @param $key
+     *
+     * @return mixed
+     */
+    public function getTwo($key)
+    {
+        return $this->two[$key];
+    }
+
+    /**
+     * @return null
+     */
+    public function getSid()
+    {
+        return $this->sid;
+    }
+
+    /**
+     * @return null
+     */
+    public function getParent()
+    {
+        return ($this->sid%2)?($this->sid - 1)/2:$this->sid/2;
+    }
+
+    public function toArray(){
+        return [
+            'uid' => $this->user->id,
+            'left' => $this->left,
+            'right' => $this->right,
+            'two' => $this->two
+        ];
+    }
+
 }
