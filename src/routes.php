@@ -230,7 +230,7 @@ Route::post('bye/one-tree', array(
     'uses' => 'Notprometey\Mposuccess\Controllers\ByeController@one',
 ));
 
-Route::get('tree/build/{sid}/{uid?}', array(
+Route::get('tree/build/{level}/{sid}', array(
     'as'    => 'tree.build',
     'uses'  => 'Notprometey\Mposuccess\Controllers\ProfileController@build',
 ));

@@ -15,11 +15,14 @@ $(function(){
        });
 
        bye.done(function( response ) {
-            console.log(response);
+           console.log(response);
+           $.each(response, function(index, res){
+               toastr[res.type](res.message, res.name);
+           });
        });
 
        bye.fail(function( jqXHR, textStatus ) {
-           alert( "Request failed: " + textStatus );
+           toastr['error']("Request failed: " + textStatus, 'Error!');
        });
    });
 });

@@ -11,14 +11,15 @@
 <link href="/assets/global/plugins/simple-line-icons/simple-line-icons.min.css" rel="stylesheet" type="text/css"/>
 <link href="/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet" type="text/css"/>
 <!-- END GLOBAL MANDATORY STYLES -->
-<!-- BEGIN THEME STYLES
-<link href="/assets/global/css/components.css" id="style_components" rel="stylesheet" type="text/css"/> -->
+<!-- BEGIN THEME STYLES-->
+<link href="/assets/global/css/components.css" id="style_components" rel="stylesheet" type="text/css"/>
 <link href="/assets/global/css/plugins.css" rel="stylesheet" type="text/css"/>
 <link href="/assets/admin/layout/css/layout.css" rel="stylesheet" type="text/css"/>
 <link id="style_color" href="/assets/admin/layout/css/themes/light2.css" rel="stylesheet" type="text/css"/>
 <link href="/assets/admin/pages/css/profile.css" rel="stylesheet" type="text/css"/>
 <link href="/assets/global/plugins/bootstrap-datepicker/css/datepicker.css" rel="stylesheet" type="text/css"/>
 <link href="/assets/global/plugins/select2/select2.css" rel="stylesheet" type="text/css"/>
+<link rel="stylesheet" type="text/css" href="/assets/global/plugins/bootstrap-toastr/toastr.min.css">
 
 {!! \Assets::css() !!}
 <!-- END THEME STYLES -->

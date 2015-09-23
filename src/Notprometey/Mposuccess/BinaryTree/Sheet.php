@@ -2,6 +2,7 @@
 
 use Notprometey\Mposuccess\Contracts\BinaryTree\SheetInterface;
 use Notprometey\Mposuccess\Repositories\Tree\TreeRepository;
+use Event;
 
 /**
  * Created by PhpStorm.
@@ -41,7 +42,7 @@ class Sheet implements SheetInterface {
         $this->sid = $sid;
         $this->level = $level;
 
-        TreeRepository::setTable('Notprometey\Mposuccess\Models\Tree');
+        TreeRepository::setTable('Notprometey\Mposuccess\Models\Tree' . $level);
         $this->tree = app('Notprometey\Mposuccess\Repositories\Tree\TreeRepository');
         $this->user = app('Notprometey\Mposuccess\Repositories\User\UserRepository');
 
@@ -106,16 +107,19 @@ class Sheet implements SheetInterface {
         $current = $this->tree->find($sid);
 
         if(is_null($current)) {
-            $this->tree->create([
+            $create = $this->tree->create([
                 'user_id' => $this->user->id,
                 'id' => $sid
-            ]);
+            ])->toArray();
         } else {
-            $this->tree->update([
+            $create = $this->tree->update([
                 'user_id' => $this->user->id,
 
-            ],$sid);
+            ],$sid)->toArray();
         }
+        Event::fire('tree.bye', $sid);
+
+        return $create;
     }
 
     public function remove($key){
@@ -205,12 +209,25 @@ class Sheet implements SheetInterface {
         return ($this->sid%2)?($this->sid - 1)/2:$this->sid/2;
     }
 
+    /**
+     * @return mixed
+     */
+    public function getLevel()
+    {
+        return $this->level;
+    }
+
+
+
     public function toArray(){
         return [
-            'uid' => $this->user->id,
-            'left' => $this->left,
-            'right' => $this->right,
-            'two' => $this->two
+            'current'   => [$this->user->id, $this->getParent(), $this->level],
+            'one'       => [$this->left, $this->sid * 2, $this->level],
+            'two'       => [$this->right, ($this->sid * 2) + 1, $this->level],
+            'three'     => [$this->two[0], $this->sid * 4, $this->level],
+            'four'      => [$this->two[1], ($this->sid * 4) + 1, $this->level],
+            'five'      => [$this->two[2], ($this->sid * 4) + 2, $this->level],
+            'six'       => [$this->two[3], ($this->sid * 4) + 3, $this->level],
         ];
     }
 
