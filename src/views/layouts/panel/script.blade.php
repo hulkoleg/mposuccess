@@ -21,6 +21,9 @@
 <script src="/assets/admin/layout/scripts/quick-sidebar.js" type="text/javascript"></script>
 <script src="/assets/admin/layout/scripts/demo.js" type="text/javascript"></script>
 
+{!! \Assets::js() !!}
+
+
 
 <!-- only for page "panel/admin/news" -->
 <script type="text/javascript" src="../../assets/global/plugins/select2/select2.min.js"></script>

@@ -13,8 +13,11 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Session\SessionManager as Session;
 use Illuminate\Support\Facades\View;
 use Illuminate\View\ViewServiceProvider;
+use Notprometey\Mposuccess\BinaryTree\Sheet;
+use Notprometey\Mposuccess\Repositories\Tree\TreeRepository;
 use Notprometey\Mposuccess\Repositories\User\UserRepository;
 use Auth;
+use Response;
 
 /**
  * Handles all requests related to managing the data models
@@ -95,13 +98,43 @@ class ProfileController extends UserController {
     /**
      * Структуры пользавателей
      *
+     * @param                $id
+     * @param TreeRepository $tree
+     *
      * @return Response
      */
     public function structures($id)
     {
-        $this->layout->content = view("mposuccess::profile.structures");
+        \Assets::add('tree.css');
+        \Assets::add('tree.js');
+
+        TreeRepository::setTable('Notprometey\Mposuccess\Models\Tree');
+        $tree = app('Notprometey\Mposuccess\Repositories\Tree\TreeRepository');
+
+        $sheet = new Sheet($id, $this->id, $tree->findBy('user_id', $this->id)->id);
+
+        $this->layout->content = view("mposuccess::profile.structures", [
+            'sheet' => $sheet
+        ]);
         $this->layout->title = trans('mposuccess::profile.structures.' . $id) . ' ' . trans('mposuccess::profile.structures.one');
         return $this->layout;
+    }
+
+    public function build(Request $request, $sid, $uid = null){
+
+        if(!Auth::check() && !$request->ajax()) {
+            return Response::json(array('massage' => ''), 401);
+        }
+
+        if(is_null($uid)){
+            TreeRepository::setTable('Notprometey\Mposuccess\Models\Tree');
+            $tree = app('Notprometey\Mposuccess\Repositories\Tree\TreeRepository');
+            $uid = $tree->findUser($sid);
+        }
+
+        $sheet = new Sheet(1, $uid, $sid);
+
+        return Response::json($sheet->toArray());
     }
     /**
      * Дерево приглашенных

@@ -12,6 +12,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Session\SessionManager as Session;
+use Notprometey\Mposuccess\Repositories\Catalog\ProductRepository;
+use Notprometey\Mposuccess\Repositories\User\Criteria\Current;
 use Notprometey\Mposuccess\Repositories\User\UserRepository;
 use Notprometey\Mposuccess\Repositories\Country\CountryRepository;
 use Notprometey\Mposuccess\Repositories\Program\ProgramRepository;
@@ -20,7 +22,6 @@ use Hash;
 use Validator;
 
 use Illuminate\Pagination\Paginator;
-
 
 /**
  * Handles all requests related to managing the data models
@@ -280,14 +281,21 @@ class UserController extends Controller {
         $this->layout->title = trans('mposuccess::profile.score.refill');
         return $this->layout;
     }
+
     /**
      * Каталог товаров для покупки
      *
+     * @param ProductRepository $products
+     *
      * @return Response
      */
-    public function catalog()
+    public function catalog(ProductRepository $products)
     {
-        $this->layout->content = view("mposuccess::profile.catalog");
+        \Assets::add('pricing.js');
+
+        $this->layout->content = view("mposuccess::profile.catalog", [
+            'products' => $products->all()
+        ]);
         $this->layout->title = trans('mposuccess::profile.catalog');
         return $this->layout;
     }

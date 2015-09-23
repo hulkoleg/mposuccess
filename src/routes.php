@@ -223,3 +223,14 @@ Route::any('test/tree', array(
     'as' => 'regdocs',
     'uses' => 'Notprometey\Mposuccess\Controllers\FrontController@test',
 ));
+
+
+Route::post('bye/one-tree', array(
+    'as' => 'one-tree',
+    'uses' => 'Notprometey\Mposuccess\Controllers\ByeController@one',
+));
+
+Route::get('tree/build/{sid}/{uid?}', array(
+    'as'    => 'tree.build',
+    'uses'  => 'Notprometey\Mposuccess\Controllers\ProfileController@build',
+));
