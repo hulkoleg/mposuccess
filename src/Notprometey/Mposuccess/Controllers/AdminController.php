@@ -14,6 +14,7 @@ use Illuminate\Session\SessionManager as Session;
 use Illuminate\Support\Facades\View;
 use Illuminate\View\ViewServiceProvider;
 use Notprometey\Mposuccess\Repositories\User\UserRepository;
+use Notprometey\Mposuccess\Repositories\News\NewsRepository;
 use Auth;
 
 /**
@@ -70,11 +71,38 @@ class AdminController extends ProfileController {
      *
      * @return Response
      */
-    public function news()
+    public function news(NewsRepository $newsRepository)
     {
-        $this->layout->content = view("mposuccess::admin.news");
+        $news = $newsRepository->all();
+
+        $data = [
+            'news' => $news
+        ];
+
+        $this->layout->content = view("mposuccess::admin.news", $data);
         $this->layout->title = trans('mposuccess::admin.news');
         return $this->layout;
+    }
+    /**
+     * Управление новостями
+     *
+     * @return Response
+     */
+    public function addNews()
+    {
+        $html = '<div class="modal-header">' .
+	                '<button type="button" class="close" data-dismiss="modal" aria-hidden="true"></button>' .
+                    '<h4 class="modal-title">Ajax Content</h4>' .
+                '</div>' .
+                '<div class="modal-body">' .
+
+                '</div>' .
+                '<div class="modal-footer">' .
+                    '<button type="button" class="btn default" data-dismiss="modal">Close</button>' .
+                    '<button type="button" class="btn blue">Save changes</button>' .
+                '</div>';
+
+        return $html;
     }
     /**
      * Управление оплатами пользователей
@@ -116,9 +144,9 @@ class AdminController extends ProfileController {
      *
      * @return Response
      */
-    public function user()
+    public function users()
     {
-        $this->layout->content = view("mposuccess::admin.user");
+        $this->layout->content = view("mposuccess::admin.users");
         $this->layout->title = trans('mposuccess::admin.user');
         return $this->layout;
     }

@@ -17,9 +17,11 @@ use Notprometey\Mposuccess\Repositories\User\Criteria\Current;
 use Notprometey\Mposuccess\Repositories\User\UserRepository;
 use Notprometey\Mposuccess\Repositories\Country\CountryRepository;
 use Notprometey\Mposuccess\Repositories\Program\ProgramRepository;
-use Validator;
+use Notprometey\Mposuccess\Repositories\News\NewsRepository;
 use Hash;
+use Validator;
 
+use Illuminate\Pagination\Paginator;
 
 /**
  * Handles all requests related to managing the data models
@@ -238,10 +240,33 @@ class UserController extends Controller {
      *
      * @return Response
      */
-    public function news()
+    public function news(NewsRepository $newsRepository)
     {
-        $this->layout->content = view("mposuccess::profile.news");
+        $perPage = $this->request->input('perPage') ? $this->request->input('perPage') : 3;
+        $news = $newsRepository->findBy('type', config('mposuccess.news_type_private'))->paginate($perPage);
+
+        $data = [
+            'news' => $news
+        ];
+
+        $this->layout->content = view("mposuccess::profile.news", $data);
         $this->layout->title = trans('mposuccess::profile.news');
+        return $this->layout;
+    }
+
+    /**
+     * Просмотр новости (поста)
+     *
+     * @return Response
+     */
+    public function post($id, NewsRepository $newsRepository)
+    {
+        $data = [
+            'news' => $newsRepository->find($id)
+        ];
+
+        $this->layout->content = view("mposuccess::profile.post", $data);
+        $this->layout->title = trans('mposuccess::profile.post');
         return $this->layout;
     }
 

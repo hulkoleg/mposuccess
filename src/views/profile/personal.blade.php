@@ -19,7 +19,7 @@
                 <!-- SIDEBAR BUTTONS -->
                 <div class="profile-userbuttons">
                     @if($refer)
-                        <a href="/profile/user/{{ $user->refer }}" class="btn btn-circle green-haze btn-sm">@lang('mposuccess::profile.refer')</a>
+                        <a href="/{{ config('mposuccess.panel_url') }}/user/{{ $user->refer }}" class="btn btn-circle green-haze btn-sm">@lang('mposuccess::profile.refer')</a>
                     @endif
                 </div>
                 <!-- END SIDEBAR BUTTONS -->
