@@ -8,6 +8,7 @@
 namespace Notprometey\Mposuccess\Controllers;
 
 use Auth;
+use Notprometey\Mposuccess\BinaryTree\SheetManager;
 use Response;
 use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
@@ -55,6 +56,24 @@ class ByeController extends Controller {
     }
 
     public function one(){
-        return Response::json(array('massage' => 'ок'));
+        $data = array(
+            0 => [
+                'type' => 'success',
+                'name' => 'Место успешно создано',
+                'message' => ''
+            ]
+        );
+        $tree = new SheetManager($this->id, 1);
+
+        if(!$sheet = $tree->create()) {
+            $data = array(
+                0 => [
+                    'type' => 'error',
+                    'name' => 'Не удалось создать место',
+                    'message' => ''
+                ]
+            );
+        }
+        return Response::json($data);
     }
 }

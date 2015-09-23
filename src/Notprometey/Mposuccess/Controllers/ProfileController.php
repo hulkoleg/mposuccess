@@ -17,6 +17,7 @@ use Notprometey\Mposuccess\BinaryTree\Sheet;
 use Notprometey\Mposuccess\Repositories\Tree\TreeRepository;
 use Notprometey\Mposuccess\Repositories\User\UserRepository;
 use Auth;
+use Assets;
 use Response;
 
 /**
@@ -105,34 +106,56 @@ class ProfileController extends UserController {
      */
     public function structures($id)
     {
-        \Assets::add('tree.css');
-        \Assets::add('tree.js');
+        Assets::add('tree.css');
+        Assets::add('tree.js');
 
-        TreeRepository::setTable('Notprometey\Mposuccess\Models\Tree');
+        TreeRepository::setTable('Notprometey\Mposuccess\Models\Tree' . $id);
         $tree = app('Notprometey\Mposuccess\Repositories\Tree\TreeRepository');
 
-        $sheet = new Sheet($id, $this->id, $tree->findBy('user_id', $this->id)->id);
-
+        $user = $tree->findBy('user_id', $this->id);
+        if(isset($user->id)){
+            $sheet = new Sheet($id, $this->id, $user->id);
+        }
         $this->layout->content = view("mposuccess::profile.structures", [
-            'sheet' => $sheet
+            'sheet' => isset($sheet)?$sheet:'Этап пока не доступен.'
         ]);
         $this->layout->title = trans('mposuccess::profile.structures.' . $id) . ' ' . trans('mposuccess::profile.structures.one');
         return $this->layout;
     }
 
-    public function build(Request $request, $sid, $uid = null){
+    public function build(Request $request, $level, $sid){
 
         if(!Auth::check() && !$request->ajax()) {
             return Response::json(array('massage' => ''), 401);
         }
 
-        if(is_null($uid)){
-            TreeRepository::setTable('Notprometey\Mposuccess\Models\Tree');
-            $tree = app('Notprometey\Mposuccess\Repositories\Tree\TreeRepository');
-            $uid = $tree->findUser($sid);
+        if(0 == $sid){
+            return array(
+                'message' => [
+                    'type' => 'warning',
+                    'name' => 'Это место является верхним',
+                    'message' => ''
+                ]
+            );
         }
 
-        $sheet = new Sheet(1, $uid, $sid);
+        TreeRepository::setTable('Notprometey\Mposuccess\Models\Tree' . $level);
+        $tree = app('Notprometey\Mposuccess\Repositories\Tree\TreeRepository');
+        $uid = $tree->findUser($sid);
+
+        $user = app('Notprometey\Mposuccess\Repositories\User\UserRepository');
+
+        if(!($this->user->refer == $uid || $this->id == $uid || $user->findChild($uid, $this->id))){
+            return array(
+                'message' => [
+                    'type' => 'warning',
+                    'name' => 'Недостатосно привелегий',
+                    'message' => 'Пользаватель не является вашим рефералом или лично приглашонным.'
+                ]
+            );
+        }
+
+        $sheet = new Sheet($level, $uid, $sid);
 
         return Response::json($sheet->toArray());
     }

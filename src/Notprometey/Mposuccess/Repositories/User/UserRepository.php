@@ -89,4 +89,9 @@ class UserRepository extends Repository {
         else
             return null;
     }
+
+    public function findChild($id, $refer)
+    {
+        return $this->model->where('refer', '=', $refer)->where('id', '=', $id)->count();
+    }
 }
