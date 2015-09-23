@@ -30,14 +30,13 @@ class AuthController extends Controller
 
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
-
     /**
      * Todo пока в конструктор запихнул userRepository
      */
     protected $userRepository;
 
     /**
-     *
+     * Адрес на который перенаправит пользователя после авторизации
      */
     protected $redirectPath = '/';
 
@@ -60,10 +59,18 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
+        Validator::extend('cyrillic', function ($attribute, $value, $parameters) {
+            return preg_match("/^[^-]{1}[А-Яа-яЁё-]+$/u", $value);
+        });
+        $data['name'] = trim($data['name']);
+        $data['surname'] = trim($data['surname']);
+        $data['patronymic'] = trim($data['patronymic']);
+        $data['email'] = trim($data['email']);
+
         return Validator::make($data, [
-            'name'                  => 'required|min:2|max:32',
-            'surname'               => 'required|min:2|max:32',
-            'patronymic'            => 'required|min:2|max:32',
+            'name'                  => 'required|min:2|max:32|cyrillic',
+            'surname'               => 'required|min:2|max:32|cyrillic',
+            'patronymic'            => 'required|min:2|max:32|cyrillic',
             'email'                 => 'required|email|max:255|unique:users',
             'password'              => 'required|confirmed|min:8',
             'password_confirmation' => 'same:password',

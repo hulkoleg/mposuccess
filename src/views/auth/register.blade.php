@@ -32,15 +32,6 @@
 <!-- END HEAD -->
 <!-- BEGIN BODY -->
 <body class="login">
-<!-- BEGIN LOGO -->
-<div class="logo">
-    <a href="index.html" class="logo-default">
-        <span>TEACHER</span>
-        <span>LOG</span>
-        <!--<img src="../..//assets/admin/layout/img/logo.png" alt="logo" class="logo-default"/>-->
-    </a>
-</div>
-<!-- END LOGO -->
 <!-- BEGIN SIDEBAR TOGGLER BUTTON -->
 <div class="menu-toggler sidebar-toggler">
 </div>
