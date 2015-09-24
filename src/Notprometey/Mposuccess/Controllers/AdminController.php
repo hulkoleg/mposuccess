@@ -13,6 +13,7 @@ use Illuminate\Support\Facades\File;
 use Illuminate\Session\SessionManager as Session;
 use Illuminate\Support\Facades\View;
 use Illuminate\View\ViewServiceProvider;
+use Notprometey\Mposuccess\Repositories\Notification\NotificationRepository;
 use Notprometey\Mposuccess\Repositories\User\UserRepository;
 use Notprometey\Mposuccess\Repositories\News\NewsRepository;
 use Auth;
@@ -30,7 +31,7 @@ class AdminController extends ProfileController {
      * @param \Illuminate\Http\Request              $request
      * @param \Illuminate\Session\SessionManager    $session
      */
-    public function __construct(Request $request, Session $session, UserRepository $user)
+    public function __construct(Request $request, Session $session, UserRepository $user,  NotificationRepository $notification)
     {
 
         $this->id = Auth::user()->id;
@@ -43,6 +44,9 @@ class AdminController extends ProfileController {
             $this->layout = view($this->layout);
             $this->layout->slidebar = view('mposuccess::admin.layout.slidebar');
             $this->layout->r_slidebar = null;
+
+            $this->layout->notification = $notification->findAllBy('sid', $this->id);
+            $this->layout->notification_count = count($this->layout->notification->toArray());
         }
     }
 

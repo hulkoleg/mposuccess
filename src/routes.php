@@ -234,3 +234,8 @@ Route::get('tree/build/{level}/{sid}', array(
     'as'    => 'tree.build',
     'uses'  => 'Notprometey\Mposuccess\Controllers\ProfileController@build',
 ));
+
+Route::post('/panel/notification/{count}', array(
+    'as'    => 'panel.notification',
+    'uses'  => 'Notprometey\Mposuccess\Controllers\ProfileController@notification',
+));

@@ -53,6 +53,8 @@
 
 
 <script>
+    var notification_count = {{$notification_new}};
+
     jQuery(document).ready(function() {
         Metronic.init(); // init metronic core components
         Layout.init(); // init current layout
@@ -69,8 +71,8 @@
             "onclick": null,
             "showDuration": "1000",
             "hideDuration": "1000",
-            "timeOut": "5000",
-            "extendedTimeOut": "1000",
+            "timeOut": "20000",
+            "extendedTimeOut": "10000",
             "showEasing": "swing",
             "hideEasing": "linear",
             "showMethod": "fadeIn",
@@ -78,18 +80,69 @@
         };
 
         $(document).ajaxStart(
-            function(){
+            function(event, jqxhr, settings){
                 Metronic.blockUI({
                     target: 'body',
                     animate: true
-                })
+                });
             }
         ).ajaxStop(
-            function() {
-                Metronic.unblockUI('body')
+            function(event, jqxhr, settings) {
+                Metronic.unblockUI('body');
             }
         );
+        loadNotification();
     });
+
+    function loadNotification(){
+        var notification = $.ajax({
+            url: '/panel/notification/' + notification_count,
+            headers: {
+                'X-CSRF-Token' : $('meta[name=_token]').attr('content')
+            },
+            method: "POST",
+            dataType: "json",
+            global: false
+        });
+
+        notification.done(function( response ) {
+            console.log(response);
+            d = new Date();
+            date = d.getDate();
+            month = d.getMonth() + 1;
+            year = d.getFullYear();
+            $.each(response, function(index, res){
+                if('notification_count' == res.type){
+                    notification_count = res.count;
+                    $('#notification-count').text(notification_count);
+                } else {
+                    toastr[res.type](res.message, res.name);
+                    $('#notification-list').append(
+                        '<li>' +
+                        '<a href="javascript:;">' +
+                        '<span class="time">' +
+                        date + "/" + month + "/" + year +
+                        '</span>' +
+                        '<span class="details"> ' +
+                        '<span class="label label-sm label-icon label-success">' +
+                        '<i>' + res.name + '</i>' +
+                        '</span>' +
+                        '</span>' +
+                        '<div>' +
+                        res.message +
+                        '</div>' +
+                        '</a>' +
+                        '</li>'
+                    );
+                }
+            });
+            setTimeout(loadNotification, 5000);
+        });
+
+        notification.fail(function( jqXHR, textStatus ) {
+            setTimeout(loadNotification, 5000);
+        });
+    }
 </script>
 <script type="text/javascript">
     jQuery(document).ready(function() {

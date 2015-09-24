@@ -117,7 +117,11 @@ class Sheet implements SheetInterface {
 
             ],$sid)->toArray();
         }
-        Event::fire('tree.bye', $sid);
+        Event::fire('tree.one.bye', [
+            trim($this->user->surname . ' ' . $this->user->name . " (" . $this->user->email . ")"),
+            $this->user->id,
+            $this->user->refer
+        ]);
 
         return $create;
     }

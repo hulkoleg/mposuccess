@@ -14,6 +14,7 @@ use Illuminate\Session\SessionManager as Session;
 use Illuminate\Support\Facades\View;
 use Illuminate\View\ViewServiceProvider;
 use Notprometey\Mposuccess\BinaryTree\Sheet;
+use Notprometey\Mposuccess\Repositories\Notification\NotificationRepository;
 use Notprometey\Mposuccess\Repositories\Tree\TreeRepository;
 use Notprometey\Mposuccess\Repositories\User\UserRepository;
 use Auth;
@@ -30,10 +31,12 @@ class ProfileController extends UserController {
     protected $user = null;
 
     /**
-     * @param \Illuminate\Http\Request              $request
-     * @param \Illuminate\Session\SessionManager    $session
+     * @param \Illuminate\Http\Request           $request
+     * @param \Illuminate\Session\SessionManager $session
+     * @param UserRepository                     $user
+     * @param NotificationRepository             $notification
      */
-    public function __construct(Request $request, Session $session, UserRepository $user)
+    public function __construct(Request $request, Session $session, UserRepository $user, NotificationRepository $notification)
     {
 
         $this->id = Auth::user()->id;
@@ -50,6 +53,10 @@ class ProfileController extends UserController {
                 $this->layout->slidebar = view('mposuccess::admin.layout.slidebar');
                 $this->layout->r_slidebar = view('mposuccess::profile.layout.r_slidebar');
             }
+
+            $this->layout->notifications = $notification->findAllBy('sid', $this->id);
+            $this->layout->notification_count = $notification->allCount($this->id);
+            $this->layout->notification_new = $notification->newCount($this->id);
         }
     }
 
@@ -169,5 +176,34 @@ class ProfileController extends UserController {
         $this->layout->content = view("mposuccess::profile.tree");
         $this->layout->title = trans('mposuccess::profile.tree');
         return $this->layout;
+    }
+
+
+    public function notification(Request $request, $count){
+
+        if(!Auth::check() && !$request->ajax()) {
+            return Response::json(array('massage' => ''), 401);
+        }
+
+        $notifications = app('Notprometey\Mposuccess\Repositories\Notification\NotificationRepository');
+        $currentCount = $notifications->newCount($this->id);
+        $data = array();
+        if($currentCount > $count){
+            $notifications = $notifications->newNotification($this->id, $count, $currentCount - $count);
+            foreach($notifications as $notification){
+                array_push($data, array(
+                    'type' => 'info',
+                    'name' => $notification->name,
+                    'message' => $notification->text
+                ));
+            }
+            array_push($data, array(
+                'type' => 'notification_count',
+                'count' => $currentCount
+            ));
+        }
+
+
+        return Response::json($data);
     }
 }

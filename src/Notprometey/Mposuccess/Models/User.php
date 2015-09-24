@@ -74,4 +74,11 @@ class User extends Model implements AuthenticatableContract, CanResetPasswordCon
     {
         return $this->belongsToMany('Bican\Roles\Models\Permission', 'permission_user');
     }
+
+    /**
+     * @return \Illuminate\Database\Eloquent\Relations\HasMany
+     */
+    public function notifications(){
+        return $this->hasMany('Notprometey\Mposuccess\Models\Notification', 'sid');
+    }
 }
