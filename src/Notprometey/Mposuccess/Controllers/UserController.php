@@ -13,6 +13,7 @@ use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Session\SessionManager as Session;
 use Notprometey\Mposuccess\Repositories\Catalog\ProductRepository;
+use Notprometey\Mposuccess\Repositories\Notification\NotificationRepository;
 use Notprometey\Mposuccess\Repositories\User\Criteria\Current;
 use Notprometey\Mposuccess\Repositories\User\UserRepository;
 use Notprometey\Mposuccess\Repositories\Country\CountryRepository;
@@ -49,10 +50,12 @@ class UserController extends Controller {
     protected $layout = "mposuccess::layouts.panel.main";
 
     /**
-     * @param \Illuminate\Http\Request              $request
-     * @param \Illuminate\Session\SessionManager    $session
+     * @param \Illuminate\Http\Request           $request
+     * @param \Illuminate\Session\SessionManager $session
+     * @param UserRepository                     $user
+     * @param NotificationRepository             $notification
      */
-    public function __construct(Request $request, Session $session, UserRepository $user)
+    public function __construct(Request $request, Session $session, UserRepository $user, NotificationRepository $notification)
     {
 
         $this->id = Auth::user()->id;
@@ -77,6 +80,10 @@ class UserController extends Controller {
                 $this->layout->slidebar = view('mposuccess::admin.layout.slidebar');
                 $this->layout->r_slidebar = view('mposuccess::profile.layout.r_slidebar');
             }
+
+            $this->layout->notifications = $notification->findAllBy('sid', $this->id);
+            $this->layout->notification_count = $notification->allCount($this->id);
+            $this->layout->notification_new = $notification->newCount($this->id);
         }
     }
 

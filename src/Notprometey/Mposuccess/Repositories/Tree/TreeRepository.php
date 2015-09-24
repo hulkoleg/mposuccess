@@ -27,6 +27,11 @@ class TreeRepository extends Repository{
         return $this->model->where('id', $id)->pluck('user_id');
     }
 
+    public function findUsersCount($ids){
+        $this->applyCriteria();
+        return $this->model->whereIn('user_id', $ids)->count();
+    }
+
     public function findIMaxId(){
         return $this->model->max('id');
     }

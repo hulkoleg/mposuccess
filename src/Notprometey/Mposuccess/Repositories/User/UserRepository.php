@@ -90,8 +90,23 @@ class UserRepository extends Repository {
             return null;
     }
 
+    /**
+     * @param $id
+     * @param $refer
+     *
+     * @return mixed
+     */
     public function findChild($id, $refer)
     {
         return $this->model->where('refer', '=', $refer)->where('id', '=', $id)->count();
+    }
+
+    /**
+     * @param $refer
+     *
+     * @return mixed
+     */
+    public function findChildRef($refer){
+        return $this->model->where('refer', '=', $refer)->lists('id');
     }
 }
