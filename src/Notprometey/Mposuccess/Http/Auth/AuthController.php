@@ -35,6 +35,7 @@ class AuthController extends Controller
      */
     protected $redirectPath = 'panel';
 
+
     /**
      * Todo пока в конструктор запихнул userRepository
      */
