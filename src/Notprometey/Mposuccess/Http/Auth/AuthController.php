@@ -35,10 +35,6 @@ class AuthController extends Controller
      */
     protected $userRepository;
 
-    /**
-     * Адрес на который перенаправит пользователя после авторизации
-     */
-    protected $redirectPath = '/';
 
     /**
      * Create a new authentication controller instance.
