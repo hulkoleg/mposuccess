@@ -117,11 +117,29 @@ class Sheet implements SheetInterface {
 
             ],$sid)->toArray();
         }
-        Event::fire('tree.one.bye', [
-            trim($this->user->surname . ' ' . $this->user->name . " (" . $this->user->email . ")"),
-            $this->user->id,
-            $this->user->refer
-        ]);
+
+        if(1 == $this->level) {
+            Event::fire('tree.one.bye', [
+                trim($this->user->surname . ' ' . $this->user->name . " (" . $this->user->email . ")"),
+                $sid,
+                $this->user->id,
+                $this->user->refer
+            ]);
+        } elseif(2 == $this->level) {
+            Event::fire('tree.two.bye', [
+                trim($this->user->surname . ' ' . $this->user->name . " (" . $this->user->email . ")"),
+                $sid,
+                $this->user->id,
+                $this->user->refer
+            ]);
+        } elseif(3 == $this->level) {
+            Event::fire('tree.three.bye', [
+                trim($this->user->surname . ' ' . $this->user->name . " (" . $this->user->email . ")"),
+                $sid,
+                $this->user->id,
+                $this->user->refer
+            ]);
+        }
 
         return $create;
     }

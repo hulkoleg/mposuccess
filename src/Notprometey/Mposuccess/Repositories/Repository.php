@@ -26,7 +26,7 @@ abstract class Repository implements RepositoryInterface, CriteriaInterface {
     private $app;
 
     /**
-     * @var
+     * @var Model
      */
     protected $model;
 

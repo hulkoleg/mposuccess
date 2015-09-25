@@ -1,7 +1,7 @@
 <link href="/assets/admin/pages/css/pricing-table.css" rel="stylesheet" type="text/css"/>
 <link href="/assets/global/css/components.css" rel="stylesheet" type="text/css"/>
 @foreach($products as $product)
-    <div class="col-md-4">
+    <div class="col-md-6">
         <div class="pricing hover-effect">
             <div class="pricing-head">
                 <h3>{{$product->name}}
@@ -15,7 +15,7 @@
                 </h4>
             </div>
             <div class="pricing-footer">
-                <a href="{{$product->url}}" class="btn yellow-crusta">
+                <a href="/bye/tree/{{$product->url}}" class="btn yellow-crusta">
                     Купить <i class="m-icon-swapright m-icon-white"></i>
                 </a>
             </div>

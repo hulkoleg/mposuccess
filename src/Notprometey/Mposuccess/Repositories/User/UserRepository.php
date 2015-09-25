@@ -13,7 +13,7 @@ use Notprometey\Mposuccess\Models\User;
 class UserRepository extends Repository {
 
     /**
-     * Specify Model class name
+     * Specify Models class name
      *
      * @return mixed
      */
@@ -107,6 +107,6 @@ class UserRepository extends Repository {
      * @return mixed
      */
     public function findChildRef($refer){
-        return $this->model->where('refer', '=', $refer)->lists('id');
+        return $this->model->where('refer', '=', $refer)->distinct()->lists('id')->toArray();
     }
 }

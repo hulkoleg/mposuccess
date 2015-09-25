@@ -225,9 +225,9 @@ Route::any('test/tree', array(
 ));
 
 
-Route::post('bye/one-tree', array(
-    'as' => 'one-tree',
-    'uses' => 'Notprometey\Mposuccess\Controllers\ByeController@one',
+Route::post('bye/tree/{fun}', array(
+    'as' => 'bye.tree',
+    'uses' => 'Notprometey\Mposuccess\Controllers\ByeController@action',
 ));
 
 Route::get('tree/build/{level}/{sid}', array(
