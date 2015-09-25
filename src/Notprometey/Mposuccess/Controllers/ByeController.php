@@ -37,6 +37,15 @@ class ByeController extends Controller {
      */
     protected $session;
 
+    protected $data;
+
+    private $one = 1;
+    private $two = 2;
+    private $three = 3;
+    private $four = 4;
+    private $five = 4;
+    private $six = 4;
+
 
     /**
      * @param \Illuminate\Http\Request           $request
@@ -53,27 +62,66 @@ class ByeController extends Controller {
         $this->user = $user->find($this->id);
 
         $this->request = $request;
-    }
 
-    public function one(){
-        $data = array(
+        $this->data = array(
             0 => [
                 'type' => 'success',
                 'name' => 'Место успешно создано',
                 'message' => ''
             ]
         );
-        $tree = new SheetManager($this->id, 1);
+    }
+
+    /**
+     * @param $fun
+     *
+     * @return mixed
+     */
+    public function action($fun){
+        return $this->$fun();
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    private function one(){
+        return $this->bey($this->one);
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    private function two(){
+        return $this->bey($this->two);
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    private function four(){
+        return $this->bey($this->four);
+    }
+
+    /**
+     * @return \Illuminate\Http\JsonResponse
+     */
+    private function five(){
+        return $this->bey($this->five);
+    }
+
+    /**
+     * @param $level
+     *
+     * @return \Illuminate\Http\JsonResponse
+     */
+    private function bey($level){
+        $tree = new SheetManager($this->id, $level);
 
         if(!$sheet = $tree->create()) {
-            $data = array(
-                0 => [
-                    'type' => 'error',
-                    'name' => 'Не удалось создать место',
-                    'message' => ''
-                ]
-            );
+            $this->data[0]['type'] = 'error';
+            $this->data[0]['name'] = 'Не удалось создать место';
         }
-        return Response::json($data);
+
+        return Response::json($this->data);
     }
 }
