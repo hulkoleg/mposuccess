@@ -198,7 +198,7 @@
                                 <i class="icon-lock"></i> @lang('mposuccess::profile.topmenu.lockscreen') </a>
                         </li>
                         <li>
-                            <a href="login.html">
+                            <a href="auth/logout">
                                 <i class="icon-key"></i> @lang('mposuccess::profile.topmenu.logout') </a>
                         </li>
                     </ul>
