@@ -45,8 +45,9 @@ class AdminController extends ProfileController {
             $this->layout->slidebar = view('mposuccess::admin.layout.slidebar');
             $this->layout->r_slidebar = null;
 
-            $this->layout->notification = $notification->findAllBy('sid', $this->id);
-            $this->layout->notification_count = count($this->layout->notification->toArray());
+            $this->layout->notifications = $notification->findAllBy('sid', $this->id);
+            $this->layout->notification_count = $notification->allCount($this->id);
+            $this->layout->notification_new = $notification->newCount($this->id);
         }
     }
 
@@ -152,6 +153,18 @@ class AdminController extends ProfileController {
     {
         $this->layout->content = view("mposuccess::admin.users");
         $this->layout->title = trans('mposuccess::admin.user');
+        return $this->layout;
+    }
+    public function products()
+    {
+        $this->layout->content = view("mposuccess::admin.products");
+        $this->layout->title = trans('mposuccess::admin.products');
+        return $this->layout;
+    }
+    public function settings_structure()
+    {
+        $this->layout->content = view("mposuccess::admin.settings_structure");
+        $this->layout->title = trans('mposuccess::admin.settings_structure');
         return $this->layout;
     }
 }
