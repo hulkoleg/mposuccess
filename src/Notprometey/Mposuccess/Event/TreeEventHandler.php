@@ -300,9 +300,9 @@ class TreeEventHandler {//implements ShouldQueue {
         $events->listen('tree.two.bye', '\Notprometey\Mposuccess\Event\TreeEventHandler@onTreeTwoBye');
         $events->listen('tree.three.bye', '\Notprometey\Mposuccess\Event\TreeEventHandler@onTreeThreeBye');
 
-        $events->listen('tree.four.bye', '\Notprometey\Mposuccess\Event\TreeEventHandler@onFourOneBye');
-        $events->listen('tree.five.bye', '\Notprometey\Mposuccess\Event\TreeEventHandler@onFiveTwoBye');
-        $events->listen('tree.six.bye', '\Notprometey\Mposuccess\Event\TreeEventHandler@onSixThreeBye');
+        $events->listen('tree.four.bye', '\Notprometey\Mposuccess\Event\TreeEventHandler@onTreeFourBye');
+        $events->listen('tree.five.bye', '\Notprometey\Mposuccess\Event\TreeEventHandler@onTreeFiveBye');
+        $events->listen('tree.six.bye', '\Notprometey\Mposuccess\Event\TreeEventHandler@onTreeSixBye');
     }
 
 }
