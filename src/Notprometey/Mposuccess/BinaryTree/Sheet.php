@@ -35,8 +35,12 @@ class Sheet implements SheetInterface {
     protected $tree;
 
     /**
-     * @param App        $app
-     * @param Collection $collection
+     * @param      $level
+     * @param null $uid
+     * @param null $sid
+     *
+     * @internal param App $app
+     * @internal param Collection $collection
      */
     public function __construct($level, $uid = null, $sid = null){
         $this->sid = $sid;
@@ -134,6 +138,27 @@ class Sheet implements SheetInterface {
             ]);
         } elseif(3 == $this->level) {
             Event::fire('tree.three.bye', [
+                trim($this->user->surname . ' ' . $this->user->name . " (" . $this->user->email . ")"),
+                $sid,
+                $this->user->id,
+                $this->user->refer
+            ]);
+        } elseif(4 == $this->level) {
+            Event::fire('tree.four.bye', [
+                trim($this->user->surname . ' ' . $this->user->name . " (" . $this->user->email . ")"),
+                $sid,
+                $this->user->id,
+                $this->user->refer
+            ]);
+        } elseif(5 == $this->level) {
+            Event::fire('tree.five.bye', [
+                trim($this->user->surname . ' ' . $this->user->name . " (" . $this->user->email . ")"),
+                $sid,
+                $this->user->id,
+                $this->user->refer
+            ]);
+        } elseif(6 == $this->level) {
+            Event::fire('tree.six.bye', [
                 trim($this->user->surname . ' ' . $this->user->name . " (" . $this->user->email . ")"),
                 $sid,
                 $this->user->id,
