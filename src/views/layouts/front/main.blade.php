@@ -20,7 +20,7 @@
         <!-- BEGIN CONTAINER -->
         <div class="main">
             <div class="container">
-                {{ $content }}
+                {!! $content !!}
             </div>
         </div>
 

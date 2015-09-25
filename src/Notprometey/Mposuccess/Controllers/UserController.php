@@ -12,12 +12,17 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Session\SessionManager as Session;
+use Notprometey\Mposuccess\Repositories\Catalog\ProductRepository;
+use Notprometey\Mposuccess\Repositories\Notification\NotificationRepository;
+use Notprometey\Mposuccess\Repositories\User\Criteria\Current;
 use Notprometey\Mposuccess\Repositories\User\UserRepository;
 use Notprometey\Mposuccess\Repositories\Country\CountryRepository;
 use Notprometey\Mposuccess\Repositories\Program\ProgramRepository;
-use Validator;
+use Notprometey\Mposuccess\Repositories\News\NewsRepository;
 use Hash;
+use Validator;
 
+use Illuminate\Pagination\Paginator;
 
 /**
  * Handles all requests related to managing the data models
@@ -45,15 +50,21 @@ class UserController extends Controller {
     protected $layout = "mposuccess::layouts.panel.main";
 
     /**
-     * @param \Illuminate\Http\Request              $request
-     * @param \Illuminate\Session\SessionManager    $session
+     * @param \Illuminate\Http\Request           $request
+     * @param \Illuminate\Session\SessionManager $session
+     * @param UserRepository                     $user
+     * @param NotificationRepository             $notification
      */
-    public function __construct(Request $request, Session $session, UserRepository $user)
+    public function __construct(Request $request, Session $session, UserRepository $user, NotificationRepository $notification)
     {
 
         $this->id = Auth::user()->id;
 
         $this->user = $user->find($this->id);
+
+        if ($this->user->refer == 0) {
+            $this->user->refer = 1;
+        }
 
         $this->request = $request;
         if ( ! is_null($this->layout))
@@ -69,6 +80,10 @@ class UserController extends Controller {
                 $this->layout->slidebar = view('mposuccess::admin.layout.slidebar');
                 $this->layout->r_slidebar = view('mposuccess::profile.layout.r_slidebar');
             }
+
+            $this->layout->notifications = $notification->findAllBy('sid', $this->id);
+            $this->layout->notification_count = $notification->allCount($this->id);
+            $this->layout->notification_new = $notification->newCount($this->id);
         }
     }
 
@@ -77,17 +92,57 @@ class UserController extends Controller {
      *
      * @return Response
      */
-    public function personal(CountryRepository $country, ProgramRepository $program, UserRepository $user)
+    public function personal(CountryRepository $country, ProgramRepository $program, UserRepository $userRepository)
     {
         $data = [
             'user'          => $this->user,
             'countries'     => $country->all(),
             'programs'      => $program->all(),
-            'refer'         => $user->getRefer($this->user->refer)
         ];
 
+        if ($this->id != 1) {
+            $data['refer'] = $userRepository->getRefer($this->user->refer);
+        }
+
         $this->layout->content = view("mposuccess::profile.personal", $data);
-        $this->layout->title = trans('mposuccess::profile.personal');
+        $this->layout->title = trans('mposuccess::profile.myProfile');
+        return $this->layout;
+    }
+
+    /**
+     * Данные другого пользавателя
+     *
+     * @return Response
+     */
+    public function user($id, CountryRepository $countryRepository, ProgramRepository $programRepository, UserRepository $userRepository)
+    {
+        $user = $userRepository->find($id);
+        if (!$user) {
+            abort(404);
+        }
+
+        if ($user->refer == 0) {
+            $user->refer = 1;
+        }
+
+        if ($user->birthday == "0000-00-00") {
+            $user->birthday = null;
+        } else {
+            $user->birthday = date_format(date_create($user->birthday), 'd M Y');
+        }
+
+        $data = [
+            'user'          => $user,
+            'country'       => $countryRepository->findby('code', $user->country),
+            'program'       => $programRepository->find($user->program)
+        ];
+
+        if ($this->id != 1) {
+            $data['refer'] =  app('Notprometey\Mposuccess\Repositories\User\UserRepository')->getRefer();
+        }
+
+        $this->layout->content = view("mposuccess::profile.user", $data);
+        $this->layout->title = trans('mposuccess::profile.user') . ' ' . $user->name;
         return $this->layout;
     }
 
@@ -103,6 +158,7 @@ class UserController extends Controller {
             'surname'    => 'required|min:2|max:32',
             'patronymic' => 'required|min:2|max:32',
             'birthday'   => 'required|date',
+            'email'      => 'required|email|max:255|unique:users',
         ]);
 
         if ($v->fails())
@@ -115,6 +171,7 @@ class UserController extends Controller {
             'surname'    => $this->request->input('surname'),
             'patronymic' => $this->request->input('patronymic'),
             'birthday'   => date_format(date_create($this->request->input('birthday')), 'Y-m-d'),
+            'email'      => $this->request->input('email')
         ], $this->user->id);
 
         return redirect('profile');
@@ -174,14 +231,49 @@ class UserController extends Controller {
     }
 
     /**
+     * Личные данные
+     *
+     * @return Response
+     */
+    public function dashboard()
+    {
+        $this->layout->content = view("mposuccess::profile.dashboard");
+        $this->layout->title = trans('mposuccess::profile.personal');
+        return $this->layout;
+    }
+
+    /**
      * Закрытые новости профиля
      *
      * @return Response
      */
-    public function news()
+    public function news(NewsRepository $newsRepository)
     {
-        $this->layout->content = view("mposuccess::profile.news");
+        $perPage = $this->request->input('perPage') ? $this->request->input('perPage') : 3;
+        $news = $newsRepository->findBy('type', config('mposuccess.news_type_private'))->paginate($perPage);
+
+        $data = [
+            'news' => $news
+        ];
+
+        $this->layout->content = view("mposuccess::profile.news", $data);
         $this->layout->title = trans('mposuccess::profile.news');
+        return $this->layout;
+    }
+
+    /**
+     * Просмотр новости (поста)
+     *
+     * @return Response
+     */
+    public function post($id, NewsRepository $newsRepository)
+    {
+        $data = [
+            'news' => $newsRepository->find($id)
+        ];
+
+        $this->layout->content = view("mposuccess::profile.post", $data);
+        $this->layout->title = trans('mposuccess::profile.post');
         return $this->layout;
     }
 
@@ -196,14 +288,21 @@ class UserController extends Controller {
         $this->layout->title = trans('mposuccess::profile.score.refill');
         return $this->layout;
     }
+
     /**
      * Каталог товаров для покупки
      *
+     * @param ProductRepository $products
+     *
      * @return Response
      */
-    public function catalog()
+    public function catalog(ProductRepository $products)
     {
-        $this->layout->content = view("mposuccess::profile.catalog");
+        \Assets::add('pricing.js');
+
+        $this->layout->content = view("mposuccess::profile.catalog", [
+            'products' => $products->all()
+        ]);
         $this->layout->title = trans('mposuccess::profile.catalog');
         return $this->layout;
     }

@@ -1,0 +1,21 @@
+.tree{
+    text-align: center;
+}
+.tree-circle{
+    display: block;
+    width: 50px;
+    height: 50px;
+    margin: 10px auto 10px;
+    background-color: #1abc9c;
+    -moz-border-radius: 50px;
+    -webkit-border-radius: 50px;
+    border-radius: 50px;
+    color: #fff;
+    font-size: 20px;
+    line-height: 50px;
+    vertical-align: middle;
+}
+.tree-circle:hover{
+    text-decoration: none;
+    cursor: pointer;
+}

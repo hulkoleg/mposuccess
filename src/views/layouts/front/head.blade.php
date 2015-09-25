@@ -22,20 +22,20 @@
 <!-- Fonts END -->
 
 <!-- Global styles START -->
-<link href="../../assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
-<link href="../../assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+<link href="/assets/global/plugins/font-awesome/css/font-awesome.min.css" rel="stylesheet">
+<link href="/assets/global/plugins/bootstrap/css/bootstrap.min.css" rel="stylesheet">
 <!-- Global styles END -->
 
 <!-- Page level plugin styles START -->
-<link href="../../assets/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
-<link href="../../assets/global/plugins/carousel-owl-carousel/owl-carousel/owl.carousel.css" rel="stylesheet">
-<link href="../../assets/global/plugins/slider-revolution-slider/rs-plugin/css/settings.css" rel="stylesheet">
+<link href="/assets/global/plugins/fancybox/source/jquery.fancybox.css" rel="stylesheet">
+<link href="/assets/global/plugins/carousel-owl-carousel/owl-carousel/owl.carousel.css" rel="stylesheet">
+<link href="/assets/global/plugins/slider-revolution-slider/rs-plugin/css/settings.css" rel="stylesheet">
 <!-- Page level plugin styles END -->
 
 <!-- Theme styles START -->
-<link href="../../assets/global/css/components.css" rel="stylesheet">
-<link href="../../assets/frontend/layout/css/style.css" rel="stylesheet">
-<link href="../../assets/frontend/pages/css/style-revolution-slider.css" rel="stylesheet"><!-- metronic revo slider styles -->
-<link href="../../assets/frontend/layout/css/style-responsive.css" rel="stylesheet">
-<link href="../../assets/frontend/layout/css/themes/green.css" rel="stylesheet" id="style-color">
-<link href="../../assets/frontend/layout/css/custom.css" rel="stylesheet">
+<link href="/assets/global/css/components.css" rel="stylesheet">
+<link href="/assets/frontend/layout/css/style.css" rel="stylesheet">
+<link href="/assets/frontend/pages/css/style-revolution-slider.css" rel="stylesheet"><!-- metronic revo slider styles -->
+<link href="/assets/frontend/layout/css/style-responsive.css" rel="stylesheet">
+<link href="/assets/frontend/layout/css/themes/green.css" rel="stylesheet" id="style-color">
+<link href="/assets/frontend/layout/css/custom.css" rel="stylesheet">

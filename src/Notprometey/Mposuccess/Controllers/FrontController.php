@@ -11,6 +11,8 @@ use Illuminate\Http\Request;
 use Illuminate\Routing\Controller;
 use Illuminate\Support\Facades\File;
 use Illuminate\Session\SessionManager as Session;
+use Notprometey\Mposuccess\BinaryTree\Sheet;
+use Notprometey\Mposuccess\BinaryTree\SheetManager;
 use Notprometey\Mposuccess\Repositories\User\UserRepository;
 /**
  * Handles all requests related to managing the data models
@@ -109,6 +111,18 @@ class FrontController extends Controller {
     {
         $this->layout->content = view("mposuccess::front.about.docs.regdocs");
         $this->layout->title = trans('mposuccess::front.about.docs.regdocs');
+        return $this->layout;
+    }
+
+    public function test(Request $request){
+
+        if ($request->has('submit')) {
+            $tree = new SheetManager($request->input('id'), $request->input('tree'));
+            $tree->create();
+        }
+
+        $this->layout->title = Null;
+        $this->layout->content = view('mposuccess::home');
         return $this->layout;
     }
 }
