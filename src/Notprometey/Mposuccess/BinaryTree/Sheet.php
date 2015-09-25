@@ -110,12 +110,12 @@ class Sheet implements SheetInterface {
             $create = $this->tree->create([
                 'user_id' => $this->user->id,
                 'id' => $sid
-            ])->toArray();
+            ]);
         } else {
             $create = $this->tree->update([
                 'user_id' => $this->user->id,
 
-            ],$sid)->toArray();
+            ],$sid);
         }
 
         if(1 == $this->level) {
