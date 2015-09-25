@@ -31,14 +31,14 @@ class AuthController extends Controller
     use AuthenticatesAndRegistersUsers, ThrottlesLogins;
 
     /**
+     * Redirect path after auth
+     */
+    protected $redirectPath = 'panel';
+
+    /**
      * Todo пока в конструктор запихнул userRepository
      */
     protected $userRepository;
-
-    /**
-     * Адрес на который перенаправит пользователя после авторизации
-     */
-    protected $redirectPath = '/';
 
     /**
      * Create a new authentication controller instance.
@@ -59,18 +59,10 @@ class AuthController extends Controller
      */
     protected function validator(array $data)
     {
-        Validator::extend('cyrillic', function ($attribute, $value, $parameters) {
-            return preg_match("/^[^-]{1}[А-Яа-яЁё-]+$/u", $value);
-        });
-        $data['name'] = trim($data['name']);
-        $data['surname'] = trim($data['surname']);
-        $data['patronymic'] = trim($data['patronymic']);
-        $data['email'] = trim($data['email']);
-
         return Validator::make($data, [
-            'name'                  => 'required|min:2|max:32|cyrillic',
-            'surname'               => 'required|min:2|max:32|cyrillic',
-            'patronymic'            => 'required|min:2|max:32|cyrillic',
+            'name'                  => 'required|min:2|max:32',
+            'surname'               => 'required|min:2|max:32',
+            'patronymic'            => 'required|min:2|max:32',
             'email'                 => 'required|email|max:255|unique:users',
             'password'              => 'required|confirmed|min:8',
             'password_confirmation' => 'same:password',
@@ -136,7 +128,7 @@ class AuthController extends Controller
     public function getRefers(Request $request)
     {
         $q = '%' . $request->query('q') . '%';
-        return User::select('sid', DB::raw('CONCAT(surname, " ", name, "(", email, ")") AS name'))
+        return User::select('id', DB::raw('CONCAT(surname, " ", name, "(", email, ")") AS name'))
             ->whereRaw('email like ? or sid like ?', [$q,$q])->take(10)->get();
     }
 }

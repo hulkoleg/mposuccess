@@ -5,6 +5,8 @@ use Illuminate\Support\Facades\Config;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\ServiceProvider;
 use Illuminate\Support\Facades\View;
+use Notprometey\Mposuccess\Event\TreeEventHandler;
+use Event;
 
 
 class MposuccessServiceProvider extends ServiceProvider {
@@ -23,6 +25,8 @@ class MposuccessServiceProvider extends ServiceProvider {
 	 */
 	public function boot(Request $request)
 	{
+		$subscriber = new TreeEventHandler();
+		Event::subscribe($subscriber);
 
 		$this->loadTranslationsFrom(__DIR__.'/../../lang', 'mposuccess');
 
@@ -31,6 +35,14 @@ class MposuccessServiceProvider extends ServiceProvider {
 		$this->publishes([
 			__DIR__.'/../../views/errors' => base_path('resources/views/errors'),
 		], 'errors');
+
+		$this->publishes([
+			__DIR__.'/../../../public/images' => base_path('public/images'),
+		], 'images');
+
+		$this->publishes([
+			__DIR__.'/../../../public/js' => base_path('public/js'),
+		], 'scripts');
 
 		$this->publishes([
 			__DIR__.'/../../config/mposuccess.php' => config_path('mposuccess.php'),

@@ -36,106 +36,42 @@
                 <li class="dropdown dropdown-extended dropdown-notification" id="header_notification_bar">
                     <a href="javascript:;" class="dropdown-toggle" data-toggle="dropdown" data-hover="dropdown" data-close-others="true">
                         <i class="icon-bell"></i>
-					<span class="badge badge-default">
-					7 </span>
+                        @if(0 != $notification_new)
+                            <span class="badge badge-default" id="notification-count">
+                                {{$notification_new}}
+                            </span>
+                        @endif
                     </a>
                     <ul class="dropdown-menu">
                         <li class="external">
-                            <h3>@lang('mposuccess::profile.topmenu.notifications.pending')<span class="bold">12</span></h3>
+                            <h3>@lang('mposuccess::profile.topmenu.notifications.pending')<span class="bold">{{$notification_count}}</span></h3>
                             <a href="extra_profile.html">view all</a>
                         </li>
                         <li>
-                            <ul class="dropdown-menu-list scroller" style="height: 250px;" data-handle-color="#637283">
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">just now</span>
-									<span class="details">
-									<span class="label label-sm label-icon label-success">
-									<i class="fa fa-plus"></i>
-									</span>
-									New user registered. </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">3 mins</span>
-									<span class="details">
-									<span class="label label-sm label-icon label-danger">
-									<i class="fa fa-bolt"></i>
-									</span>
-									Server #12 overloaded. </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">10 mins</span>
-									<span class="details">
-									<span class="label label-sm label-icon label-warning">
-									<i class="fa fa-bell-o"></i>
-									</span>
-									Server #2 not responding. </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">14 hrs</span>
-									<span class="details">
-									<span class="label label-sm label-icon label-info">
-									<i class="fa fa-bullhorn"></i>
-									</span>
-									Application error. </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">2 days</span>
-									<span class="details">
-									<span class="label label-sm label-icon label-danger">
-									<i class="fa fa-bolt"></i>
-									</span>
-									Database overloaded 68%. </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">3 days</span>
-									<span class="details">
-									<span class="label label-sm label-icon label-danger">
-									<i class="fa fa-bolt"></i>
-									</span>
-									A user IP blocked. </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">4 days</span>
-									<span class="details">
-									<span class="label label-sm label-icon label-warning">
-									<i class="fa fa-bell-o"></i>
-									</span>
-									Storage Server #4 not responding dfdfdfd. </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">5 days</span>
-									<span class="details">
-									<span class="label label-sm label-icon label-info">
-									<i class="fa fa-bullhorn"></i>
-									</span>
-									System Error. </span>
-                                    </a>
-                                </li>
-                                <li>
-                                    <a href="javascript:;">
-                                        <span class="time">9 days</span>
-									<span class="details">
-									<span class="label label-sm label-icon label-danger">
-									<i class="fa fa-bolt"></i>
-									</span>
-									Storage server failed. </span>
-                                    </a>
-                                </li>
+                            <ul class="dropdown-menu-list scroller" style="height: 300px;" data-handle-color="#637283" id="notification-list">
+                                @foreach($notifications as $notification)
+                                    <li>
+                                        <a href="javascript:;">
+                                            <span class="time">
+                                                <script>
+                                                    d = new Date('{{$notification->created_at}}');
+                                                    date = d.getDate();
+                                                    month = d.getMonth() + 1;
+                                                    year = d.getFullYear();
+                                                    document.write(date + "/" + month + "/" + year);
+                                                </script>
+                                            </span>
+                                            <span class="details">
+                                                <span class="label label-sm label-icon label-success">
+                                                    <i>{{$notification->name}}</i>
+                                                </span>
+                                            </span>
+                                            <div>
+                                                {{$notification->text}}
+                                            </div>
+                                        </a>
+                                    </li>
+                                @endforeach
                             </ul>
                         </li>
                     </ul>
@@ -241,7 +177,7 @@
                     </a>
                     <ul class="dropdown-menu dropdown-menu-default">
                         <li>
-                            <a href="extra_profile.html">
+                            <a href="/{{ config('mposuccess.panel_url') }}/personal">
                                 <i class="icon-user"></i> @lang('mposuccess::profile.topmenu.myprofile') </a>
                         </li>
                         <li>

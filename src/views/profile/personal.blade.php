@@ -6,7 +6,7 @@
             <div class="portlet light profile-sidebar-portlet">
                 <!-- SIDEBAR USERPIC -->
                 <div class="profile-userpic">
-                    <img src="{{ $user->url_avatar }}" class="img-responsive" alt="">
+                    <img src="{{ $user->url_avatar ? $user->url_avatar : '/images/users/default.jpg' }}" class="img-responsive" alt="">
                 </div>
                 <!-- END SIDEBAR USERPIC -->
                 <!-- SIDEBAR USER TITLE -->
@@ -18,8 +18,9 @@
                 <!-- END SIDEBAR USER TITLE -->
                 <!-- SIDEBAR BUTTONS -->
                 <div class="profile-userbuttons">
-                    <button type="button" class="btn btn-circle green-haze btn-sm">@lang('mposuccess::profile.refer')</button>
-                    <button type="button" class="btn btn-circle btn-danger btn-sm">@lang('mposuccess::profile.message')</button>
+                    @if($refer)
+                        <a href="/{{ config('mposuccess.panel_url') }}/user/{{ $user->refer }}" class="btn btn-circle green-haze btn-sm">@lang('mposuccess::profile.refer')</a>
+                    @endif
                 </div>
                 <!-- END SIDEBAR BUTTONS -->
             </div>
@@ -52,7 +53,7 @@
                             <div class="tab-content">
                                 <!-- PERSONAL INFO TAB -->
                                 <div class="tab-pane @if (!in_array(Session::get('tab'), [2,3])) active @endif" id="tab_1_1">
-                                    <form id="form-change-data" method="post" action="{{ url('/profile/changeData') }}">
+                                    <form id="form-change-data" method="post" action="{{ route(config('mposuccess.panel_url') . '.changeData') }}">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                                         <div class="form-group @if($errors->has('surname')) has-error @endif">
@@ -94,6 +95,14 @@
                                             @endif
                                         </div>
 
+                                        <div class="form-group @if($errors->has('email')) has-error @endif">
+                                            <label class="control-label">@lang('mposuccess::profile.personalInfo.email')</label>
+                                            <input type="text" name="email" placeholder="name@gmail.com" class="form-control" value="{{ old('email', $user->email) }}">
+                                            @if($errors->has('email'))
+                                                <span id="name-error" class="help-block">{{ $errors->first('email') }}</span>
+                                            @endif
+                                        </div>
+
                                         <div class="form-group">
                                             <label class="control-label">@lang('mposuccess::profile.region')</label>
                                             <select name="country" id="select2_country" class="form-control select2 input-sm" data-placeholder="@lang('mposuccess::profile.regionNoSelect')" disabled>
@@ -112,15 +121,12 @@
                                             </select>
                                         </div>
 
+                                        @if($user['id'] != 1)
                                         <div class="form-group">
                                             <label class="control-label">@lang('mposuccess::profile.refer')</label>
-                                            <input type="text" placeholder="@lang('mposuccess::profile.referNone')" class="form-control" value="{{ $refer }}" disabled>
+                                            <input type="text" placeholder="@lang('mposuccess::profile.referNone')" class="form-control" value="{{ $refer or "" }}" disabled>
                                         </div>
-
-                                        <div class="form-group">
-                                            <label class="control-label">@lang('mposuccess::profile.personalInfo.email')</label>
-                                            <input type="text" placeholder="name@gmail.com" class="form-control" value="{{$user->email}}" disabled>
-                                        </div>
+                                        @endif
 
                                         <div class="form-group">
                                             <label class="control-label">@lang('mposuccess::profile.personalInfo.dateRegister')</label>
@@ -137,7 +143,7 @@
                                 <!-- END PERSONAL INFO TAB -->
                                 <!-- CHANGE AVATAR TAB -->
                                 <div class="tab-pane @if (Session::get('tab') === 2) active @endif" id="tab_1_2">
-                                    <form id="form-change-avatar" method="post" action="{{ url('/profile/changeAvatar') }}" enctype="multipart/form-data">
+                                    <form id="form-change-avatar" method="post" action="{{ route(config('mposuccess.panel_url') . '.changeAvatar') }}" enctype="multipart/form-data">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                                         <div class="form-group">
@@ -168,7 +174,7 @@
                                 <!-- END CHANGE AVATAR TAB -->
                                 <!-- CHANGE PASSWORD TAB -->
                                 <div class="tab-pane @if (Session::get('tab') === 3) active @endif" id="tab_1_3">
-                                    <form id="form-change-password" method="post" action="{{ url('/profile/changePassword') }}">
+                                    <form id="form-change-password" method="post" action="{{ route(config('mposuccess.panel_url') . '.changePassword') }}">
                                         <input type="hidden" name="_token" value="{{ csrf_token() }}">
 
                                         <div class="form-group @if($errors->has('current')) has-error @endif">
@@ -228,7 +234,7 @@
 
     function formatCountry(state) {
         if (!state.id) return state.text; // optgroup
-        return "<img class='flag' src='../../assets/global/img/flags/" + $(state.element).data('country') + ".png'/>&nbsp;&nbsp;" + state.text;
+        return "<img class='flag' src='/assets/global/img/flags/" + $(state.element).data('country') + ".png'/>&nbsp;&nbsp;" + state.text;
     }
     $("#select2_country").select2({
         allowClear: true,
