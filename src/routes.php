@@ -54,6 +54,14 @@ Route::group([
             'as'    => config('mposuccess.admin_prefix') . '.users',
             'uses'  => 'Notprometey\Mposuccess\Controllers\AdminController@users'
         ));
+         Route::get('products', array(
+             'as'    => config('mposuccess.admin_prefix') . '.products',
+             'uses'  => 'Notprometey\Mposuccess\Controllers\AdminController@products'
+         ));
+         Route::get('settings_structure', array(
+             'as'    => config('mposuccess.admin_prefix') . '.settings_structure',
+             'uses'  => 'Notprometey\Mposuccess\Controllers\AdminController@settings_structure'
+         ));
     }
 );
 

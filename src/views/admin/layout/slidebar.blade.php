@@ -138,9 +138,18 @@
                             <i class="icon-bar-chart"></i>
                             @lang('mposuccess::admin.user')</a>
                     </li>
+                    <li @if('admin.products' == Route::currentRouteName()) class="active" @endif>
+                        <a href="{{ route('admin.products') }}">
+                            <i class="icon-basket-loaded"></i>
+                            @lang('mposuccess::admin.products')</a>
+                    </li>
+                    <li @if('admin.settings_structure' == Route::currentRouteName()) class="active" @endif>
+                        <a href="{{ route('admin.settings_structure') }}">
+                            <i class="icon-wrench"></i>
+                            @lang('mposuccess::admin.settings_structure')</a>
+                    </li>
                 </ul>
             </li>
-
         </ul>
         <!-- END SIDEBAR MENU -->
     </div>
