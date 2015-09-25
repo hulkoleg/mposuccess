@@ -140,7 +140,6 @@
                     </li>
                 </ul>
             </li>
-
         </ul>
         <!-- END SIDEBAR MENU -->
     </div>
