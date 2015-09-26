@@ -8,5 +8,18 @@ return [
     'roles'                      => 'Роли',
     'user'                       => 'Пользователи',
     'products'                   => 'Продукты',
-    'settings_structure'         => 'Настройки структуры'
+    'tree_settings'              => 'Настройки структуры',
+    'first_structure'            => 'Первая структура',
+    'second_structure'           => 'Вторая стуктура',
+    'third_structure'            => 'Третья структура',
+    'fourth_structure'           => 'Четвертая структура',
+    'fifth_structure'            => 'Пятая структура',
+    'sixth_structure'            => 'Шестая структура',
+    'settings'                   => [
+        'cells_to_fill'              => 'Мест для заполнения',
+        'first_pay'                  => 'Количество пользователей для первой выплаты',
+        'next_pay'                   => 'Шаг количества приглашённых для следующей выплаты',
+        'sum_pay'                    => 'Сумма выплат',
+        'save_settings'              => 'Сохранить настройки'
+    ]
 ];

@@ -16,6 +16,7 @@ use Illuminate\View\ViewServiceProvider;
 use Notprometey\Mposuccess\Repositories\Notification\NotificationRepository;
 use Notprometey\Mposuccess\Repositories\User\UserRepository;
 use Notprometey\Mposuccess\Repositories\News\NewsRepository;
+use Notprometey\Mposuccess\Repositories\Tree\TreeSettingsRepository;
 use Auth;
 
 /**
@@ -23,8 +24,14 @@ use Auth;
  */
 class AdminController extends ProfileController {
 
+    /**
+     * @var null
+     */
     protected $id = null;
 
+    /**
+     * @var mixed|null
+     */
     protected $user = null;
 
     /**
@@ -155,16 +162,30 @@ class AdminController extends ProfileController {
         $this->layout->title = trans('mposuccess::admin.user');
         return $this->layout;
     }
+
+    /**
+     * @return View
+     */
     public function products()
     {
         $this->layout->content = view("mposuccess::admin.products");
         $this->layout->title = trans('mposuccess::admin.products');
         return $this->layout;
     }
-    public function settings_structure()
+
+
+    /**
+     * @param TreeSettingsRepository $settings
+     * @return View
+     */
+    public function tree_settings(TreeSettingsRepository $settings)
     {
-        $this->layout->content = view("mposuccess::admin.settings_structure");
-        $this->layout->title = trans('mposuccess::admin.settings_structure');
+        $this->layout->content = view("mposuccess::admin.tree_settings", [
+            'settings' => $settings->getParamAndGroupLevel()
+        ]);
+        $this->layout->title = trans('mposuccess::admin.tree_settings');
         return $this->layout;
     }
+
+
 }

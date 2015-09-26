@@ -58,9 +58,9 @@ Route::group([
              'as'    => config('mposuccess.admin_prefix') . '.products',
              'uses'  => 'Notprometey\Mposuccess\Controllers\AdminController@products'
          ));
-         Route::get('settings_structure', array(
-             'as'    => config('mposuccess.admin_prefix') . '.settings_structure',
-             'uses'  => 'Notprometey\Mposuccess\Controllers\AdminController@settings_structure'
+         Route::get('tree_settings', array(
+             'as'    => config('mposuccess.admin_prefix') . '.tree_settings',
+             'uses'  => 'Notprometey\Mposuccess\Controllers\AdminController@tree_settings'
          ));
     }
 );
@@ -139,6 +139,17 @@ Route::group([
 
     }
 );
+/*
+ * Настройки структур
+ */
+Route::post('changeSettingsStructure', array(
+    'as'    => config('mposuccess.panel_url') . '.changeSettingsStructure',
+    'uses'  => 'Notprometey\Mposuccess\Controllers\UserController@changeSettingsStructure',
+));
+
+/*
+ *
+ */
 
 Route::group([
         'middleware' => 'Notprometey\Mposuccess\Http\Middleware\ProfileMiddleware',

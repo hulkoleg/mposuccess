@@ -143,10 +143,10 @@
                             <i class="icon-basket-loaded"></i>
                             @lang('mposuccess::admin.products')</a>
                     </li>
-                    <li @if('admin.settings_structure' == Route::currentRouteName()) class="active" @endif>
-                        <a href="{{ route('admin.settings_structure') }}">
+                    <li @if('admin.tree_settings' == Route::currentRouteName()) class="active" @endif>
+                        <a href="{{ route('admin.tree_settings') }}">
                             <i class="icon-wrench"></i>
-                            @lang('mposuccess::admin.settings_structure')</a>
+                            @lang('mposuccess::admin.tree_settings')</a>
                     </li>
                 </ul>
             </li>
