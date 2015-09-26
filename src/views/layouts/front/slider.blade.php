@@ -100,7 +100,7 @@
                          data-speed="400"
                          data-start="1500"
                          data-easing="easeOutExpo">
-                        What else included ?
+                        What  included ?
                     </div>
                     <div class="caption lft slide_subtitle"
                          data-x="30"
