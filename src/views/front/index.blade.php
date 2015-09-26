@@ -53,7 +53,7 @@
                     <a href="../../assets/frontend/pages/img/works/img1.jpg" class="fancybox-button" title="Купи прибыльный бизнес" data-rel="fancybox-button"><i class="fa fa-search"></i></a>
                 </em>
                 <a class="recent-work-description" href="javascript:;">
-                    <strong>Купи прибыльный бизнес (долю) – сразу 10-15% в месяц </strong>
+                    <strong>Купи прибыльный бизнес (долю) – сразу 10-15% в месяц.</strong>
                     <b>МПО-Успех-М.</b>
                 </a>
             </div>

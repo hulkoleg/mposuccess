@@ -116,7 +116,7 @@
                          data-speed="400"
                          data-start="2500"
                          data-easing="easeOutExpo">
-                        Lorem ipsum dolor  amet, consectetuer elit sed diam<br> nonummy amet euismod dolore.
+                        Lorem ipsum dolor  consectetuer elit sed diam<br> nonummy amet euismod dolore.
                     </div>
                     <a class="caption lft slide_btn btn red slide_item_left" href="http://www.keenthemes.com/preview/index.php?theme=metronic_admin" target="_blank"
                        data-x="30"
