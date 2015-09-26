@@ -3,23 +3,26 @@
     <div class="col-md-4 col-sm-4">
         <div class="service-box-heading">
             <em><i class="fa fa-location-arrow blue"></i></em>
-            <span>Multipurpose Template</span>
+            <span>Стабильность</span>
         </div>
-        <p>Lorem ipsum dolor sit amet, dolore eiusmod quis tempor incididunt ut et dolore Ut veniam unde nostrudlaboris. Sed unde omnis iste natus error sit voluptatem.</p>
+        <p>Главное преимущество любого Потребительского Общества (ПО) заключено в
+            его организационно-правовой схеме работы. </p>
     </div>
     <div class="col-md-4 col-sm-4">
         <div class="service-box-heading">
             <em><i class="fa fa-check red"></i></em>
-            <span>Well Documented</span>
+            <span>Экономия времени</span>
         </div>
-        <p>Lorem ipsum dolor sit amet, dolore eiusmod quis tempor incididunt ut et dolore Ut veniam unde nostrudlaboris. Sed unde omnis iste natus error sit voluptatem.</p>
+        <p> Вы сможете экономить
+            на налогах, покупках необходимых товаров и услуг, увеличить свой доход и улучшить
+            качество своей жизни за очень короткое время.</p>
     </div>
     <div class="col-md-4 col-sm-4">
         <div class="service-box-heading">
             <em><i class="fa fa-compress green"></i></em>
-            <span>Responsive Design</span>
+            <span>Независимость от экономики</span>
         </div>
-        <p>Lorem ipsum dolor sit amet, dolore eiusmod quis tempor incididunt ut et dolore Ut veniam unde nostrudlaboris. Sed unde omnis iste natus error sit voluptatem.</p>
+        <p>Юридические лица, члены ПО, могут создать круг взаимной помощи предпринимателей, свободный от экономики, в основе которой кредитно-финансовая система!</p>
     </div>
 </div>
 <!-- END SERVICE BOX -->
@@ -27,10 +30,10 @@
 <!-- BEGIN BLOCKQUOTE BLOCK -->
 <div class="row quote-v1 margin-bottom-30">
     <div class="col-md-9">
-        <span>Metronic - The Most Complete &amp; Popular Admin &amp; Frontend Theme</span>
+        <span>Узнай больше о НАС - вступи в МПО</span>
     </div>
     <div class="col-md-3 text-right">
-        <a class="btn-transparent" href="http://www.keenthemes.com/preview/index.php?theme=metronic_admin" target="_blank"><i class="fa fa-rocket margin-right-10"></i>Preview Admin</a>
+        <a class="btn-transparent" href="/auth/register" target="_blank"><i class="fa fa-rocket margin-right-10"></i>ПРИСОЕДИНЯЙСЯ</a>
     </div>
 </div>
 <!-- END BLOCKQUOTE BLOCK -->
@@ -38,99 +41,78 @@
 <!-- BEGIN RECENT WORKS -->
 <div class="row recent-work margin-bottom-40">
     <div class="col-md-3">
-        <h2><a href="portfolio.html">Recent Works</a></h2>
-        <p>Lorem ipsum dolor sit amet, dolore eiusmod quis tempor incididunt ut et dolore Ut veniam unde voluptatem. Sed unde omnis iste natus error sit voluptatem.</p>
+        <h2><a href="#">Наши проекты</a></h2>
+        <p>Наша компания предоставляет широкий спектр различных проекотов как для бизнеса так и для физических лиц!</p>
     </div>
     <div class="col-md-9">
         <div class="owl-carousel owl-carousel3">
             <div class="recent-work-item">
                 <em>
-                    <img src="../../assets/frontend/pages/img/works/img1.jpg" alt="Amazing Project" class="img-responsive">
-                    <a href="portfolio-item.html"><i class="fa fa-link"></i></a>
-                    <a href="../../assets/frontend/pages/img/works/img1.jpg" class="fancybox-button" title="Project Name #1" data-rel="fancybox-button"><i class="fa fa-search"></i></a>
+                    <img src="../../assets/frontend/pages/img/works/img1.jpg" alt="Купи прибыльный бизнес" class="img-responsive">
+                    <a href="#"><i class="fa fa-link"></i></a>
+                    <a href="../../assets/frontend/pages/img/works/img1.jpg" class="fancybox-button" title="Купи прибыльный бизнес" data-rel="fancybox-button"><i class="fa fa-search"></i></a>
                 </em>
                 <a class="recent-work-description" href="javascript:;">
-                    <strong>Amazing Project</strong>
-                    <b>Agenda corp.</b>
+                    <strong>Купи прибыльный бизнес (долю) – сразу 10-15% в месяц </strong>
+                    <b>МПО-Успех-М.</b>
                 </a>
             </div>
             <div class="recent-work-item">
                 <em>
-                    <img src="../../assets/frontend/pages/img/works/img2.jpg" alt="Amazing Project" class="img-responsive">
-                    <a href="portfolio-item.html"><i class="fa fa-link"></i></a>
-                    <a href="../../assets/frontend/pages/img/works/img2.jpg" class="fancybox-button" title="Project Name #2" data-rel="fancybox-button"><i class="fa fa-search"></i></a>
+                    <img src="../../assets/frontend/pages/img/works/img1.jpg" alt="Квартиры в рассрочку" class="img-responsive">
+                    <a href="#"><i class="fa fa-link"></i></a>
+                    <a href="../../assets/frontend/pages/img/works/img1.jpg" class="fancybox-button" title="Квартиры в рассрочку" data-rel="fancybox-button"><i class="fa fa-search"></i></a>
                 </em>
                 <a class="recent-work-description" href="javascript:;">
-                    <strong>Amazing Project</strong>
-                    <b>Agenda corp.</b>
+                    <strong>Квартиры в рассрочку до 15 лет.</strong>
+                    <b>МПО-Успех-М.</b>
                 </a>
             </div>
             <div class="recent-work-item">
                 <em>
-                    <img src="../../assets/frontend/pages/img/works/img3.jpg" alt="Amazing Project" class="img-responsive">
-                    <a href="portfolio-item.html"><i class="fa fa-link"></i></a>
-                    <a href="../../assets/frontend/pages/img/works/img3.jpg" class="fancybox-button" title="Project Name #3" data-rel="fancybox-button"><i class="fa fa-search"></i></a>
+                    <img src="../../assets/frontend/pages/img/works/img3.jpg" alt="Ипотека в Испании – прибыль в России" class="img-responsive">
+                    <a href="#"><i class="fa fa-link"></i></a>
+                    <a href="../../assets/frontend/pages/img/works/img3.jpg" class="fancybox-button" title="Ипотека в Испании – прибыль в России" data-rel="fancybox-button"><i class="fa fa-search"></i></a>
                 </em>
                 <a class="recent-work-description" href="javascript:;">
-                    <strong>Amazing Project</strong>
-                    <b>Agenda corp.</b>
+                    <strong>Ипотека в Испании – прибыль в России.</strong>
+                    <b>МПО-Успех-М.</b>
                 </a>
             </div>
             <div class="recent-work-item">
                 <em>
-                    <img src="../../assets/frontend/pages/img/works/img4.jpg" alt="Amazing Project" class="img-responsive">
-                    <a href="portfolio-item.html"><i class="fa fa-link"></i></a>
-                    <a href="../../assets/frontend/pages/img/works/img4.jpg" class="fancybox-button" title="Project Name #4" data-rel="fancybox-button"><i class="fa fa-search"></i></a>
+                    <img src="../../assets/frontend/pages/img/works/img4.jpg" alt="Кредит – основа дохода" class="img-responsive">
+                    <a href="#"><i class="fa fa-link"></i></a>
+                    <a href="../../assets/frontend/pages/img/works/img4.jpg" class="fancybox-button" title="Кредит – основа дохода" data-rel="fancybox-button"><i class="fa fa-search"></i></a>
                 </em>
                 <a class="recent-work-description" href="javascript:;">
-                    <strong>Amazing Project</strong>
-                    <b>Agenda corp.</b>
+                    <strong>Кредит – основа дохода</strong>
+                    <b>МПО-Успех-М..</b>
                 </a>
             </div>
             <div class="recent-work-item">
                 <em>
-                    <img src="../../assets/frontend/pages/img/works/img5.jpg" alt="Amazing Project" class="img-responsive">
-                    <a href="portfolio-item.html"><i class="fa fa-link"></i></a>
-                    <a href="../../assets/frontend/pages/img/works/img5.jpg" class="fancybox-button" title="Project Name #5" data-rel="fancybox-button"><i class="fa fa-search"></i></a>
+                    <img src="../../assets/frontend/pages/img/works/img5.jpg" alt="«Твоя защита» - в рассрочку" class="img-responsive">
+                    <a href="#"><i class="fa fa-link"></i></a>
+                    <a href="../../assets/frontend/pages/img/works/img5.jpg" class="fancybox-button" title="«Твоя защита» - в рассрочку" data-rel="fancybox-button"><i class="fa fa-search"></i></a>
                 </em>
                 <a class="recent-work-description" href="javascript:;">
-                    <strong>Amazing Project</strong>
-                    <b>Agenda corp.</b>
+                    <strong>«Твоя защита» - в рассрочку.</strong>
+                    <b>МПО-Успех-М.</b>
                 </a>
             </div>
             <div class="recent-work-item">
                 <em>
-                    <img src="../../assets/frontend/pages/img/works/img6.jpg" alt="Amazing Project" class="img-responsive">
-                    <a href="portfolio-item.html"><i class="fa fa-link"></i></a>
-                    <a href="../../assets/frontend/pages/img/works/img6.jpg" class="fancybox-button" title="Project Name #6" data-rel="fancybox-button"><i class="fa fa-search"></i></a>
+                    <img src="../../assets/frontend/pages/img/works/img6.jpg" alt="ОТ МЕТРОВ - К КВАРТИРЕ!" class="img-responsive">
+                    <a href="#"><i class="fa fa-link"></i></a>
+                    <a href="../../assets/frontend/pages/img/works/img6.jpg" class="fancybox-button" title="ОТ МЕТРОВ - К КВАРТИРЕ!" data-rel="fancybox-button"><i class="fa fa-search"></i></a>
                 </em>
                 <a class="recent-work-description" href="javascript:;">
-                    <strong>Amazing Project</strong>
-                    <b>Agenda corp.</b>
+                    <strong> ОТ МЕТРОВ - К КВАРТИРЕ!</strong>
+                    <b>МПО-Успех-М.</b>
                 </a>
             </div>
-            <div class="recent-work-item">
-                <em>
-                    <img src="../../assets/frontend/pages/img/works/img3.jpg" alt="Amazing Project" class="img-responsive">
-                    <a href="portfolio-item.html"><i class="fa fa-link"></i></a>
-                    <a href="../../assets/frontend/pages/img/works/img3.jpg" class="fancybox-button" title="Project Name #3" data-rel="fancybox-button"><i class="fa fa-search"></i></a>
-                </em>
-                <a class="recent-work-description" href="javascript:;">
-                    <strong>Amazing Project</strong>
-                    <b>Agenda corp.</b>
-                </a>
-            </div>
-            <div class="recent-work-item">
-                <em>
-                    <img src="../../assets/frontend/pages/img/works/img4.jpg" alt="Amazing Project" class="img-responsive">
-                    <a href="portfolio-item.html"><i class="fa fa-link"></i></a>
-                    <a href="../../assets/frontend/pages/img/works/img4.jpg" class="fancybox-button" title="Project Name #4" data-rel="fancybox-button"><i class="fa fa-search"></i></a>
-                </em>
-                <a class="recent-work-description" href="javascript:;">
-                    <strong>Amazing Project</strong>
-                    <b>Agenda corp.</b>
-                </a>
-            </div>
+
         </div>
     </div>
 </div>
@@ -141,10 +123,10 @@
     <!-- TABS -->
     <div class="col-md-7 tab-style-1">
         <ul class="nav nav-tabs">
-            <li class="active"><a href="#tab-1" data-toggle="tab">Multipurpose</a></li>
-            <li><a href="#tab-2" data-toggle="tab">Documented</a></li>
-            <li><a href="#tab-3" data-toggle="tab">Responsive</a></li>
-            <li><a href="#tab-4" data-toggle="tab">Clean & Fresh</a></li>
+            <li class="active"><a href="#tab-1" data-toggle="tab">Новость 1</a></li>
+            <li><a href="#tab-2" data-toggle="tab">Новость 2</a></li>
+            <li><a href="#tab-3" data-toggle="tab">Новость 3</a></li>
+            <li><a href="#tab-4" data-toggle="tab">новость 4</a></li>
         </ul>
         <div class="tab-content">
             <div class="tab-pane row fade in active" id="tab-1">
@@ -176,6 +158,7 @@
             </div>
         </div>
     </div>
+
     <!-- END TABS -->
 
     <!-- TESTIMONIALS -->
@@ -184,32 +167,22 @@
             <!-- Carousel items -->
             <div class="carousel-inner">
                 <div class="active item">
-                    <blockquote><p>Denim you probably haven't heard of. Lorem ipsum dolor met consectetur adipisicing sit amet, consectetur adipisicing elit, of them jean shorts sed magna aliqua. Lorem ipsum dolor met.</p></blockquote>
+                    <blockquote><p>Наша компания создавалась как помощь бизнесу! Мы работаем в этой сфере с 2011 года. Будим рады видеть вас нашими партнерами!</p></blockquote>
                     <div class="carousel-info">
                         <img class="pull-left" src="../../assets/frontend/pages/img/people/img1-small.jpg" alt="">
                         <div class="pull-left">
-                            <span class="testimonials-name">Lina Mars</span>
-                            <span class="testimonials-post">Commercial Director</span>
+                            <span class="testimonials-name">Татьяна</span>
+                            <span class="testimonials-post">Комерческий директор</span>
                         </div>
                     </div>
                 </div>
                 <div class="item">
-                    <blockquote><p>Raw denim you Mustache cliche tempor, williamsburg carles vegan helvetica probably haven't heard of them jean shorts austin. Nesciunt tofu stumptown aliqua, retro synth master cleanse. Mustache cliche tempor, williamsburg carles vegan helvetica.</p></blockquote>
+                    <blockquote><p>Мы очень рады приветствовать вас на нашем сайте! Здесь вы найдете много интересной и полезной информации для ведения бизнаса, помощь в расшерении бизнаса!</p></blockquote>
                     <div class="carousel-info">
                         <img class="pull-left" src="../../assets/frontend/pages/img/people/img5-small.jpg" alt="">
                         <div class="pull-left">
-                            <span class="testimonials-name">Kate Ford</span>
-                            <span class="testimonials-post">Commercial Director</span>
-                        </div>
-                    </div>
-                </div>
-                <div class="item">
-                    <blockquote><p>Reprehenderit butcher stache cliche tempor, williamsburg carles vegan helvetica.retro keffiyeh dreamcatcher synth. Cosby sweater eu banh mi, qui irure terry richardson ex squid Aliquip placeat salvia cillum iphone.</p></blockquote>
-                    <div class="carousel-info">
-                        <img class="pull-left" src="../../assets/frontend/pages/img/people/img2-small.jpg" alt="">
-                        <div class="pull-left">
-                            <span class="testimonials-name">Jake Witson</span>
-                            <span class="testimonials-post">Commercial Director</span>
+                            <span class="testimonials-name">Лариса</span>
+                            <span class="testimonials-post">Комерчиский директор</span>
                         </div>
                     </div>
                 </div>
@@ -220,7 +193,7 @@
             <a class="right-btn" href="#myCarousel" data-slide="next"></a>
         </div>
     </div>
-    <!-- END TESTIMONIALS -->
+<!-- END TESTIMONIALS -->
 </div>
 <!-- END TABS AND TESTIMONIALS -->
 
@@ -228,82 +201,22 @@
 <div class="row margin-bottom-40 front-steps-wrapper front-steps-count-3">
     <div class="col-md-4 col-sm-4 front-step-col">
         <div class="front-step front-step1">
-            <h2>Goal definition</h2>
-            <p>Lorem ipsum dolor sit amet sit consectetur adipisicing eiusmod tempor.</p>
+            <h2>Зарегестрируйся!</h2>
+            <p>Спеши стать нашем партнером!!!</p>
         </div>
     </div>
     <div class="col-md-4 col-sm-4 front-step-col">
         <div class="front-step front-step2">
-            <h2>Analyse</h2>
-            <p>Lorem ipsum dolor sit amet sit consectetur adipisicing eiusmod tempor.</p>
+            <h2>Приглашай друзей!</h2>
+            <p>Больше друзей - больше выгода!</p>
         </div>
     </div>
     <div class="col-md-4 col-sm-4 front-step-col">
         <div class="front-step front-step3">
-            <h2>Implementation</h2>
-            <p>Lorem ipsum dolor sit amet sit consectetur adipisicing eiusmod tempor.</p>
+            <h2>Накопи на квартиру!</h2>
+            <p>Покупай недвижимость с нами!.</p>
         </div>
     </div>
 </div>
 <!-- END STEPS -->
 
-<!-- BEGIN CLIENTS -->
-<div class="row margin-bottom-40 our-clients">
-    <div class="col-md-3">
-        <h2><a href="javascript:;">Our Clients</a></h2>
-        <p>Lorem dipsum folor margade sitede lametep eiusmod psumquis dolore.</p>
-    </div>
-    <div class="col-md-9">
-        <div class="owl-carousel owl-carousel6-brands">
-            <div class="client-item">
-                <a href="javascript:;">
-                    <img src="../../assets/frontend/pages/img/clients/client_1_gray.png" class="img-responsive" alt="">
-                    <img src="../../assets/frontend/pages/img/clients/client_1.png" class="color-img img-responsive" alt="">
-                </a>
-            </div>
-            <div class="client-item">
-                <a href="javascript:;">
-                    <img src="../../assets/frontend/pages/img/clients/client_2_gray.png" class="img-responsive" alt="">
-                    <img src="../../assets/frontend/pages/img/clients/client_2.png" class="color-img img-responsive" alt="">
-                </a>
-            </div>
-            <div class="client-item">
-                <a href="javascript:;">
-                    <img src="../../assets/frontend/pages/img/clients/client_3_gray.png" class="img-responsive" alt="">
-                    <img src="../../assets/frontend/pages/img/clients/client_3.png" class="color-img img-responsive" alt="">
-                </a>
-            </div>
-            <div class="client-item">
-                <a href="javascript:;">
-                    <img src="../../assets/frontend/pages/img/clients/client_4_gray.png" class="img-responsive" alt="">
-                    <img src="../../assets/frontend/pages/img/clients/client_4.png" class="color-img img-responsive" alt="">
-                </a>
-            </div>
-            <div class="client-item">
-                <a href="javascript:;">
-                    <img src="../../assets/frontend/pages/img/clients/client_5_gray.png" class="img-responsive" alt="">
-                    <img src="../../assets/frontend/pages/img/clients/client_5.png" class="color-img img-responsive" alt="">
-                </a>
-            </div>
-            <div class="client-item">
-                <a href="javascript:;">
-                    <img src="../../assets/frontend/pages/img/clients/client_6_gray.png" class="img-responsive" alt="">
-                    <img src="../../assets/frontend/pages/img/clients/client_6.png" class="color-img img-responsive" alt="">
-                </a>
-            </div>
-            <div class="client-item">
-                <a href="javascript:;">
-                    <img src="../../assets/frontend/pages/img/clients/client_7_gray.png" class="img-responsive" alt="">
-                    <img src="../../assets/frontend/pages/img/clients/client_7.png" class="color-img img-responsive" alt="">
-                </a>
-            </div>
-            <div class="client-item">
-                <a href="javascript:;">
-                    <img src="../../assets/frontend/pages/img/clients/client_8_gray.png" class="img-responsive" alt="">
-                    <img src="../../assets/frontend/pages/img/clients/client_8.png" class="color-img img-responsive" alt="">
-                </a>
-            </div>
-        </div>
-    </div>
-</div>
-<!-- END CLIENTS -->
