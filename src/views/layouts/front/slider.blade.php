@@ -108,7 +108,7 @@
                          data-speed="400"
                          data-start="2000"
                          data-easing="easeOutExpo">
-                        The Most Complete Admin Theme
+                         Most Complete Admin Theme
                     </div>
                     <div class="caption lft slide_desc"
                          data-x="30"
