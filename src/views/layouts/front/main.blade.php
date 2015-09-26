@@ -17,6 +17,8 @@
             @include('mposuccess::layouts.front.header')
         </header>
 
+        {!! $slider !!}
+
         <!-- BEGIN CONTAINER -->
         <div class="main">
             <div class="container">
