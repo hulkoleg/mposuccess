@@ -30,7 +30,7 @@
 <!-- BEGIN BLOCKQUOTE BLOCK -->
 <div class="row quote-v1 margin-bottom-30">
     <div class="col-md-9">
-        <span>Узнай больше о НАС - вступи в МПО</span>
+        <span>Узнай больше о НАС - вступи в МПО.</span>
     </div>
     <div class="col-md-3 text-right">
         <a class="btn-transparent" href="/auth/register" target="_blank"><i class="fa fa-rocket margin-right-10"></i>ПРИСОЕДИНЯЙСЯ</a>
