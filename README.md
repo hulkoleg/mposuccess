@@ -25,6 +25,7 @@ Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 Barryvdh\Debugbar\ServiceProvider::class,
 
 /*
+
  * Production Providers
  */
 Stolz\Assets\Laravel\ServiceProvider::class,
