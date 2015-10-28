@@ -25,8 +25,10 @@ Barryvdh\LaravelIdeHelper\IdeHelperServiceProvider::class,
 Barryvdh\Debugbar\ServiceProvider::class,
 
 /*
+
  * Production Providers
  */
+Stolz\Assets\Laravel\ServiceProvider::class,
 Notprometey\Mposuccess\MposuccessServiceProvider::class,
 Frozennode\Administrator\AdministratorServiceProvider::class,
 Bican\Roles\RolesServiceProvider::class,
@@ -50,3 +52,5 @@ Run `php artisan db:seed --class=UserSeeder` and `php artisan db:seed --class=Ta
 Download the files [`public`](https://drive.google.com/file/d/0B1FIEy8WL45hRDFzRTNaZXJuVkU/view?usp=sharing) and put them in a folder `PROJECT_DIR\public`
 
 Create sumylink `mklink /D "C:\xampp\htdocs\mposuccess\public\assets" "C:\xampp\htdocs\mposuccess\vendor\notprometey\mposuccess\public\assets"`
+
+Create sumylink `mklink /D "C:\xampp\htdocs\mposuccess\public\images" "C:\xampp\htdocs\mposuccess\vendor\notprometey\mposuccess\public\images"`
